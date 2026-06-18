@@ -1,0 +1,49 @@
+{
+  "name": "contenthero",
+  "version": "0.1.0",
+  "description": "Generate media, run the content pipeline, and read your brand and research context with ContentHero. The skills feed your agent grounding (brand kit, inspiration outliers, your own past posts) and execute (generate, publish, schedule). Your own LLM stays the brain: ContentHero is the context and execution layer.",
+  "author": {
+    "name": "ContentHero",
+    "url": "https://contenthero.ai"
+  },
+  "homepage": "https://contenthero.ai",
+  "repository": "https://github.com/contenthero-ai/skills",
+  "license": "MIT",
+  "keywords": [
+    "contenthero",
+    "content",
+    "generate",
+    "image",
+    "video",
+    "audio",
+    "lip-sync",
+    "reference-board",
+    "pipeline",
+    "publish",
+    "schedule",
+    "brand-kit",
+    "brand-voice",
+    "inspiration",
+    "outliers",
+    "social-media"
+  ],
+  "skills": "./",
+  "interface": {
+    "displayName": "ContentHero",
+    "shortDescription": "Generate media, run the content pipeline, and read brand and research context",
+    "longDescription": "ContentHero Skills make your agent the brain and ContentHero the context-plus-execution layer. Use contenthero-generate to create image, video, audio, reference-board, and lip-sync media (with output-id chaining and cost preflight), contenthero-pipeline to ground a post in your inspiration outliers and brand voice, draft on-brand copy in your own voice, then publish and schedule it, and contenthero-brand to read and update your brand kit and read inspiration and performance context. ContentHero never writes copy server-side: the skills supply the grounding and the method, your LLM writes the words.",
+    "developerName": "ContentHero",
+    "category": "Design",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://contenthero.ai",
+    "defaultPrompt": [
+      "Generate a 9:16 product image with nano-banana-2, then animate it into a 5-second clip",
+      "Find my top outliers, ground a Reel caption in my brand voice, and draft it for my approval",
+      "Read my brand kit and summarize my tone of voice and banned words",
+      "Turn this idea into an on-brand post and schedule it to my connected accounts"
+    ],
+    "brandColor": "#121212",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}

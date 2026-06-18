@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "contenthero": {
+      "type": "http",
+      "url": "https://mcp.contenthero.ai",
+      "note": "Official ContentHero hosted MCP server. OAuth on first connection (no API key handling). Runs against the signed-in user's ContentHero account and credits. The contenthero-generate, contenthero-pipeline, and contenthero-brand skills detect this MCP (tools matching mcp__contenthero__*) and prefer it over the CLI when it is available. A local stdio alternative is the npm package @contenthero/mcp, which authenticates with a CONTENTHERO_API_KEY instead of OAuth."
+    }
+  }
+}

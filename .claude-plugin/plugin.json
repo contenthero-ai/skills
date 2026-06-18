@@ -1,0 +1,30 @@
+{
+  "name": "contenthero",
+  "version": "0.1.0",
+  "description": "Generate media, run the content pipeline, and read your brand and research context with ContentHero. The skills feed your agent grounding (brand kit, inspiration outliers, your own past posts) and execute (generate, publish, schedule). Your own LLM stays the brain: ContentHero is the context and execution layer.",
+  "author": {
+    "name": "ContentHero",
+    "url": "https://contenthero.ai"
+  },
+  "homepage": "https://contenthero.ai",
+  "repository": "https://github.com/contenthero-ai/skills",
+  "license": "MIT",
+  "keywords": [
+    "contenthero",
+    "content",
+    "generate",
+    "image",
+    "video",
+    "audio",
+    "lip-sync",
+    "reference-board",
+    "pipeline",
+    "publish",
+    "schedule",
+    "brand-kit",
+    "brand-voice",
+    "inspiration",
+    "outliers",
+    "social-media"
+  ]
+}

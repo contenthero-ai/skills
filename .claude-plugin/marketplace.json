@@ -1,0 +1,32 @@
+{
+  "name": "contenthero",
+  "owner": {
+    "name": "ContentHero",
+    "url": "https://contenthero.ai"
+  },
+  "plugins": [
+    {
+      "name": "contenthero",
+      "source": "./",
+      "description": "ContentHero skills for the context-plus-execution layer: generate media (image, video, audio, board, lip-sync), run the content pipeline (ground in your outliers and brand voice, draft on-brand, publish and schedule), and read or update your brand context. Invoke as /contenthero:generate, /contenthero:pipeline, or /contenthero:brand.",
+      "version": "0.1.0",
+      "skills": [
+        {
+          "name": "generate",
+          "path": "contenthero-generate",
+          "invoke": "/contenthero:generate"
+        },
+        {
+          "name": "pipeline",
+          "path": "contenthero-pipeline",
+          "invoke": "/contenthero:pipeline"
+        },
+        {
+          "name": "brand",
+          "path": "contenthero-brand",
+          "invoke": "/contenthero:brand"
+        }
+      ]
+    }
+  ]
+}

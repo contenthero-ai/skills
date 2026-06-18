@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+*.swo
+node_modules/
+*.jsonl
+.contenthero/
+
+# Local CI fixtures
+_install_test/

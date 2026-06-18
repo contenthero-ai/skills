@@ -23,7 +23,7 @@ When more than one brand kit exists and the user did not say which, ask, or use 
 
 ## Knowledge add limits
 
-The knowledge base is plan-limited (items per brand kit by tier). A `limitReached` error means the user is at their cap; point them at upgrading, or remove an item first. Video and audio files are not ingestible over the API; use a YouTube link or a hosted document instead.
+The knowledge base is plan-limited (items per brand kit by tier). A `limitReached` error means the user is at their cap; point them at upgrading, or remove an item first. Large files and video or audio must be added by a hosted URL (`--file-url` / `fileUrl`) rather than a base64 `--file`, which is limited to small documents and images by the request-body size.
 
 ## Brand-scoped reads look empty
 

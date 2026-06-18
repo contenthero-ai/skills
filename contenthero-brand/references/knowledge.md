@@ -22,7 +22,7 @@ The knowledge base is most valuable when it grows as the user works. When the us
 - **text:** a note. `--text "..."` (MCP `sourceType: "text", text`). For lessons, decisions, definitions, catchphrases.
 - **url:** scrape and add a web page. `--url <link>`.
 - **youtube:** add a video's transcript. `--youtube <link>`.
-- **file:** a document or image (PDF, DOCX, PNG, etc.). CLI `--file <path>` reads and base64-encodes it locally. (Video and audio files are not ingestible over the API; use a YouTube link instead.)
+- **file:** a document, image, or media file. For a small document or image, CLI `--file <path>` reads and base64-encodes it locally (MCP `fileData`). For a large file, or a video or audio file, pass a hosted URL the server fetches: CLI `--file-url <url>` (MCP `fileUrl`); video and audio are chunked and embedded automatically.
 
 Confirm before adding, give it a clear title, and tell the user it is now searchable. Good moments to offer: after a brand decision, when the user shares an article or doc, when a generation or post taught a lesson worth keeping.
 

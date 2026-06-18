@@ -44,7 +44,7 @@ Per the auth ladder in `CLAUDE.md`: prefer **MCP** (`mcp__*contenthero*__*` tool
 ## The loop (every generation)
 
 1. **Pick the model.** Match the user's intent to a model from the live roster. The roster is dynamic, so confirm against `list_models` (CLI `contenthero model list --type <image|video|audio>`) rather than trusting memory. Selection guidance and the current snapshot are in `references/model-catalog.md`.
-2. **Shape the request.** Set only the parameters the model supports (aspect, resolution, duration, references, model-specific mode/shots). Parameter shapes per operation are in `references/model-catalog.md`. References (URL or output-id) are in `references/media-inputs.md`.
+2. **Shape the request.** Set only the parameters the model supports (aspect, resolution, duration, references, model-specific mode/shots). Parameter shapes per operation are in `references/model-catalog.md`. References (URL or output-id) are in `references/media-inputs.md`. **For prompt quality, read `references/prompt-craft.md`** once you know the model: how to structure image and video prompts, image-to-image vs image-to-video, negative phrasing, and aspect ratio. A well-crafted prompt is the difference between a usable result and a wasted spend.
 3. **Preview the cost.** Before any non-trivial or batched spend, run the same call with cost preflight: MCP `getCost: true`, CLI `--cost`. It charges nothing. Surface the credit cost to the user. For a routine single small image the preview is optional; for video, batches, or anything the user might not expect to cost, always preview first.
 4. **Run it.** Submit. Image / video / board / lip-sync / upscale are async with a smart-wait; audio is synchronous.
 5. **Resolve and deliver.** Return the media URL and the actual cost. Be concise: no raw payloads, no output ids in chat unless the user is going to chain on them.
@@ -77,7 +77,8 @@ Avatars, looks, and reference boards are ContentHero's reusable "reference libra
 
 ## References
 
-- `references/model-catalog.md` — the live roster, what each model is for, and per-operation parameter shapes
+- `references/model-catalog.md` — the live roster, positioning, and per-operation parameter shapes
+- `references/prompt-craft.md` — how to write strong image and video prompts (durable craft)
 - `references/identity.md` — avatars, looks, and boards as the reference library
 - `references/media-inputs.md` — references by URL or output-id, field by field
 - `references/chaining.md` — feeding one generation into the next

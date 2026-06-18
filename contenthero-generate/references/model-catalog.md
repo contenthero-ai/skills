@@ -11,6 +11,17 @@ The snapshot below was captured 2026-06-19 to guide selection. If an id here is 
 
 Match the user's intent to a model. Defaults are marked. Tags tell you the strengths.
 
+**Durable positioning (the quick mental model):**
+- **GPT Image 2** when text, UI, typography, or graphic design fidelity matters, or as the general high-fidelity default.
+- **Nano Banana 2** as the fast everyday image model, strong for single-subject portraits and character work.
+- **Seedance 2.0** as the all-purpose, multi-shot video workhorse; **Seedance 2.0 Fast** when speed and cost matter.
+- **Kling 3.0** as a cheaper single-plane video option with multi-shot and audio; reach for it when heavy motion is not required.
+- **VEO 3.1** for top cinematic quality with native audio/dialogue; **VEO 3.1 Fast** for the same character at lower cost.
+- **WAN 2.6** for intentionally stylized, artistic, multi-shot video, up to 15s.
+- **Flux 2** for strong prompt adherence and a different look from the Banana family (takes a `mode`).
+
+When the user's intent is open, prefer the marked default for the content type and confirm against `list_models`.
+
 ### Image (`generate_image` / `contenthero generate image`)
 
 | Model id | Name | Good for |

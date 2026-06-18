@@ -1,11 +1,11 @@
 # Model catalog and parameter shapes
 
-The roster is **dynamic**: enabled and disabled from the ContentHero admin switchboard, so it changes without a skill update. Always confirm against the live list before relying on a specific id:
+The roster is **dynamic**: enabled and disabled from the ContentHero admin switchboard, so it changes without a skill update. Always confirm against the live roster before relying on a specific id:
 
-- MCP: `list_models` (optionally filter by content type in your reasoning).
 - CLI: `contenthero model list --type image` (or `video`, `audio`).
+- MCP: there is no separate list tool. The live roster IS the `modelId` enum on the `generate_*` tools, so the valid ids are visible in the tool schema and an out-of-roster id is rejected.
 
-The snapshot below was captured 2026-06-19 to guide selection. If an id here is missing from `list_models`, it was disabled: use the live list.
+The snapshot below was captured 2026-06-19 to guide selection. If an id here is not in the live roster, it was disabled: use the live roster.
 
 ## How to pick
 
@@ -20,7 +20,7 @@ Match the user's intent to a model. Defaults are marked. Tags tell you the stren
 - **WAN 2.6** for intentionally stylized, artistic, multi-shot video, up to 15s.
 - **Flux 2** for strong prompt adherence and a different look from the Banana family (takes a `mode`).
 
-When the user's intent is open, prefer the marked default for the content type and confirm against `list_models`.
+When the user's intent is open, prefer the marked default for the content type and confirm against the live roster (CLI `contenthero model list`; MCP `generate_*` `modelId` enum).
 
 ### Image (`generate_image` / `contenthero generate image`)
 

@@ -29,7 +29,7 @@ The most common cause is sending a field a model does not support, or a value ou
 - `shots` on a model other than Kling 3.0, or `multiShot` outside WAN.
 - A `quality` field the model does not accept.
 
-Check `list_models` and `model-catalog.md` for what the chosen model supports, then resend only supported fields.
+Check the live roster (CLI `contenthero model list`; MCP `generate_*` `modelId` enum) and `model-catalog.md` for what the chosen model supports, then resend only supported fields.
 
 ## Scope errors
 

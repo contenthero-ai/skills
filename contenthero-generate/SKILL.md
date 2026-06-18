@@ -38,12 +38,12 @@ Per the auth ladder in `CLAUDE.md`: prefer **MCP** (`mcp__*contenthero*__*` tool
 | Upscale | `upscale` | `contenthero upscale` |
 | Poll one | `get_generation_status` | `contenthero generation status <id>` |
 | Wait (batch) | `wait_for_generation` | `contenthero generation wait <id...>` |
-| List models | `list_models` | `contenthero model list` |
+| Discover models | (the `modelId` enum on the `generate_*` tools) | `contenthero model list` |
 | Balance | `get_balance` | `contenthero account balance` |
 
 ## The loop (every generation)
 
-1. **Pick the model.** Match the user's intent to a model from the live roster. The roster is dynamic, so confirm against `list_models` (CLI `contenthero model list --type <image|video|audio>`) rather than trusting memory. Selection guidance and the current snapshot are in `references/model-catalog.md`.
+1. **Pick the model.** Match the user's intent to a model from the live roster. The roster is dynamic: on the CLI confirm with `contenthero model list --type <image|video|audio>`; on MCP the live roster IS the `modelId` enum on the `generate_*` tools (there is no separate list tool, and an out-of-roster id is rejected). Do not trust memory over either. Selection guidance and the current snapshot are in `references/model-catalog.md`.
 2. **Shape the request.** Set only the parameters the model supports (aspect, resolution, duration, references, model-specific mode/shots). Parameter shapes per operation are in `references/model-catalog.md`. References (URL or output-id) are in `references/media-inputs.md`. **For prompt quality, read `references/prompt-craft.md`** once you know the model: how to structure image and video prompts, image-to-image vs image-to-video, negative phrasing, and aspect ratio. A well-crafted prompt is the difference between a usable result and a wasted spend.
 3. **Preview the cost.** Before any non-trivial or batched spend, run the same call with cost preflight: MCP `getCost: true`, CLI `--cost`. It charges nothing. Surface the credit cost to the user. For a routine single small image the preview is optional; for video, batches, or anything the user might not expect to cost, always preview first.
 4. **Run it.** Submit. Image / video / board / lip-sync / upscale are async with a smart-wait; audio is synchronous.
@@ -72,7 +72,7 @@ Avatars, looks, and reference boards are ContentHero's reusable "reference libra
 2. **Preview cost before a surprising or batched spend, and surface it.** Never silently run a large video batch.
 3. **One transport per session.** Detect once, never cross over, never narrate.
 4. **Poll, do not re-submit.** Slow is not failed.
-5. **Set only supported parameters.** Sending an unsupported field (e.g. a `quality` a model does not take, or a resolution it does not allow) is a 400. When unsure, check `list_models` and `references/model-catalog.md`.
+5. **Set only supported parameters.** Sending an unsupported field (e.g. a `quality` a model does not take, or a resolution it does not allow) is a 400. When unsure, check the roster (CLI `contenthero model list`; MCP `generate_*` `modelId` enum) and `references/model-catalog.md`.
 6. **Revalidate a cached id before spending on it** (e.g. an avatar id from `.contenthero/context.md`). Ids can be archived between sessions.
 
 ## References

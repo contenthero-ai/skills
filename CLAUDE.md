@@ -108,7 +108,7 @@ If the file is missing, the first skill that needs an id resolves it live and cr
 ## API Conventions
 
 - **Async generation:** `generate_*` runs a smart-wait (about 50s) then hands back an `outputId` if the render is still going. Poll with `get_generation_status`, or block with `wait_for_generation` (CLI `contenthero generation wait <id>`). Exit code 4 (CLI) or a pending status (MCP) means the work was accepted but did not finish in time. The `outputId` is always returned, so keep polling.
-- **Cost preflight:** every spend can be previewed first. MCP passes `get_cost: true` on the generate call; CLI uses `--cost`. It charges nothing.
+- **Cost preflight:** every spend can be previewed first. MCP passes `getCost: true` on the generate call; CLI uses `--cost`. It charges nothing.
 - **Chaining:** a reference (start frame, image input, etc.) accepts a raw URL OR a ContentHero output-id token `<uuid>-<N>` (the Nth variation of a prior output). The server resolves either, type-checks it, and scopes it to the owner. This is more forgiving than import-first competitors. Prefer passing the output-id straight through rather than re-uploading.
 - **Scopes:** API keys are scope-gated. Generation needs generate scopes, publishing needs `publish:write`, pipeline needs `pipeline:write`. If a call fails on scope, tell the user which scope to grant in API Keys settings. Do not work around a missing scope.
 

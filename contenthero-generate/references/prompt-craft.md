@@ -1,6 +1,6 @@
 # Prompt craft
 
-Durable, model-agnostic prompting guidance for ContentHero's generation models. This is a foundation, not a per-model bible: model-specific depth is added over time. Anything volatile (which aspect ratios, resolutions, or durations a model accepts) is confirmed at run time via `list_models`, not asserted here.
+Durable, model-agnostic prompting guidance for ContentHero's generation models. This is a foundation, not a per-model bible: model-specific depth is added over time. Anything volatile (which aspect ratios, resolutions, or durations a model accepts) is confirmed at run time against the live roster (CLI `contenthero model list`; MCP `generate_*` `modelId` enum), not asserted here.
 
 Field names below are the ContentHero surface names (`aspectRatio`, `resolution`, `negativePrompt`, `startFrame`, `referenceImages`, `audioEnabled`); CLI flags are the kebab equivalents.
 
@@ -39,7 +39,7 @@ The model already has the input; redescribing it competes with the edit.
 - Subject motion: "the dancer spins," "smoke rises slowly," "leaves drift across frame."
 - Do not redescribe what is already in the frame.
 
-**Duration, aspect ratio, audio, and references are model-gated.** Confirm per model via `list_models` rather than assuming. Audio: set `audioEnabled` only on models that support it; a few models take an `referenceAudio` input instead (e.g. Seedance references mode). See `model-catalog.md`.
+**Duration, aspect ratio, audio, and references are model-gated.** Confirm per model against the live roster (CLI `contenthero model list`; MCP `generate_*` `modelId` enum) rather than assuming. Audio: set `audioEnabled` only on models that support it; a few models take an `referenceAudio` input instead (e.g. Seedance references mode). See `model-catalog.md`.
 
 ## Negative phrasing
 

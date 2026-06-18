@@ -107,7 +107,7 @@ On the happy path this step ends with an active brand kit cached and a one-line 
 
 Ask the user: "Want a quick smoke test? I can preview the cost of a small image generation (charges nothing), or generate one real image (a few credits) to confirm the integration works end to end."
 
-- **Cost-only (free):** MCP `generate_image` with `get_cost: true`, or CLI `contenthero generate image "a red ceramic cube on white" --model nano-banana-2 --cost`. Confirms auth, transport, and pricing without spending.
+- **Cost-only (free):** MCP `generate_image` with `getCost: true`, or CLI `contenthero generate image "a red ceramic cube on white" --model nano-banana-2 --cost`. Confirms auth, transport, and pricing without spending.
 - **Real generation (a few credits):** drop the `--cost` flag. Returns an `outputId` and, once finished, the media URL.
 
 If the user declines, skip to Step 6. The skills work either way; the smoke test just removes uncertainty.

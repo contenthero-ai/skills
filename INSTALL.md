@@ -2,13 +2,13 @@
 
 The repo includes three skills:
 
-- **`contenthero-generate`** — generate image, video, audio, reference-board, and lip-sync media, with output-id chaining and cost preflight
-- **`contenthero-pipeline`** — ground a post in your outliers and brand voice, draft on-brand copy in your own voice, then publish and schedule it
-- **`contenthero-brand`** — read and update your brand kit, and read your inspiration accounts, outliers, and performance
+- **`contenthero-generate`**: generate image, video, audio, reference-board, and lip-sync media, with output-id chaining and cost preflight
+- **`contenthero-pipeline`**: ground a post in your outliers and brand voice, draft on-brand copy in your own voice, then publish and schedule it
+- **`contenthero-brand`**: read and update your brand kit, and read your inspiration accounts, outliers, and performance
 
 Most people want all three. They cooperate: `contenthero-brand` resolves your brand context, `contenthero-pipeline` grounds and publishes, and `contenthero-generate` produces the media along the way.
 
-## Option 1 — `gh skill install` (most portable)
+## Option 1: `gh skill install` (most portable)
 
 If you have [GitHub CLI](https://cli.github.com) v2.90+, this writes to the right directory for your agent automatically (Claude Code, Cursor, Codex, Gemini CLI, and more):
 
@@ -20,7 +20,7 @@ gh skill install contenthero-ai/skills contenthero-brand
 
 Project scope (current repo) is the default. For user scope (every project on this machine), add `--scope user`.
 
-## Option 2 — Git clone
+## Option 2: Git clone
 
 Clone into your agent's skills directory:
 

@@ -86,7 +86,7 @@ The user can edit their own brand identity and sections through this skill (`upd
 
 ## References
 
-- `references/brand-kit-structure.md` — the five-tab anatomy, field map, and section editing
-- `references/knowledge.md` — the knowledge base: search, browse, read, add, remove
-- `references/inspiration.md` — inspiration accounts, outliers, performance, brand scoping
-- `references/troubleshooting.md` — scopes, empty grounding, error to action mapping
+- `references/brand-kit-structure.md`: the five-tab anatomy, field map, and section editing
+- `references/knowledge.md`: the knowledge base: search, browse, read, add, remove
+- `references/inspiration.md`: inspiration accounts, outliers, performance, brand scoping
+- `references/troubleshooting.md`: scopes, empty grounding, error to action mapping

@@ -1,4 +1,4 @@
-# ContentHero Skills — Installation Guide for AI Agents
+# ContentHero Skills: Installation Guide for AI Agents
 
 Read this entire file, then follow the steps. Ask the user for an API key only through the supported flows (never have them paste a key into the chat). Target: about 5 minutes to a working ContentHero integration.
 
@@ -10,11 +10,11 @@ Read [`CLAUDE.md`](./CLAUDE.md) at the repo root first. It is the runtime contra
 
 If you fetched this file by URL without cloning yet, the companion files live at:
 
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/CLAUDE.md` — runtime contract
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero-generate/SKILL.md` — generation skill (transport ladder, chaining, cost preflight)
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero-pipeline/SKILL.md` — pipeline skill (ground, draft on-brand, produce, publish, schedule)
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero-brand/SKILL.md` — brand skill (brand kit reads and writes, inspiration reads)
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/INSTALL.md` — human-facing install doc
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/CLAUDE.md`: runtime contract
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero-generate/SKILL.md`: generation skill (transport ladder, chaining, cost preflight)
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero-pipeline/SKILL.md`: pipeline skill (ground, draft on-brand, produce, publish, schedule)
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero-brand/SKILL.md`: brand skill (brand kit reads and writes, inspiration reads)
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/INSTALL.md`: human-facing install doc
 
 ## Step 1: Detect the agent host and install the skills
 

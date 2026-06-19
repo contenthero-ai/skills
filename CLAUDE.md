@@ -1,12 +1,12 @@
-# CLAUDE.md — ContentHero Skills
+# CLAUDE.md: ContentHero Skills
 
 ## What This Is
 
 The ContentHero Skills. Three independent, self-contained skills that turn ContentHero into the context-plus-execution layer for your agent:
 
-- **contenthero-generate** — idea to media. Image, video, audio, reference board, and lip-sync generation, with output-id chaining and cost preflight. Execution only.
-- **contenthero-pipeline** — research to published post. Grounds a post in your inspiration outliers and brand voice, has the host LLM draft on-brand copy in your own voice, then produces the media, assembles the post, and schedules or publishes it. The hero skill.
-- **contenthero-brand** — your context. Reads and updates your brand kit and sections, and reads inspiration accounts, outliers, and brand-account performance. Feeds the other two.
+- **contenthero-generate**: idea to media. Image, video, audio, reference board, and lip-sync generation, with output-id chaining and cost preflight. Execution only.
+- **contenthero-pipeline**: research to published post. Grounds a post in your inspiration outliers and brand voice, has the host LLM draft on-brand copy in your own voice, then produces the media, assembles the post, and schedules or publishes it. The hero skill.
+- **contenthero-brand**: your context. Reads and updates your brand kit and sections, and reads inspiration accounts, outliers, and brand-account performance. Feeds the other two.
 
 Each skill includes its own bundle of `references/` so it installs cleanly via `gh skill install`, an agent host's plugin manifest, or a direct git clone.
 
@@ -65,10 +65,10 @@ What moves to `references/`: CLI and tool call examples, request and response sh
 
 Pick one transport at the start of a session. Never mix, never switch mid-session, never narrate the choice. Detect in this order:
 
-1. **MCP (preferred)** — if ContentHero MCP tools are visible in the toolset, use them. Match loosely across server namespaces: `mcp__contenthero__*` (hosted OAuth at `https://mcp.contenthero.ai`), `mcp__contenthero-local__*` (a local stdio build), or any `mcp__* contenthero*__*` variant a host assigns. OAuth or a configured API key handles auth. No key handling in chat.
-2. **CLI** — if no MCP is visible, use the `contenthero` CLI when `contenthero auth status` exits 0 OR `CONTENTHERO_API_KEY` is set in the environment. Pattern is `contenthero <noun> <verb>`, JSON on stdout by default, exit codes `0` ok, `1` general, `2` usage, `3` auth, `4` timeout (work accepted but not finished). Add `--cost` to preflight a spend and `--no-wait` plus `contenthero generation wait <id>` for non-blocking polling.
-3. **Raw `/api/v1`** — last resort only, when neither MCP nor the CLI is available but the user has an API key and an HTTP client. Bearer the API key against `https://app.contenthero.ai/api/v1`.
-4. **Neither** — tell the user once: "To use this skill, connect the ContentHero MCP server (`https://mcp.contenthero.ai`) or install the CLI: `npm install -g @contenthero/cli` then `contenthero login`."
+1. **MCP (preferred)**: if ContentHero MCP tools are visible in the toolset, use them. Match loosely across server namespaces: `mcp__contenthero__*` (hosted OAuth at `https://mcp.contenthero.ai`), `mcp__contenthero-local__*` (a local stdio build), or any `mcp__* contenthero*__*` variant a host assigns. OAuth or a configured API key handles auth. No key handling in chat.
+2. **CLI**: if no MCP is visible, use the `contenthero` CLI when `contenthero auth status` exits 0 OR `CONTENTHERO_API_KEY` is set in the environment. Pattern is `contenthero <noun> <verb>`, JSON on stdout by default, exit codes `0` ok, `1` general, `2` usage, `3` auth, `4` timeout (work accepted but not finished). Add `--cost` to preflight a spend and `--no-wait` plus `contenthero generation wait <id>` for non-blocking polling.
+3. **Raw `/api/v1`**: last resort only, when neither MCP nor the CLI is available but the user has an API key and an HTTP client. Bearer the API key against `https://app.contenthero.ai/api/v1`.
+4. **Neither**: tell the user once: "To use this skill, connect the ContentHero MCP server (`https://mcp.contenthero.ai`) or install the CLI: `npm install -g @contenthero/cli` then `contenthero login`."
 
 **Hard rules:**
 - **Never ask the user to paste an API key into the chat.** Keys go through `contenthero login` (browser-assisted), the `CONTENTHERO_API_KEY` environment variable, or the MCP OAuth flow. The skill never logs or echoes a key.

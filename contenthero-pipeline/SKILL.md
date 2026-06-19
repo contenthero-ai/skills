@@ -79,8 +79,8 @@ Build the post object. Details and field shapes are in `references/posts-and-des
 
 ## References
 
-- `references/voice-synthesis.md` — the grounding-to-draft methodology (the moat)
-- `references/posts-and-destinations.md` — building posts, assets, and platform destinations
-- `references/scheduling.md` — scheduling, publishing, and the live-push safety gate
-- `references/connected-accounts.md` — reading connected accounts as publish targets
-- `references/troubleshooting.md` — scopes, publish failures, error to action mapping
+- `references/voice-synthesis.md`: the grounding-to-draft methodology (the moat)
+- `references/posts-and-destinations.md`: building posts, assets, and platform destinations
+- `references/scheduling.md`: scheduling, publishing, and the live-push safety gate
+- `references/connected-accounts.md`: reading connected accounts as publish targets
+- `references/troubleshooting.md`: scopes, publish failures, error to action mapping

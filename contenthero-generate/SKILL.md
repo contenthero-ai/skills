@@ -77,9 +77,9 @@ Avatars, looks, and reference boards are ContentHero's reusable "reference libra
 
 ## References
 
-- `references/model-catalog.md` — the live roster, positioning, and per-operation parameter shapes
-- `references/prompt-craft.md` — how to write strong image and video prompts (durable craft)
-- `references/identity.md` — avatars, looks, and boards as the reference library
-- `references/media-inputs.md` — references by URL or output-id, field by field
-- `references/chaining.md` — feeding one generation into the next
-- `references/troubleshooting.md` — error to action mapping, exit codes, idempotency
+- `references/model-catalog.md`: the live roster, positioning, and per-operation parameter shapes
+- `references/prompt-craft.md`: how to write strong image and video prompts (durable craft)
+- `references/identity.md`: avatars, looks, and boards as the reference library
+- `references/media-inputs.md`: references by URL or output-id, field by field
+- `references/chaining.md`: feeding one generation into the next
+- `references/troubleshooting.md`: error to action mapping, exit codes, idempotency

@@ -4,7 +4,7 @@ description: |
   Run the ContentHero content pipeline end to end: ground a post in the user's inspiration
   outliers and brand voice, have the host LLM draft on-brand copy in the user's own voice
   (grounded, never generic, approval-gated), produce the media, assemble the post, and
-  schedule or publish it to connected accounts. The flagship skill.
+  schedule or publish it to connected accounts. The hero skill.
   Use when: (1) "turn this idea into a post", "write me an on-brand caption", "draft a hook for my reel",
   "make a post and schedule it", "publish this to my accounts", (2) the user wants copy that emulates
   their proven patterns and their own voice, (3) any flow from research or idea to a published or

@@ -1,6 +1,6 @@
 # ContentHero Skills
 
-AI agent skills for creating and shipping on-brand content. ContentHero is the context-plus-execution layer. Your own LLM is the brain.
+AI agent skills for creating and publishing on-brand content. ContentHero is the context-plus-execution layer. Your own LLM is the brain.
 
 Works with Claude Code, Cursor, Codex, OpenClaw, and other AI coding agents.
 
@@ -30,12 +30,12 @@ Then connect a transport: MCP (`claude mcp add --transport http contenthero http
 
 ## The idea
 
-Most "AI content" tools try to be the brain: you give a topic, their server writes your script and picks your visuals as a black box. ContentHero does the opposite. Your LLM is already a strong writer. What it lacks is your context and a way to ship. ContentHero supplies both.
+ContentHero pairs your LLM with your context. Your LLM is already a strong writer. What it lacks is your brand voice, your proven patterns, and a way to publish. ContentHero supplies both: the context and the execution.
 
 - **Context:** your brand kit (tone, vocabulary, banned words), your inspiration outliers (the posts that actually perform in your niche), and your own past posts and their performance.
 - **Execution:** generate image, video, audio, reference boards, and lip-sync, then assemble, schedule, and publish to your connected accounts.
 
-ContentHero never writes your copy server-side. When a draft is needed, the skill grounds your LLM in your real context and your proven patterns, your LLM writes it in your voice, and you approve before anything ships.
+When a draft is needed, the skill grounds your LLM in your real context and your proven patterns, your LLM writes it in your voice, and you approve before anything goes live.
 
 ## What's included
 

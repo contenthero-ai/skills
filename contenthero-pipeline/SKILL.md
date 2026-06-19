@@ -4,14 +4,14 @@ description: |
   Run the ContentHero content pipeline end to end: ground a post in the user's inspiration
   outliers and brand voice, have the host LLM draft on-brand copy in the user's own voice
   (grounded, never generic, approval-gated), produce the media, assemble the post, and
-  schedule or publish it to connected accounts. The hero skill.
+  schedule or publish it to connected accounts. The flagship skill.
   Use when: (1) "turn this idea into a post", "write me an on-brand caption", "draft a hook for my reel",
   "make a post and schedule it", "publish this to my accounts", (2) the user wants copy that emulates
   their proven patterns and their own voice, (3) any flow from research or idea to a published or
   scheduled post. The skill pulls the user's outliers, brand kit tone and vocabulary, and their own
   recent and top-performing posts, then the host LLM drafts emulating what works for this user.
-  ContentHero never writes copy server-side: the skill supplies the grounding and the method, the
-  host LLM writes the words, and the user approves before anything ships.
+  The skill supplies the grounding and the method, the host LLM writes the words, and the
+  user approves before anything goes live.
   NOT for: bare media generation with no post (use contenthero-generate), or generic copywriting
   with no grounding in the user's real context (that is the anti-pattern this skill exists to replace).
 argument-hint: "[idea or post goal]"
@@ -21,7 +21,7 @@ allowed-tools: Bash, WebFetch, Read, Write, mcp__contenthero__*
 
 # ContentHero Pipeline
 
-You take a user from an idea to a scheduled or published post, grounded in their real context. You orchestrate the user's own LLM to draft on-brand copy and you execute the production and distribution. **You never write copy server-side and you never invent generic copy.** The draft is the host LLM's, grounded in the user's outliers, brand voice, and past performance, and approved by the user before anything ships.
+You take a user from an idea to a scheduled or published post, grounded in their real context. You orchestrate the user's own LLM to draft on-brand copy and you execute the production and distribution. **You never invent generic, ungrounded copy.** The draft is the host LLM's, grounded in the user's outliers, brand voice, and past performance, and approved by the user before anything goes live.
 
 Read [`../CLAUDE.md`](../CLAUDE.md) first for the auth ladder, the thesis, the hard rules, and the `.contenthero/context.md` cache. The phases below are specific to the pipeline.
 
@@ -45,7 +45,7 @@ Full grounding method, including the list-then-get mining pattern, is in `refere
 
 ### 2. Draft (the host LLM writes, grounded, approval-gated)
 
-Synthesize the copy (hook, caption, script, hashtags) by **emulating the user's proven patterns in the user's own voice**, following `references/voice-synthesis.md`. There is no server tool that writes copy; the host LLM does the writing, grounded in Phase 1. Then **present the draft to the user and get approval before producing or publishing.** Iterate on their feedback. Never ship copy the user has not seen.
+Synthesize the copy (hook, caption, script, hashtags) by **emulating the user's proven patterns in the user's own voice**, following `references/voice-synthesis.md`. The host LLM does the writing, grounded in Phase 1. Then **present the draft to the user and get approval before producing or publishing.** Iterate on their feedback. Never publish copy the user has not seen.
 
 This is the line that defines the skill: grounded voice-synthesis is the feature; generic ungrounded copy is the anti-pattern. If you have no grounding (no brand kit, no outliers, no past posts), say so and ask, rather than inventing a generic caption.
 

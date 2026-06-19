@@ -1,6 +1,6 @@
 # Install ContentHero Skills
 
-The repo ships three skills:
+The repo includes three skills:
 
 - **`contenthero-generate`** — generate image, video, audio, reference-board, and lip-sync media, with output-id chaining and cost preflight
 - **`contenthero-pipeline`** — ground a post in your outliers and brand voice, draft on-brand copy in your own voice, then publish and schedule it

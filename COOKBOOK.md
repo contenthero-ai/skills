@@ -1,6 +1,6 @@
 # ContentHero Cookbook
 
-End-to-end recipes that chain the skills. Tool names are the MCP names; the CLI equivalents are `contenthero <noun> <verb>`. Across every recipe: ContentHero supplies the context and the execution, the host LLM does any drafting (grounded, never generic), and the user approves before anything ships.
+End-to-end recipes that chain the skills. Tool names are the MCP names; the CLI equivalents are `contenthero <noun> <verb>`. Across every recipe: ContentHero supplies the context and the execution, the host LLM does any drafting (grounded, never generic), and the user approves before anything goes live.
 
 ## Ground the workspace on a brand (run this first)
 
@@ -19,7 +19,7 @@ The everyday request: the user has a clip and wants a caption in their voice. `c
 1. Ground: `list_outliers` (scoped with `brandKitId`) -> pick the top few -> `get_inspiration_content` on each for hooks and structure. `get_brand_kit` for voice. `get_brand_account_performance` for the user's own best posts. `search_brand_knowledge` for the brand's stance on the topic.
 2. Draft (host LLM): write the hook and caption emulating the user's proven patterns, in their voice. Present for approval.
 3. Attach: `create_post` (the approved caption as the description) -> `add_post_asset` (the reel) -> `add_post_destination`.
-4. Ship: `schedule_post` or `publish_post`, after the user confirms.
+4. Publish: `schedule_post` or `publish_post`, after the user confirms.
 
 ## Outlier to on-brand clip, scheduled (the full pipeline)
 
@@ -29,7 +29,7 @@ Research to published, end to end:
 2. Draft (host LLM): concept + hook + caption, grounded in the above. Approve.
 3. Produce (`contenthero-generate`): `generate_image` for the key frame -> chain its output id into `generate_video` as the start frame. Ground the visual in the brand's `visualStyle`.
 4. Assemble: `create_post` -> `add_post_asset` (the video) -> `add_post_destination` (platform + format + connected account).
-5. Ship: `schedule_post`, after confirming destinations and timing.
+5. Publish: `schedule_post`, after confirming destinations and timing.
 
 ## Talking-head post
 

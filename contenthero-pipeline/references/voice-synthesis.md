@@ -1,6 +1,6 @@
 # Voice synthesis: grounding to draft
 
-This is the method that makes ContentHero different from a generic "write me a caption" prompt. ContentHero does not write the copy. It grounds the host LLM in the user's real, performing context, and the host LLM drafts in the user's own voice, emulating what already works for them. The output is a draft the user approves, never a published post written by a machine the user never saw.
+This is the method that makes a ContentHero draft different from a generic "write me a caption" prompt. The skill grounds the host LLM in the user's real, performing context, and the host LLM drafts in the user's own voice, emulating what already works for them. The output is a draft the user approves.
 
 The rule: **grounded voice-synthesis is the feature; generic ungrounded copy is the anti-pattern.** If the grounding is missing, ask for it or proceed without claiming the result is on-brand. Do not fill the gap with generic copywriting.
 

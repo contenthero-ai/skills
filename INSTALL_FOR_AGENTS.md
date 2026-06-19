@@ -141,5 +141,5 @@ Or with `gh skill`, re-run `gh skill install contenthero-ai/skills <skill>`. Re-
 ## What this skill does NOT do
 
 - It does not create the user's ContentHero account. They must already have one.
-- It does not write copy server-side. The host LLM drafts copy, grounded in the user's context, per the thesis in `CLAUDE.md`. ContentHero supplies the grounding and the method, never the words.
+- It does not draft generic, ungrounded copy. The host LLM drafts copy grounded in the user's context, per the thesis in `CLAUDE.md`. ContentHero supplies the grounding and the method; the host LLM writes the words.
 - It does not store or transmit the API key anywhere outside the local agent environment. The key stays in the user's shell, the CLI credential file, or the MCP OAuth session. The skill never logs it.

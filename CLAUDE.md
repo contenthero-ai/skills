@@ -8,18 +8,18 @@ The ContentHero Skills. Three independent, self-contained skills that turn Conte
 - **contenthero-pipeline** — research to published post. Grounds a post in your inspiration outliers and brand voice, has the host LLM draft on-brand copy in your own voice, then produces the media, assembles the post, and schedules or publishes it. The hero skill.
 - **contenthero-brand** — your context. Reads and updates your brand kit and sections, and reads inspiration accounts, outliers, and brand-account performance. Feeds the other two.
 
-Each skill ships its own bundle of `references/` so it installs cleanly via `gh skill install`, an agent host's plugin manifest, or a direct git clone.
+Each skill includes its own bundle of `references/` so it installs cleanly via `gh skill install`, an agent host's plugin manifest, or a direct git clone.
 
 ## The Thesis (read this first)
 
-ContentHero is the **context and execution layer**. Your own LLM is the **brain**. The skills feed the brain grounding (brand kit, inspiration outliers, your own past posts) and execute (generate media, publish, schedule). This is the line that defines what these skills do and do not do.
+ContentHero is the **context and execution layer**. Your own LLM is the **brain**. The skills feed the brain grounding (brand kit, inspiration outliers, your own past posts) and execute (generate media, publish, schedule). This is the line that defines how these skills work.
 
 There are two different things. Only one of them is the anti-pattern.
 
-- **Anti-pattern (never do this):** treat ContentHero as a creative engine that writes the copy, script, or caption for the user as a black box. ContentHero's servers never generate copy. There is no "write my post for me" server call, and the skills must not pretend there is one.
-- **The feature (always do this when copy is needed):** the host LLM may draft copy, but only when it is grounded in the user's real context. Pull the user's outliers to extract the patterns that actually perform for them (hook archetype, structure, pacing, CTA style). Pull the brand kit for tone, vocabulary, and banned words. Pull the user's own recent and top-performing posts. Then synthesize a draft that emulates the user's proven patterns in the user's own voice, present it for approval, and only then execute. The brain writes the words. ContentHero supplies the grounding and the method.
+- **Anti-pattern (never do this):** draft copy with no grounding in the user's real context, generic words that could belong to any brand, presented as if they were on-brand.
+- **The feature (always do this when copy is needed):** the host LLM drafts copy, grounded in the user's real context. Pull the user's outliers to extract the patterns that actually perform for them (hook archetype, structure, pacing, CTA style). Pull the brand kit for tone, vocabulary, and banned words. Pull the user's own recent and top-performing posts. Then synthesize a draft that emulates the user's proven patterns in the user's own voice, present it for approval, and only then execute. The brain writes the words. ContentHero supplies the grounding and the method.
 
-**The hard rule:** ContentHero never generates copy server-side. The host LLM may draft, but only when grounded in the user's real context (outliers plus brand voice plus past posts), never generic or ungrounded copy, and never published without explicit approval. Generic copywriting with no grounding is the anti-pattern. Grounded voice synthesis is the feature. The full method lives in `contenthero-pipeline/references/voice-synthesis.md`.
+**The hard rule:** when copy is needed, ground it in the user's real context (outliers plus brand voice plus past posts), never present generic or ungrounded copy as on-brand, and never publish without explicit approval. Generic copywriting with no grounding is the anti-pattern. Grounded voice synthesis is the feature. The full method lives in `contenthero-pipeline/references/voice-synthesis.md`.
 
 ## Architecture
 
@@ -114,7 +114,7 @@ If the file is missing, the first skill that needs an id resolves it live and cr
 
 ## Hard Rules (every skill, every turn)
 
-1. Never generate copy server-side, and never present ungrounded generic copy as if it were on-brand. See the thesis.
+1. Always ground drafted copy in the user's real context, and never present ungrounded generic copy as if it were on-brand. See the thesis.
 2. Never ask the user to paste an API key in chat.
 3. Never publish or schedule without explicit user approval of the final content.
 4. Always preview cost before a large or batched spend, and surface it to the user.

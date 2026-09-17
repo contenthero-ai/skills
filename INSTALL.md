@@ -1,21 +1,23 @@
 # Install ContentHero Skills
 
-The repo includes three skills:
+The repo includes **one skill, `contenthero`**, covering the whole product: generating media,
+running the planner and publishing, brand context and its knowledge base, research by outlier
+score, the media library, and the editor.
 
-- **`contenthero-generate`**: generate image, video, audio, reference-board, and lip-sync media, with output-id chaining and cost preflight
-- **`contenthero-pipeline`**: ground a post in your outliers and brand voice, draft on-brand copy in your own voice, then publish and schedule it
-- **`contenthero-brand`**: read and update your brand kit, and read your inspiration accounts, outliers, and performance
+It routes your request to the right workflow, so there is nothing to choose at install time and
+nothing to install twice.
 
-Most people want all three. They cooperate: `contenthero-brand` resolves your brand context, `contenthero-pipeline` grounds and publishes, and `contenthero-generate` produces the media along the way.
+> It was three skills (`contenthero-generate`, `contenthero-pipeline`, `contenthero-brand`) until
+> September 2026. If you installed those, remove them: one skill replaces all three, and leaving
+> the old ones installed means two sets of instructions describing the same product, one of them
+> out of date.
 
 ## Option 1: `gh skill install` (most portable)
 
 If you have [GitHub CLI](https://cli.github.com) v2.90+, this writes to the right directory for your agent automatically (Claude Code, Cursor, Codex, Gemini CLI, and more):
 
 ```bash
-gh skill install contenthero-ai/skills contenthero-generate
-gh skill install contenthero-ai/skills contenthero-pipeline
-gh skill install contenthero-ai/skills contenthero-brand
+gh skill install contenthero-ai/skills contenthero
 ```
 
 Project scope (current repo) is the default. For user scope (every project on this machine), add `--scope user`.

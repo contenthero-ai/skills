@@ -10,16 +10,16 @@ Pull all three before drafting. Each answers a different question.
 
 1. **Brand voice: how this user sounds.** `get_brand_kit` returns `voiceProfile`, `audience`, `positioning`, `contentStrategy`, `designPrinciples`, and `sections` (each section has `fields` of `{ key, label, value }`). Read these for tone, vocabulary, the audience being addressed, and any explicit do-nots. Banned words or tone guardrails usually live in `voiceProfile` or a voice section field, not a dedicated column, so read the voice profile and sections rather than assuming a field name.
 
-2. **What performs in the niche: proven patterns.** `list_outliers` returns the top content the user tracks, ranked by `outlierScore` (also `engagementRate`, `viewsPerFollower`). This list is shallow (title plus metrics). To mine a pattern you need the depth, so this is a two-step read.
+2. **What performs in the niche: proven patterns.** `list_content` returns the posts the user tracks, ranked by OUTLIER SCORE, which measures a post against its own creator's baseline rather than the platform average. That is why a small account's breakout outranks a big account's routine post: it is a repeatable pattern rather than a big number. The list is shallow (title plus metrics), so mining one is a two-step read. Filters and the full surface are in `research.md`.
 
-3. **What performs for this user: their own track record.** `get_brand_account_performance` returns the user's own `topContent` and `recentContent` (plus totals and averages). `list_posts` and `get_post` surface their past captions (`description`), `script`, and `notes`. This is the most important voice signal: the user's own best posts are the truest model of their voice.
+3. **What performs for this user: their own track record.** `get_account` on one of the user's own tracked profiles (`accountType: 'brand'`) returns their top and most recent posts with totals and averages. `list_cards` and `get_card` surface the captions, scripts and notes they have written before. **This is the most important voice signal**: the user's own best posts are the truest model of their voice, ahead of any stated profile.
 
 ## The list-then-get mining pattern
 
-Outliers and brand-account content come back as shallow `Outlier` records (title and metrics, no transcript). The deep fields you draft from come from a second call:
+Ranked content comes back shallow: title and metrics, no transcript. The deep fields you draft from need a second call.
 
-1. `list_outliers` (or read `topContent` from `get_brand_account_performance`) to rank and choose the few most relevant, highest-performing items.
-2. `get_inspiration_content <id>` on each chosen item to get `transcript`, `description`, `hashtags`, `keywords`. These are what you extract pattern primitives from.
+1. `list_content`, filtered to the brand and a recent window, to rank and choose the few most relevant, highest-performing items. `get_account` on one of the user's own tracked profiles gives the same ranking for their own back catalog.
+2. `get_content` on each chosen item for `description`, `hashtags`, `keywords` and audio info. ⚠️ **The transcript is OPT-IN**: ask for it only on the two or three you will actually mine, because a long video is a large document.
 
 Do not try to mine a hook or structure from the list view. Pick from the list, then get the detail.
 
@@ -50,7 +50,7 @@ When the brand voice profile and the user's own top-performing captions disagree
 
 Synthesize: take the proven pattern primitives, apply them to this post's topic, and write in the user's voice for the user's audience.
 
-- Produce the pieces the platform needs: hook, caption or script, hashtags, CTA. Match the destination platform's norms (a Reel caption is not a YouTube description).
+- Produce the pieces the platform needs: hook, caption or script, hashtags, CTA. Match the target platform's norms (a Reel caption is not a YouTube description), and read them from `get_platform` rather than memory.
 - Keep it the user's, not yours. If you would not believe the user wrote it, rewrite it.
 - **Present the draft to the user and get approval.** Offer the reasoning briefly ("modeled the hook on your top Reel's question opener, kept it to your usual short punchy caption") so they can steer.
 - Iterate on feedback. Never proceed to produce or publish on an unapproved draft.

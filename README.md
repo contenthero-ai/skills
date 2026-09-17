@@ -21,9 +21,7 @@ Ask me for any API keys you need.
 Prefer to install manually? See [INSTALL.md](./INSTALL.md). The short version:
 
 ```bash
-gh skill install contenthero-ai/skills contenthero-generate
-gh skill install contenthero-ai/skills contenthero-pipeline
-gh skill install contenthero-ai/skills contenthero-brand
+gh skill install contenthero-ai/skills contenthero
 ```
 
 Then connect a transport: MCP (`claude mcp add --transport http contenthero https://mcp.contenthero.ai`) or the CLI (`npm install -g @contenthero/cli` then `contenthero login`).
@@ -39,13 +37,23 @@ When a draft is needed, the skill grounds your LLM in your real context and your
 
 ## What's included
 
-| Skill | What it does | Invoke |
-|-------|--------------|--------|
-| **contenthero-generate** | Image, video, audio, reference board, and lip-sync. Output-id chaining, cost preflight, async wait. Execution only. | `/contenthero:generate` |
-| **contenthero-pipeline** | Ground in outliers and brand voice → draft on-brand (your LLM writes, you approve) → produce → assemble → schedule or publish. The hero skill. | `/contenthero:pipeline` |
-| **contenthero-brand** | Read and update your brand kit and sections. Read inspiration accounts, outliers, and brand-account performance. | `/contenthero:brand` |
+**One skill, `/contenthero`, covering the whole product.** It routes your request to the right
+workflow rather than making you pick a skill first.
 
-The skills cooperate through a small workspace file, `.contenthero/context.md`, that caches your active brand kit and identity ids so they are not re-discovered every run.
+| Workflow | What it covers |
+|----------|----------------|
+| **Generate** | Image, video, audio, reference boards, lip-sync, upscaling. Cost preflight before every spend, output-id chaining so you never re-upload. |
+| **Plan and publish** | Spaces, stages and cards, one post per platform, scheduling, and publishing to your connected accounts. |
+| **Ground and draft** | Your brand kit and its searchable knowledge base. Your LLM writes in your voice; you approve before anything goes live. |
+| **Research** | The accounts you track and their posts ranked by outlier score, which measures a post against its own creator's baseline rather than the platform's. |
+| **Media library** | Upload, import, search, folders, and archiving that is always reversible. |
+| **Editor** | Projects, timelines, canvases, saved elements, previews, and exports. |
+
+It remembers your context in a small workspace file, `.contenthero/context.md`, caching your
+active brand kit and identity ids so they are not re-discovered every run.
+
+> It was three separate skills until September 2026. One covers the same ground with a single
+> install, and the real flows crossed all three anyway.
 
 ## Authentication
 

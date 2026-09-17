@@ -2,6 +2,43 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.0] - 2026-09-17
+
+Three skills become one, the whole 88-tool surface becomes reachable, and the repo gets its first
+guard. Rebuilt against the published `@contenthero/mcp` 0.4.6 and `@contenthero/cli` 0.3.5.
+
+### Changed
+- **One skill, `contenthero`, replaces `contenthero-generate`, `contenthero-pipeline` and
+  `contenthero-brand`.** The split cost more than it saved: `pipeline` delegated into `generate`
+  and read `brand`'s cached context, so the main flow loaded all three anyway while paying for
+  three always-in-context descriptions. claude.ai also installs one zip per skill, so three skills
+  meant three uploads on the most common path. `SKILL.md` is now a router; the workflows live in
+  `contenthero/references/`.
+- **The skill no longer restates the tool surface.** When it runs, the agent already holds every
+  name, description and JSON Schema from `listTools()`. What is written here is only what those
+  schemas cannot say: sequencing, traps, gates, and the choice between two tools that look alike.
+- Rewrote the cookbook and the install docs for one skill and the current vocabulary.
+
+### Added
+- **`scripts/check-tools.mjs`, and CI to run it.** The first automated check in this repository.
+  It reads the live surface from the published package and checks both directions: every tool the
+  skill names must exist, and every tool that exists must be named in a workflow.
+- Coverage for two domains no skill had ever mentioned: **the editor** (projects, timelines,
+  canvases, elements, previews, exports) and **inspiration** (tracked accounts and outlier-ranked
+  content), plus the planner, the media library, and account reads.
+
+### Fixed
+- **21 tool names that no longer existed.** The whole `create_post` / `add_post_destination` /
+  `schedule_post` family, `list_outliers`, `list_inspiration_accounts`,
+  `get_brand_account_performance`, `wait_for_generation` and more. The vocabulary had changed in
+  two directions at once: a post became a card, a destination became a post, and `publish_post`
+  survived taking a `cardId`.
+- **Coverage went from 25 of 88 tools to 88 of 88**, and it is now enforced rather than claimed.
+- Removed a frozen model catalog that had already drifted, missing 2 of 26 live models, and a
+  frozen list of prompt-reference schemes. Both are values the roster resolves live.
+- `.codex-plugin` and `.cursor-plugin` pointed at `assets/icon.png` and `assets/logo.png`, which
+  have never existed in this repository. References removed.
+
 ## [0.1.0] - 2026-06-19
 
 First release: three skills, the runtime contract, and the cookbook, contract-audited and dogfooded end to end against production.

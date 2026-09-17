@@ -1,123 +1,116 @@
-# CLAUDE.md: ContentHero Skills
+# CLAUDE.md: maintaining the ContentHero skill
 
-## What This Is
+Instructions for editing **this repository**. The skill's own instructions live in
+`contenthero/SKILL.md` and are not repeated here, because two copies of one rule drift.
 
-The ContentHero Skills. Three independent, self-contained skills that turn ContentHero into the context-plus-execution layer for your agent:
+## What this is
 
-- **contenthero-generate**: idea to media. Image, video, audio, reference board, and lip-sync generation, with output-id chaining and cost preflight. Execution only.
-- **contenthero-pipeline**: research to published post. Grounds a post in your inspiration outliers and brand voice, has the host LLM draft on-brand copy in your own voice, then produces the media, assembles the post, and schedules or publishes it. The hero skill.
-- **contenthero-brand**: your context. Reads and updates your brand kit and sections, and reads inspiration accounts, outliers, and brand-account performance. Feeds the other two.
+**One skill: `contenthero`.** A router `SKILL.md` plus workflow references under
+`contenthero/references/`, published to Claude Code, Claude Desktop, claude.ai, Cursor and Codex
+through the plugin manifests in the dot-directories.
 
-Each skill includes its own bundle of `references/` so it installs cleanly via `gh skill install`, an agent host's plugin manifest, or a direct git clone.
+It was three skills (`contenthero-generate`, `contenthero-pipeline`, `contenthero-brand`) until
+2026-09-17. They were consolidated because the split cost more than it saved: `pipeline`
+delegated into `generate` and read `brand`'s cached context, so the flagship flow loaded all
+three anyway and paid for three always-in-context descriptions to do it. **claude.ai also
+installs one zip per skill**, so three skills meant three uploads for the most common install
+path.
 
-## The Thesis (read this first)
+## ⛔ The skill must never enumerate the tool surface
 
-ContentHero is the **context and execution layer**. Your own LLM is the **brain**. The skills feed the brain grounding (brand kit, inspiration outliers, your own past posts) and execute (generate media, publish, schedule). This is the line that defines how these skills work.
+The rule that shapes every edit here.
 
-There are two different things. Only one of them is the anti-pattern.
+When the skill runs, the agent has **already received every tool's name, description and full
+JSON Schema** from `listTools()`. Writing a parameter table into a reference file creates a second
+source of truth for facts the agent already holds, costs tokens to carry, and is guaranteed to
+drift. That is exactly what rotted the documentation repository: 77 dead references across 10
+files, live for about three months.
 
-- **Anti-pattern (never do this):** draft copy with no grounding in the user's real context, generic words that could belong to any brand, presented as if they were on-brand.
-- **The feature (always do this when copy is needed):** the host LLM drafts copy, grounded in the user's real context. Pull the user's outliers to extract the patterns that actually perform for them (hook archetype, structure, pacing, CTA style). Pull the brand kit for tone, vocabulary, and banned words. Pull the user's own recent and top-performing posts. Then synthesize a draft that emulates the user's proven patterns in the user's own voice, present it for approval, and only then execute. The brain writes the words. ContentHero supplies the grounding and the method.
+**Write only what `listTools()` cannot say:**
 
-**The hard rule:** when copy is needed, ground it in the user's real context (outliers plus brand voice plus past posts), never present generic or ungrounded copy as on-brand, and never publish without explicit approval. Generic copywriting with no grounding is the anti-pattern. Grounded voice synthesis is the feature. The full method lives in `contenthero-pipeline/references/voice-synthesis.md`.
+| Write this | Not this |
+|---|---|
+| The order to call things in | What arguments a tool takes |
+| The trap that costs money or deletes work | What a tool returns |
+| The gate that needs a human | A restatement of the tool's description |
+| The choice between two tools that look alike | A list of every tool in a domain |
 
-## Architecture
+If a sentence would still be true with the tool's own description in front of you, delete it.
+
+## The guard
+
+`npm run check` runs `scripts/check-tools.mjs`, which reads the live surface from the published
+`@contenthero/mcp` and checks it **in both directions**:
+
+- **Forward:** every tool the skill names must exist. This repo had **21 dead names** before the
+  guard existed.
+- **Reverse:** every live tool must be named at least once, in a sentence telling an agent when
+  to reach for it. This repo covered **25 of 88 tools**, with the editor's 16 and inspiration's 4
+  not mentioned anywhere at all.
+
+The reverse direction is what makes "full coverage" a fact rather than a claim in a README.
+Coverage is derived by reading the prose, so there is no second list to fall behind: **you cannot
+satisfy the guard without writing the sentence.**
+
+Run it before committing. It is also CI.
+
+### Two ways the guard was wrong, kept here so they are not rediscovered
+
+1. **It could not see single-word tools.** Both directions used one backticked-snake_case pattern,
+   so `archive`, `favorite`, `upscale` and `transcribe` were reported uncovered while being
+   documented, purely for having no underscore. Coverage now searches for each live name
+   literally; only dead-name detection uses the pattern, because you cannot enumerate what does
+   not exist.
+2. **It flagged correct prose.** Canvas ops (`create_layer`, `set_background`) and schema enum
+   values are real, current, snake_case, and not tools. Rather than allowlist them, the guard
+   accepts any token the **live surface itself still mentions**, harvested from every description
+   and enum the server advertises. A retired op vanishes from those descriptions too, so it is
+   still caught.
+
+⭐ **A guard that flags correct code gets switched off.** Both fixes exist to keep this one
+trusted.
+
+## Editing rules
+
+- **`SKILL.md` is a router and must stay one.** It is loaded in full on invoke and stays in
+  context for the session, so every line is a recurring cost. Keep it under 500 lines; it is
+  currently around 150. Detail goes to `references/`, which load only when read. **If domain
+  detail creeps back into `SKILL.md`, the consolidation has failed.**
+- **The `description` in the frontmatter is always in context**, for every session, whether the
+  skill is used or not. It is capped at 1,536 characters. Make it earn the space.
+- **Never freeze a value the product resolves live.** The model roster, a model's
+  `promptReferences` schemes, a platform's character limits and tier limits all change without a
+  deploy. Point at the tool that resolves them. A frozen list was already found drifting here: a
+  model catalog missing 2 of 26 live models.
+- ⛔ **Never an em dash or an en dash**, anywhere. Restructure the sentence.
+- **American English**, including in comments.
+- **Say "card" not "post"** for a piece of work. What used to be a post is a card; what used to be
+  a destination is a post, one per platform; `publish_post` survived and takes a `cardId`.
+
+## The thesis, which the skill must keep carrying
+
+ContentHero is the **context and execution layer**. The user's own LLM is the **brain**.
+
+- **The anti-pattern:** copy with no grounding in the user's real context, generic words that
+  could belong to any brand, presented as if they were on-brand.
+- **The feature:** the host LLM drafts, grounded in what actually performs for this user, their
+  brand voice, and their own past work, then the user approves.
+
+ContentHero never writes copy server-side. That line is the product, so it survives every edit.
+
+## Layout
 
 ```
 contenthero-skills/
-├── CLAUDE.md                   # This file. Thesis, auth ladder, hard rules, shared state.
-├── INSTALL.md                  # Human-facing install
-├── INSTALL_FOR_AGENTS.md       # Agent-driven install spec
-├── README.md                   # Public-facing description
-├── COOKBOOK.md                 # End-to-end workflow recipes
-├── VERSION  CHANGELOG.md  LICENSE
-├── mcp.json + .mcp.json        # Hosted MCP server config (used by plugin manifests)
-├── .claude-plugin/             # Claude Code / OpenClaw plugin manifest
-├── .codex-plugin/              # Codex plugin manifest
-├── .cursor-plugin/             # Cursor plugin manifest
-├── contenthero-generate/       # Self-contained skill
-│   ├── SKILL.md                # Generation workflow (execution only)
-│   └── references/             # model-catalog, identity, media-inputs, chaining, troubleshooting
-├── contenthero-pipeline/       # Self-contained skill (hero)
-│   ├── SKILL.md                # Ground to draft to produce to assemble to publish
-│   └── references/             # voice-synthesis, posts-and-destinations, scheduling, connected-accounts, troubleshooting
-├── contenthero-brand/          # Self-contained skill
-│   ├── SKILL.md                # Brand kit reads and writes, inspiration reads
-│   └── references/             # brand-kit-structure, inspiration, troubleshooting
-└── assets/                     # Logos, plugin assets
+├── CLAUDE.md               This file. Maintainer rules.
+├── README.md  INSTALL.md  INSTALL_FOR_AGENTS.md  COOKBOOK.md
+├── CHANGELOG.md  VERSION  LICENSE
+├── package.json            Exists only to run the guard.
+├── scripts/check-tools.mjs The guard.
+├── .github/workflows/      CI.
+├── mcp.json  .mcp.json     Hosted MCP config, used by the manifests.
+├── .claude-plugin/  .codex-plugin/  .cursor-plugin/
+└── contenthero/
+    ├── SKILL.md            The router.
+    └── references/         The workflows.
 ```
-
-The three skills are independent. If shared docs drift between them, that is acceptable. Each skill is internally consistent and authored to stand alone.
-
-## The 300-Line Guideline
-
-Keep each SKILL.md focused. Skill files are injected into the prompt, so what stays in SKILL.md is what the agent needs to decide what to do next:
-
-- Frontmatter (name, description, triggers, allowed-tools)
-- Stage and phase flow (what stages exist, when to enter each)
-- Decision trees (mode detection, transport selection, when to draft vs when to stop)
-- Rules that apply every turn
-- Short "Read references/X.md for details" pointers at each stage
-
-What moves to `references/`: CLI and tool call examples, request and response shapes, model rosters, parameter tables, full prompt patterns, and error handling. The test: if removing a section would NOT break the agent's ability to decide what to do next, it belongs in `references/`. If it WOULD, it stays.
-
-## Auth Ladder (transport detection)
-
-Pick one transport at the start of a session. Never mix, never switch mid-session, never narrate the choice. Detect in this order:
-
-1. **MCP (preferred)**: if ContentHero MCP tools are visible in the toolset, use them. Match loosely across server namespaces: `mcp__contenthero__*` (hosted OAuth at `https://mcp.contenthero.ai`), `mcp__contenthero-local__*` (a local stdio build), or any `mcp__* contenthero*__*` variant a host assigns. OAuth or a configured API key handles auth. No key handling in chat.
-2. **CLI**: if no MCP is visible, use the `contenthero` CLI when `contenthero auth status` exits 0 OR `CONTENTHERO_API_KEY` is set in the environment. Pattern is `contenthero <noun> <verb>`, JSON on stdout by default, exit codes `0` ok, `1` general, `2` usage, `3` auth, `4` timeout (work accepted but not finished). Add `--cost` to preflight a spend and `--no-wait` plus `contenthero generation wait <id>` for non-blocking polling.
-3. **Raw `/api/v1`**: last resort only, when neither MCP nor the CLI is available but the user has an API key and an HTTP client. Bearer the API key against `https://app.contenthero.ai/api/v1`.
-4. **Neither**: tell the user once: "To use this skill, connect the ContentHero MCP server (`https://mcp.contenthero.ai`) or install the CLI: `npm install -g @contenthero/cli` then `contenthero login`."
-
-**Hard rules:**
-- **Never ask the user to paste an API key into the chat.** Keys go through `contenthero login` (browser-assisted), the `CONTENTHERO_API_KEY` environment variable, or the MCP OAuth flow. The skill never logs or echoes a key.
-- **MCP mode: only use `mcp__*contenthero*__*` tools.** The tool name is the API. Do not shell out to the CLI for the same operation.
-- **CLI mode: only use `contenthero ...` commands.** Run `contenthero schema` or `contenthero <command> --help` to discover arguments. Do not hand-write raw HTTP.
-- **Never cross over.** If an operation is not exposed in your detected transport, tell the user. Do not switch transports to reach it.
-- **Tool and CLI names are identical concepts across transports.** MCP `generate_image` is CLI `contenthero generate image`. The references show both side by side. Read only the column for your detected mode.
-
-## Shared State (cross-skill cache)
-
-Skills cooperate through one workspace file: **`.contenthero/context.md`** at the workspace root. It caches the ids a session resolves so a later skill does not have to re-discover them.
-
-- `contenthero-brand` writes it after resolving the active brand kit.
-- `contenthero-pipeline` and `contenthero-generate` read it first, and append ids they resolve (avatar, look, board, connected account, recent post ids).
-- It is a hint, not the source of truth. **Always revalidate an id against a live read before a spend or a publish.** Ids can be archived or revoked between sessions.
-- It is human-readable and machine-readable. One file per workspace.
-
-Schema (Markdown with a fenced YAML-style block the skills parse leniently):
-
-```
-# ContentHero workspace context
-# Written by the ContentHero skills. Safe to edit or delete. Revalidated before every spend.
-
-active_brand_kit_id: <uuid>
-active_brand_kit_name: <string>
-default_avatar_id: <uuid>
-default_look_id: <uuid>
-connected_account_ids:
-  - <uuid>   # platform: instagram, handle: @...
-recent_post_ids:
-  - <uuid>   # last posts this workspace created, newest first
-notes: <free text, optional>
-```
-
-If the file is missing, the first skill that needs an id resolves it live and creates the file. If a cached id fails a live read, drop it from the cache and resolve fresh.
-
-## API Conventions
-
-- **Async generation:** `generate_*` runs a smart-wait (about 50s) then hands back an `outputId` if the render is still going. Poll with `get_generation_status`, or block with `wait_for_generation` (CLI `contenthero generation wait <id>`). Exit code 4 (CLI) or a pending status (MCP) means the work was accepted but did not finish in time. The `outputId` is always returned, so keep polling.
-- **Cost preflight:** every spend can be previewed first. MCP passes `getCost: true` on the generate call; CLI uses `--cost`. It charges nothing.
-- **Chaining:** a reference (start frame, image input, etc.) accepts a raw URL OR a ContentHero output-id token `<uuid>-<N>` (the Nth variation of a prior output). The server resolves either, type-checks it, and scopes it to the owner. This is more forgiving than import-first competitors. Prefer passing the output-id straight through rather than re-uploading.
-- **Scopes:** API keys are scope-gated. Generation needs generate scopes, publishing needs `publish:write`, pipeline needs `pipeline:write`. If a call fails on scope, tell the user which scope to grant in API Keys settings. Do not work around a missing scope.
-
-## Hard Rules (every skill, every turn)
-
-1. Always ground drafted copy in the user's real context, and never present ungrounded generic copy as if it were on-brand. See the thesis.
-2. Never ask the user to paste an API key in chat.
-3. Never publish or schedule without explicit user approval of the final content.
-4. Always preview cost before a large or batched spend, and surface it to the user.
-5. Be concise in chat. Report the result (the media, the post link, the cost) not the plumbing (output ids, raw payloads, transport choice).
-6. Revalidate cached ids before a spend or publish.
-7. One transport per session. Detect once, never narrate, never cross over.

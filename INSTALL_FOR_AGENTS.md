@@ -11,9 +11,9 @@ Read [`CLAUDE.md`](./CLAUDE.md) at the repo root first. It is the runtime contra
 If you fetched this file by URL without cloning yet, the companion files live at:
 
 - `https://raw.githubusercontent.com/contenthero-ai/skills/main/CLAUDE.md`: runtime contract
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero-generate/SKILL.md`: generation skill (transport ladder, chaining, cost preflight)
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero-pipeline/SKILL.md`: pipeline skill (ground, draft on-brand, produce, publish, schedule)
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero-brand/SKILL.md`: brand skill (brand kit reads and writes, inspiration reads)
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero/SKILL.md`: generation skill (transport ladder, chaining, cost preflight)
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero/SKILL.md`: pipeline skill (ground, draft on-brand, produce, publish, schedule)
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero/SKILL.md`: brand skill (brand kit reads and writes, inspiration reads)
 - `https://raw.githubusercontent.com/contenthero-ai/skills/main/INSTALL.md`: human-facing install doc
 
 ## Step 1: Detect the agent host and install the skills
@@ -23,9 +23,7 @@ Detect which agent is running before cloning. Each host expects skills at a diff
 The most portable install is `gh skill install` (GitHub CLI v2.90+), which writes to the right directory for your host automatically:
 
 ```bash
-gh skill install contenthero-ai/skills contenthero-generate
-gh skill install contenthero-ai/skills contenthero-pipeline
-gh skill install contenthero-ai/skills contenthero-brand
+gh skill install contenthero-ai/skills contenthero
 ```
 
 If `gh skill` is not available, clone the whole repo to the host's skills path:
@@ -45,7 +43,7 @@ git clone --single-branch --depth 1 \
   <install-path>
 ```
 
-After cloning, the three skills are auto-discovered at `contenthero-generate/SKILL.md`, `contenthero-pipeline/SKILL.md`, and `contenthero-brand/SKILL.md`.
+After cloning, the skill is auto-discovered at `contenthero/SKILL.md`.
 
 ## Step 2: Pick a transport (MCP or CLI)
 
@@ -95,7 +93,7 @@ If the balance is low, point the user at their billing settings rather than proc
 
 This is the step the install is actually for. The thing that makes ContentHero different from a raw media API is that it grounds your agent in the user's real brand and research context. Set that up now so every later generation and post is on-brand.
 
-Read [`contenthero-brand/SKILL.md`](./contenthero-brand/SKILL.md) and:
+Read [`contenthero/SKILL.md`](./contenthero/SKILL.md) and:
 
 1. List the user's brand kits (`list_brand_kits`). If there is exactly one, make it active. If there are several, ask which to use. If there are none, tell the user they can create one in the app and continue without it for now.
 2. Read the active brand kit (`get_brand_kit`) and summarize back to the user, in one or two lines, the tone of voice, key vocabulary, and any banned words you found.

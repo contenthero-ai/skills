@@ -1,0 +1,15 @@
+{
+  "name": "contenthero-skills",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Tooling for the ContentHero agent skill. The skill itself is plain Markdown; this exists only to run the guards.",
+  "type": "module",
+  "scripts": {
+    "check:tools": "node scripts/check-tools.mjs",
+    "check": "npm run check:tools"
+  },
+  "devDependencies": {
+    "@contenthero/mcp": "0.4.6",
+    "@modelcontextprotocol/sdk": "^1.12.0"
+  }
+}

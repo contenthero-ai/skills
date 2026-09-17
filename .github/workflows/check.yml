@@ -1,0 +1,27 @@
+name: check
+
+# The first CI in this repository.
+#
+# Before it, nothing verified the skill against the product it describes. Measured 2026-09-17:
+# 21 tool names that no longer existed, and 25 of 88 live tools covered, with two entire domains
+# unmentioned. No test, build or typecheck could have said so, because a Markdown skill has none
+# of those. This is the whole safety net, so it runs on every push.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # `npm ci` and not `npm install`: the point is to check the skill against the EXACT
+      # published @contenthero/mcp the lockfile pins, not whatever floats in today.
+      - run: npm ci
+      - run: npm run check

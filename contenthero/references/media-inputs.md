@@ -34,19 +34,38 @@ You get an `outputId` from any generate result. A multi-variation generation (e.
 
 ## Addressing references in the prompt
 
-How a model binds references to your prompt varies by model. `get_model` returns a `promptReferences` block; follow it rather than assuming one convention. The `scheme` tells you the form:
+**How a model binds references to your prompt varies by model, and there is no convention you can
+assume.** `get_model` returns a `promptReferences` block for exactly this reason. Read it and
+follow it.
 
-- `numbered_tag`: write the literal tokens it lists (e.g. `@Image1`, `@Video1`, `@Audio1`) in the prompt, numbered by the order you pass references. The model binds each tag to that reference (e.g. "the warrior from `@Image1` holding `@Image2`").
-- `named_tag`: each reference is a named element; reference it as `@name` in the prompt, matching the element's name.
-- `numbered_prose`: refer to references as plain text, `"image 1"`, `"image 2"` (no `@`), in the order you pass them.
-- `descriptive`: the model has no tags; describe each reference by its role or content ("the subject from the first image", "use the second image as the background"). Order still matters.
-- `none`: a single reference; describe it directly.
+⛔ **Do not memorize the scheme names, and do not expect a list of them here.** The set of schemes
+is a live value the roster resolves, in the same way the model list is. A list frozen into this
+file would be wrong the first time a model ships with a new binding style, and wrong silently,
+because using the wrong scheme does not error.
 
-`promptReferences.honored` says whether the model binds the addressing or treats references positionally. `promptReferences.inputs[].token` gives the exact form per bucket (`{n}` = reference order, `{name}` = element name). Pass references in the same order you reference them. Do not use a scheme a model does not declare: a literal `@Image1` on a `numbered_prose` or `descriptive` model is just stray prompt text.
+What the block tells you, and how to act on each part:
+
+- **`scheme`** names the form the model expects. Some models want literal tokens written into the
+  prompt; some address references by an element's name; some want plain prose ("the first
+  image"); some have no addressing at all and take references positionally, so you describe each
+  one by its role.
+- **`inputs[].token`** gives the exact token form for each bucket, with `{n}` standing for the
+  reference's order and `{name}` for an element's name. Build the token from this rather than
+  guessing its capitalization or spacing.
+- **`honored`** says whether the model actually binds your addressing or silently falls back to
+  position. When it is false, order is the only thing that carries meaning, so put the references
+  in the order the prompt discusses them.
+
+⚠️ **Using a scheme the model does not declare does not fail loudly, it just degrades the
+result.** A literal `@Image1` written at a model that takes prose is stray text in the prompt: it
+consumes attention, it binds nothing, and the output is quietly worse. This is the most common
+way a technically valid generation comes back wrong.
+
+Pass references in the same order you address them, whatever the scheme.
 
 ### Named elements (Kling 3.0)
 
-A model whose `promptReferences.scheme` is `named_tag` and whose `inputTypes` include `elements` accepts named reference elements: groups of images that all depict one entity (a character, prop, location), addressable as `@name`. Pass them on the video reference set as `elements: [{ name, description, images: [urlsOrIds] }]` (CLI: see `contenthero generate video --help`), alongside a `startFrame` (required). Up to `maxElements` per request. Reference each in the prompt by its `@name`. Element images may be URLs or output-ids, so you can generate the angle shots first and assemble an element from them.
+A model whose `promptReferences` declares a named-element scheme and whose `inputTypes` include `elements` accepts named reference elements: groups of images that all depict one entity (a character, prop, location), addressable as `@name`. Pass them on the video reference set as `elements: [{ name, description, images: [urlsOrIds] }]` (CLI: see `contenthero generate video --help`), alongside a `startFrame` (required). Up to `maxElements` per request. Reference each in the prompt by its `@name`. Element images may be URLs or output-ids, so you can generate the angle shots first and assemble an element from them.
 
 ## Rules
 

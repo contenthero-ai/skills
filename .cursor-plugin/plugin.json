@@ -2,7 +2,7 @@
   "$schema": "https://cursor.com/schemas/cursor-plugin/plugin.json",
   "name": "contenthero",
   "displayName": "ContentHero",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Generate media, run the content pipeline, and read your brand and research context with ContentHero. The skills feed your agent grounding (brand kit, inspiration outliers, your own past posts) and execute (generate, publish, schedule). Your own LLM stays the brain: ContentHero is the context and execution layer.",
   "author": {
     "name": "ContentHero"
@@ -11,7 +11,6 @@
   "homepage": "https://contenthero.ai",
   "repository": "https://github.com/contenthero-ai/skills",
   "license": "MIT",
-  "logo": "assets/logo.png",
   "category": "developer-tools",
   "keywords": [
     "contenthero",
@@ -31,6 +30,18 @@
     "outliers",
     "social-media"
   ],
-  "tags": ["content", "generate", "video", "image", "pipeline", "publish", "brand", "social-media", "creative"],
-  "skills": ["./contenthero-generate/", "./contenthero-pipeline/", "./contenthero-brand/"]
+  "tags": [
+    "content",
+    "generate",
+    "video",
+    "image",
+    "pipeline",
+    "publish",
+    "brand",
+    "social-media",
+    "creative"
+  ],
+  "skills": [
+    "./contenthero/"
+  ]
 }

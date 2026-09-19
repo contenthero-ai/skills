@@ -11,9 +11,7 @@ Read [`CLAUDE.md`](./CLAUDE.md) at the repo root first. It is the runtime contra
 If you fetched this file by URL without cloning yet, the companion files live at:
 
 - `https://raw.githubusercontent.com/contenthero-ai/skills/main/CLAUDE.md`: runtime contract
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero/SKILL.md`: generation skill (transport ladder, chaining, cost preflight)
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero/SKILL.md`: pipeline skill (ground, draft on-brand, produce, publish, schedule)
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero/SKILL.md`: brand skill (brand kit reads and writes, inspiration reads)
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero/SKILL.md`: the ContentHero skill (transport ladder, sequencing, traps, cost preflight; routes to references for generating, the planner, brand, the editor, research and the media library)
 - `https://raw.githubusercontent.com/contenthero-ai/skills/main/INSTALL.md`: human-facing install doc
 
 ## Step 1: Detect the agent host and install the skills
@@ -99,7 +97,7 @@ Read [`contenthero/SKILL.md`](./contenthero/SKILL.md) and:
 2. Read the active brand kit (`get_brand_kit`) and summarize back to the user, in one or two lines, the tone of voice, key vocabulary, and any banned words you found.
 3. Write the resolved brand kit id (and any default avatar or connected accounts you see) into `.contenthero/context.md` at the workspace root, per the shared-state schema in `CLAUDE.md`. Later skills read this so they do not re-discover it.
 
-On the happy path this step ends with an active brand kit cached and a one-line summary of the user's voice. That is the grounding the pipeline skill builds on.
+On the happy path this step ends with an active brand kit cached and a one-line summary of the user's voice. That is the grounding everything downstream builds on.
 
 ## Step 5: Verify the install (opt-in)
 
@@ -126,7 +124,7 @@ The skills now have a transport, an authenticated account, and a grounded brand 
 > - "Find my top outliers, ground a Reel caption in my brand voice, and draft it for my approval"
 > - "Turn this idea into an on-brand post and schedule it to my connected accounts"
 
-The pipeline skill handles the research, grounds the draft in the user's own voice, produces the media, assembles the post, and schedules it. The user's LLM writes the words; ContentHero supplies the grounding and the execution.
+The skill handles the research, grounds the draft in the user's own voice, produces the media, assembles the post, and schedules it. The user's LLM writes the words; ContentHero supplies the grounding and the execution.
 
 ## Upgrade
 

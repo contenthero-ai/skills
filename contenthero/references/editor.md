@@ -58,11 +58,15 @@ The description is what makes an element findable later, so write a real one.
 
 Two different answers, and picking the wrong one wastes time or money:
 
-- **A frame or a few frames:** `get_context` with a render. Cheaper and instant. Use this by
-  default.
-- **Motion, cuts, transitions, pacing:** `create_preview` renders a short low-res composed video
-  of a timeline range. It is a JOB: it returns an id, you poll `get_preview` until it is done,
-  then fetch the url. The output is **ephemeral and never stored**, so it is not a deliverable.
+One tool answers all of it: `get_context` with a render. `mode` picks how much motion you need.
+
+- **A frame:** just `render`. Cheapest and instant; `mode` defaults to `'image'`.
+- **A few frames across a range:** `count` with `fromFrame`/`toFrame`. Still instant, still inline images.
+- **Motion, cuts, transitions, pacing:** `mode: 'video'` renders a short low-res composed clip of
+  a timeline range. This one is a JOB: it returns a renderId, you poll `get_preview` until it is
+  done, then fetch the url. Capped at 20 seconds, because judging motion needs seconds not minutes.
+
+All three are **ephemeral and never stored**, so none of them is a deliverable.
 
 A still cannot show pacing. Reach for a preview only when the question is about motion.
 

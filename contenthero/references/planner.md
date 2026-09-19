@@ -36,8 +36,23 @@ rejected rather than guessed.
 
 1. `create_card` with the title and the primary platform. Keep the title short: a long one wraps
    and makes the column unreadable.
-2. `update_card` for the body (script, notes, cover) and for its posts and assets.
+2. `update_card` for the body (notes, cover) and for its posts and assets.
 3. `publish_post` when it is approved, or set `scheduledAt` and let it go at its time.
+
+### Writing `notes` means reading the card first
+
+⛔ **The other mistake that loses work, and this one is silent.** A card's notes have several
+independent writers: this surface, the CLI, the board's own panel, and the user typing into it
+right now. Every one of them reads the whole document, edits it, and writes it back whole.
+
+**`get_card`, compose your version from what it returned, and pass its `revision` back as
+`expectedRevision`.** A `notes` write without it is refused outright rather than guessed at.
+
+If the card changed while you were composing, the call fails and **the refusal carries the current
+`notes` and `revision` with it**, so you already have what you need: merge your change onto what
+came back and send it again with the revision that came back. Do not re-read, and do not add one
+to the revision yourself. It advances only when the notes actually change, so a title edit or an
+identical save leaves it where it was.
 
 ### `posts` and `assets` replace the whole set
 
@@ -79,7 +94,7 @@ call.** Prefer scheduling. Publishing is public and cannot be undone from here.
 - **Between spaces:** `update_card` with a `spaceId`. Without a stage it lands in the target's
   stage whose slug matches its current one, or that space's first stage.
 - **In bulk:** pass `cardIds` to move a selection in one call. Fields that describe ONE card
-  (title, notes, script, cover) still need exactly one.
+  (title, notes, cover) still need exactly one.
 
 ## Organizing the board
 

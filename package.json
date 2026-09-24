@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@contenthero-ai/american-spelling": "0.1.1",
-    "@contenthero/mcp": "0.4.17",
+    "@contenthero/mcp": "0.4.18",
     "@modelcontextprotocol/sdk": "^1.12.0"
   }
 }

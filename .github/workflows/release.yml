@@ -19,6 +19,7 @@ on:
 
 permissions:
   contents: write
+  packages: read
 
 jobs:
   release:
@@ -31,10 +32,12 @@ jobs:
       - uses: astral-sh/setup-uv@v5
       # `.npmrc` reads the private @contenthero-ai scope (the spelling gate) with NPM_TOKEN. Without it every
       # run failed at `npm ci` with E401 from 2026-09-19 on, so no check ran and no release could build.
-      # PACKAGES_READ_TOKEN is the org-level read:packages secret the other repos' CI already uses.
+      # GITHUB_TOKEN reads the package once the package grants this repository Actions access (package
+      # settings, Manage Actions access). PACKAGES_READ_TOKEN, if set as a secret here, is the fallback: the
+      # same read:packages credential the private repos' CI uses.
       - run: npm ci
         env:
-          NPM_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
+          NPM_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN || secrets.GITHUB_TOKEN }}
       - run: npm run check
       - run: npm run check:spec
       # A tag that disagrees with VERSION would publish a zip labeled one version containing another.

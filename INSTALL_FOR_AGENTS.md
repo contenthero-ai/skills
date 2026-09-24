@@ -14,40 +14,38 @@ If you fetched this file by URL without cloning yet, the companion files live at
 - `https://raw.githubusercontent.com/contenthero-ai/skills/main/skills/contenthero/SKILL.md`: the ContentHero skill (transport ladder, sequencing, traps, cost preflight; routes to references for generating, the planner, brand, the editor, research and the media library)
 - `https://raw.githubusercontent.com/contenthero-ai/skills/main/INSTALL.md`: human-facing install doc
 
-## Step 1: Detect the agent host and install the skills
+## Step 1: Detect the agent host and install the skill
 
-Detect which agent is running before cloning. Each host expects skills at a different path. If you are not sure, ask the user "which AI coding agent are you running this from?"
+**This file is for terminal agents.** If the user is in a chat app (claude.ai, the Claude desktop
+app, ChatGPT, Gemini, Grok), you cannot install anything from here: send them to
+<https://contenthero.ai/skills>, which has a download and click-by-click steps for each app.
 
-The most portable install is `gh skill install` (GitHub CLI v2.90+), which writes to the right directory for your host automatically:
+Detect which agent is running. If you are not sure, ask the user which AI they are using. Prefer
+the **plugin**, because it installs the skill and the ContentHero connector together:
+
+| Agent | Install |
+|---|---|
+| Claude Code | `claude plugin marketplace add contenthero-ai/skills`, then `claude plugin install contenthero@contenthero` |
+| Codex | `codex plugin marketplace add contenthero-ai/skills`, then install ContentHero from `/plugins` and start a new session |
+| Gemini CLI | `gemini skills install https://github.com/contenthero-ai/skills --path skills/contenthero --scope user` |
+| Hermes | `hermes skills install contenthero-ai/skills/skills/contenthero` |
+| Any other | Copy `skills/contenthero/` into the host's skills folder. `~/.agents/skills/` is the shared location most agents read. |
+
+For "any other", with no plugin support:
 
 ```bash
-gh skill install contenthero-ai/skills contenthero
+git clone --depth 1 https://github.com/contenthero-ai/skills.git /tmp/contenthero-skills
+mkdir -p ~/.agents/skills && cp -R /tmp/contenthero-skills/skills/contenthero ~/.agents/skills/
 ```
 
-If `gh skill` is not available, clone the whole repo to the host's skills path:
-
-| Agent host    | Default install path                            |
-|---------------|-------------------------------------------------|
-| Claude Code   | `~/.claude/skills/contenthero-skills`           |
-| OpenClaw      | `~/.openclaw/skills/contenthero-skills`         |
-| Codex         | `~/.codex/skills/contenthero-skills`            |
-| Cursor        | `~/.cursor/skills/contenthero-skills`           |
-| Other         | Whatever path the host loads skills from. Ask the user. |
-
-```bash
-# Replace <install-path> with the row from the table above:
-git clone --single-branch --depth 1 \
-  https://github.com/contenthero-ai/skills.git \
-  <install-path>
-```
-
-After cloning, the skill is auto-discovered at `skills/contenthero/SKILL.md`.
+Copy the `skills/contenthero/` folder itself, never the whole repository: most agents look one
+folder deep for `SKILL.md`, so a whole repo cloned into the skills folder is not found.
 
 ## Step 2: Pick a transport (MCP or CLI)
 
 The skills route every ContentHero call through one transport. Detect in this order (full ladder in [`CLAUDE.md`](./CLAUDE.md)):
 
-1. **MCP** if ContentHero MCP tools are already visible (`mcp__contenthero__*` or any `mcp__*contenthero*__*`). This is the path of least resistance: OAuth, no key handling, runs against the user's account and credits. If MCP is detected and the user is happy with it, **skip to Step 4**.
+1. **MCP** if ContentHero MCP tools are already visible (`mcp__contenthero__*`, `mcp__plugin_contenthero_ContentHero__*` from the plugin, or any `mcp__*contenthero*__*` in any casing). The plugin install in Step 1 brings this connection; the user signs in once (`/mcp` in Claude Code). This is the path of least resistance: OAuth, no key handling, runs against the user's account and credits. If MCP is detected and the user is happy with it, **skip to Step 4**.
 2. **CLI** if no MCP is visible.
 
 ### Wiring MCP from scratch (preferred for chat-native hosts)
@@ -110,7 +108,7 @@ If the user declines, skip to Step 6. The skills work either way; the smoke test
 
 Common failures, in order:
 
-1. **No transport detected.** Run `contenthero auth status` (CLI) or confirm `mcp__contenthero__*` tools are visible (MCP).
+1. **No transport detected.** Run `contenthero auth status` (CLI) or confirm ContentHero MCP tools are visible (MCP).
 2. **Auth fails.** The key is missing or revoked. Re-run `contenthero login`, or check the OAuth connection.
 3. **Scope error.** The key lacks a needed scope. Tell the user which one to grant.
 4. **Low balance.** Point the user at billing.
@@ -119,7 +117,7 @@ Common failures, in order:
 
 The skills now have a transport, an authenticated account, and a grounded brand context. Tell the user:
 
-> ContentHero Skills are installed and grounded on your brand. Try:
+> ContentHero is installed and grounded on your brand. Try:
 > - "Generate a 9:16 product image with nano-banana-2, then animate it into a 5-second clip"
 > - "Find my top outliers, ground a Reel caption in my brand voice, and draft it for my approval"
 > - "Turn this idea into an on-brand post and schedule it to my connected accounts"
@@ -128,11 +126,10 @@ The skill handles the research, grounds the draft in the user's own voice, produ
 
 ## Upgrade
 
-```bash
-cd <install-path> && git pull origin main
-```
+- Plugin: `claude plugin marketplace update contenthero` (Claude Code) or `codex plugin marketplace upgrade` (Codex).
+- Copied folder: copy `skills/contenthero/` again from a fresh clone.
 
-Or with `gh skill`, re-run `gh skill install contenthero-ai/skills <skill>`. Re-read the active SKILL.md after an upgrade if the version bumped: the transport ladder occasionally gains new options.
+Re-read SKILL.md after an upgrade: the transport ladder occasionally gains new options.
 
 ## What this skill does NOT do
 

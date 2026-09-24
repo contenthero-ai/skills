@@ -1,34 +1,31 @@
-# ContentHero Skills
+# ContentHero
 
-An agent skill that lets your own AI assistant generate media, plan and publish content, and ground every draft in your brand, all through your ContentHero account.
+Create, edit, schedule, and publish content from your AI assistant. Generate images, video, and
+voiceovers, plan your content calendar, and draft on-brand copy, from hooks and scripts to captions
+and ads, grounded in what already performs for you.
 
-Works with Claude Code, Cursor, Codex, OpenClaw, and other AI coding agents.
+One plugin: the `contenthero` skill plus the ContentHero connector. It works in Claude, ChatGPT,
+Gemini, Codex, Cursor, VS Code, and other AI assistants that read skills.
 
 ```
 "Find my top outliers, ground a Reel caption in my brand voice, draft it for my approval, then schedule it."
-→ reads your inspiration outliers → extracts the patterns that perform for you → pulls your brand kit voice and your recent posts → drafts an on-brand caption in your own voice → you approve → produces the media → schedules the post
+→ reads your inspiration outliers → extracts the patterns that perform for you → pulls your brand kit
+  voice and your recent posts → drafts an on-brand caption in your own voice → you approve → produces
+  the media → schedules the post
 ```
 
 ## Install
 
-**Paste this into your agent.** It clones the repo to the right path, wires a transport (MCP or CLI), grounds itself on your brand kit, and offers a free smoke test.
+**Pick your AI at [contenthero.ai/skills](https://contenthero.ai/skills)** for step-by-step
+instructions and the download. The short version is in [INSTALL.md](./INSTALL.md):
 
-```
-Read https://raw.githubusercontent.com/contenthero-ai/skills/main/INSTALL_FOR_AGENTS.md and follow it.
-Ask me for any API keys you need.
-```
-
-Prefer to install manually? See [INSTALL.md](./INSTALL.md). The short version:
-
-```bash
-gh skill install contenthero-ai/skills contenthero
-```
-
-Then connect a transport: MCP (`claude mcp add --transport http contenthero https://mcp.contenthero.ai`) or the CLI (`npm install -g @contenthero/cli` then `contenthero login`).
+- **Claude:** download [`contenthero-plugin.zip`](https://github.com/contenthero-ai/skills/releases/latest/download/contenthero-plugin.zip) and upload it under Customize, Plugins.
+- **ChatGPT, Gemini, Grok:** download [`contenthero.zip`](https://github.com/contenthero-ai/skills/releases/latest/download/contenthero.zip) and upload it as a skill, then connect ContentHero.
+- **Claude Code:** `claude plugin marketplace add contenthero-ai/skills`, then `claude plugin install contenthero@contenthero`.
 
 ## The idea
 
-ContentHero pairs your LLM with your context. Your LLM is already a strong writer. What it lacks is your brand voice, your proven patterns, and a way to publish. ContentHero supplies both: the context and the execution.
+ContentHero pairs your LLM with your context. Your LLM is already a strong writer. What it lacks is your brand voice, your proven patterns, and a way to publish. ContentHero supplies all three.
 
 - **Context:** your brand kit (tone, vocabulary, banned words), your inspiration outliers (the posts that actually perform in your niche), and your own past posts and their performance.
 - **Execution:** generate image, video, audio, reference boards, and lip-sync, then assemble, schedule, and publish to your connected accounts.
@@ -78,9 +75,9 @@ Never paste an API key into an agent chat. Use `contenthero login` (browser-assi
 
 ## Requirements
 
-- A ContentHero account (MCP OAuth or a CLI API key)
-- An AI agent that supports skills
-- For the CLI: Node 20+. For MCP: nothing to install locally.
+- A ContentHero account
+- An AI that supports skills or plugins
+- For the CLI only: Node 20+
 
 ## Links
 

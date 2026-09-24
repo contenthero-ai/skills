@@ -27,6 +27,11 @@ The repo becomes one Agent Plugins 1.0 plugin that brings the ContentHero connec
   and when to use it. Found by a real claude.ai upload, not by any check here.
 
 ### Added
+- **Install instructions per host.** `README.md` and `INSTALL.md` send members to
+  contenthero.ai/skills and list the two release files; `INSTALL_FOR_AGENTS.md` is now for terminal
+  agents only and installs the plugin, or copies `skills/contenthero/` (never the whole repo, which
+  nested the skill too deep to be found). `.cursor-plugin/marketplace.json` is generated, because
+  Cursor's GitHub import refuses a repo without one.
 - **The ContentHero connector ships with the skill.** A bare skill cannot declare a connector, so
   claude.ai listed none. As a plugin, `mcp.json` declares `https://mcp.contenthero.ai`.
 - **Uploadable packages.** `npm run build:zip` writes `dist/contenthero.zip` (the skill folder at

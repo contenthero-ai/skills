@@ -1,87 +1,64 @@
-# Install ContentHero Skills
+# Install ContentHero
 
-The repo includes **one skill, `contenthero`**, covering the whole product: generating media,
-running the planner and publishing, brand context and its knowledge base, research by outlier
-score, the media library, and the editor.
+ContentHero ships as **one plugin**: the `contenthero` skill plus the ContentHero connector (the
+hosted MCP server at `https://mcp.contenthero.ai`). The skill knows how to use ContentHero well; the
+connector is what lets it act on your account.
 
-It routes your request to the right workflow, so there is nothing to choose at install time and
-nothing to install twice.
+**Step-by-step instructions for your AI, with download buttons, are at
+[contenthero.ai/skills](https://contenthero.ai/skills)** and in the
+[docs](https://docs.contenthero.ai/skills/install). This page is the short version.
 
-> It was three skills (`contenthero-generate`, `contenthero-pipeline`, `contenthero-brand`) until
-> September 2026. If you installed those, remove them: one skill replaces all three, and leaving
-> the old ones installed means two sets of instructions describing the same product, one of them
-> out of date.
+## Two files, from every release
 
-## Option 1: `gh skill install` (most portable)
+| File | What it is | Use it on |
+|---|---|---|
+| [`contenthero-plugin.zip`](https://github.com/contenthero-ai/skills/releases/latest/download/contenthero-plugin.zip) | The plugin: skill and connector together | Claude (Customize, Plugins, Add, upload) |
+| [`contenthero.zip`](https://github.com/contenthero-ai/skills/releases/latest/download/contenthero.zip) | The skill on its own | ChatGPT and Grok (upload the zip), Gemini (unzip, then upload the `contenthero` folder) |
 
-If you have [GitHub CLI](https://cli.github.com) v2.90+, this writes to the right directory for your agent automatically (Claude Code, Cursor, Codex, Gemini CLI, and more):
+A skill uploaded on its own cannot bring the connector with it, so on those apps connect ContentHero
+separately first (the MCP steps at [contenthero.ai/mcp](https://contenthero.ai/mcp)).
 
-```bash
-gh skill install contenthero-ai/skills contenthero
-```
+## Terminal agents: install the plugin
 
-Project scope (current repo) is the default. For user scope (every project on this machine), add `--scope user`.
-
-## Option 2: Git clone
-
-Clone into your agent's skills directory:
-
-**Claude Code** (default `~/.claude/skills/contenthero-skills`):
-```bash
-git clone https://github.com/contenthero-ai/skills.git ~/.claude/skills/contenthero-skills
-```
-
-**Cursor / Codex / OpenClaw:** clone to `~/.cursor/skills/`, `~/.codex/skills/`, or `~/.openclaw/skills/` respectively.
-
-> Not sure where your skills directory is? Ask your agent: "Where is your skills directory?"
-
-## Authenticate
-
-Two transports, detected in this order. Pick whichever fits how you work.
-
-| Priority | Transport | Trigger | Auth | Best for |
-|----------|-----------|---------|------|----------|
-| 1 | **MCP (OAuth)** | ContentHero MCP tools visible | Browser OAuth, no key | Chat-native hosts on a ContentHero plan |
-| 2 | **CLI (API key)** | `contenthero auth status` exits 0 or `CONTENTHERO_API_KEY` set | API key | Shell-native hosts, CI, scripts |
-
-### MCP (OAuth, no API key)
-
-Connect the hosted server. For Claude Code:
+This repository is its own plugin marketplace, so the plugin (skill and connector) installs by name:
 
 ```bash
-claude mcp add --transport http contenthero https://mcp.contenthero.ai
+# Claude Code
+claude plugin marketplace add contenthero-ai/skills
+claude plugin install contenthero@contenthero
+
+# Codex
+codex plugin marketplace add contenthero-ai/skills   # then /plugins, install ContentHero
 ```
 
-The first call opens an OAuth consent screen in your browser. Calls run against your ContentHero account and credits.
+Cursor and VS Code import the same repository as a plugin; Gemini CLI, OpenClaw and Hermes install
+the skill folder. The exact steps for each are on [contenthero.ai/skills](https://contenthero.ai/skills).
 
-### CLI (API key)
+## Any other agent that reads skills
+
+Copy `skills/contenthero/` from this repo into your agent's skills folder. `~/.agents/skills/` is the
+shared location most agents read (Codex, Cursor, VS Code, Gemini CLI, Grok Build, OpenClaw). Then
+connect ContentHero over MCP, or install the CLI:
 
 ```bash
 npm install -g @contenthero/cli   # Node 20+, binary is `contenthero`
-
-# Browser-assisted login (recommended): opens your browser, mints a key for this machine
-contenthero login
-
-# ...or bring your own key (CI / headless). Create one in the app under API Keys:
-export CONTENTHERO_API_KEY=ch_live_...
-
-contenthero auth status   # verify
+contenthero login                 # opens your browser, saves a key for this machine
 ```
 
-The stored credential lives at `~/.contenthero/credentials` (mode 0600). The environment variable always wins over the stored file, so CI can override a local login.
+The stored credential lives at `~/.contenthero/credentials` (mode 0600). `CONTENTHERO_API_KEY` in
+the environment always wins over it, so CI can override a local login.
 
-> Never paste your API key into an agent chat. Use `contenthero login` or the environment variable. The skills will pick the key up from the CLI or the OAuth session.
+> Never paste your API key into an agent chat. Use the connector, `contenthero login`, or the
+> environment variable.
 
-## First run
+## Updating
 
-Paste this to your agent:
-
-> Read https://raw.githubusercontent.com/contenthero-ai/skills/main/INSTALL_FOR_AGENTS.md and follow it. Ask me for any API keys you need.
-
-The agent fetches the install spec, wires the transport, grounds itself on your brand kit, and offers a free cost-preview smoke test. Then try: "Find my top outliers, ground a Reel caption in my brand voice, and draft it for my approval."
+A plugin installed from the marketplace updates when you update the marketplace
+(`claude plugin marketplace update contenthero`). An uploaded file is a snapshot: download the new
+release and upload it again. A copied folder updates when you copy it again.
 
 ## Requirements
 
-- A ContentHero account (sign in via MCP OAuth, or create an API key for the CLI)
-- An AI agent that supports skills (Claude Code, Cursor, Codex, OpenClaw, or similar)
-- For the CLI: Node 20+. For MCP: nothing to install locally.
+- A ContentHero account
+- An AI that supports skills or plugins (Claude, ChatGPT, Gemini, Codex, Cursor, and more)
+- For the CLI only: Node 20+

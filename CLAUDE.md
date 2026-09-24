@@ -12,7 +12,7 @@ Skills, ChatGPT, Gemini) get `dist/contenthero.zip`; plugin hosts (claude.ai Plu
 Codex, Cursor, VS Code, Devin, OpenClaw, Hermes) get the skill and the connector in one install.
 
 **Two files are hand-edited: `plugin.json` and `mcp.json`.** Every vendor spelling
-(`.claude-plugin/`, `.mcp.json`, `skills/contenthero/agents/openai.yaml`) is generated from them by
+(`.claude-plugin/`, `.cursor-plugin/marketplace.json`, `.mcp.json`, `skills/contenthero/agents/openai.yaml`) is generated from them by
 `npm run build:skill`, and `npm run check` fails when a generated file is stale. Never edit a
 generated file: the per-vendor manifests this replaced each pointed their host at a different,
 wrong skill path, and Claude's validator rejected ours outright (measured 2026-09-24).
@@ -119,6 +119,7 @@ contenthero-skills/
 ├── .github/workflows/      CI, and the release that attaches both zips.
 ├── plugin.json  mcp.json   HAND-EDITED. The Agent Plugins manifest and the connector.
 ├── .claude-plugin/  .mcp.json   GENERATED for Claude.
+├── .cursor-plugin/marketplace.json   GENERATED for Cursor's GitHub import.
 └── skills/contenthero/
     ├── SKILL.md            The router.
     ├── references/         The workflows.

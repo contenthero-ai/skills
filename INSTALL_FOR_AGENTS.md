@@ -11,7 +11,7 @@ Read [`CLAUDE.md`](./CLAUDE.md) at the repo root first. It is the runtime contra
 If you fetched this file by URL without cloning yet, the companion files live at:
 
 - `https://raw.githubusercontent.com/contenthero-ai/skills/main/CLAUDE.md`: runtime contract
-- `https://raw.githubusercontent.com/contenthero-ai/skills/main/contenthero/SKILL.md`: the ContentHero skill (transport ladder, sequencing, traps, cost preflight; routes to references for generating, the planner, brand, the editor, research and the media library)
+- `https://raw.githubusercontent.com/contenthero-ai/skills/main/skills/contenthero/SKILL.md`: the ContentHero skill (transport ladder, sequencing, traps, cost preflight; routes to references for generating, the planner, brand, the editor, research and the media library)
 - `https://raw.githubusercontent.com/contenthero-ai/skills/main/INSTALL.md`: human-facing install doc
 
 ## Step 1: Detect the agent host and install the skills
@@ -41,7 +41,7 @@ git clone --single-branch --depth 1 \
   <install-path>
 ```
 
-After cloning, the skill is auto-discovered at `contenthero/SKILL.md`.
+After cloning, the skill is auto-discovered at `skills/contenthero/SKILL.md`.
 
 ## Step 2: Pick a transport (MCP or CLI)
 
@@ -91,7 +91,7 @@ If the balance is low, point the user at their billing settings rather than proc
 
 This is the step the install is actually for. The thing that makes ContentHero different from a raw media API is that it grounds your agent in the user's real brand and research context. Set that up now so every later generation and post is on-brand.
 
-Read [`contenthero/SKILL.md`](./contenthero/SKILL.md) and:
+Read [`skills/contenthero/SKILL.md`](./skills/contenthero/SKILL.md) and:
 
 1. List the user's brand kits (`list_brand_kits`). If there is exactly one, make it active. If there are several, ask which to use. If there are none, tell the user they can create one in the app and continue without it for now.
 2. Read the active brand kit (`get_brand_kit`) and summarize back to the user, in one or two lines, the tone of voice, key vocabulary, and any banned words you found.

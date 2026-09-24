@@ -1,8 +1,8 @@
 ---
 name: contenthero
 description: >-
-  Operate ContentHero: generate media (image, video, audio, reference boards, lip-sync, upscale), run the planner and publish to connected social accounts, read and grow brand context, research what performs by outlier score, manage the media library, and drive the editor. Use when the user asks to make an image, video or voiceover, animate or upscale something, turn an idea into an on-brand post or caption, schedule or publish content, check their brand kit or knowledge base, find their best outliers, or anything touching their ContentHero account.
-allowed-tools: Bash, WebFetch, Read, Write, mcp__contenthero__*
+  Create, edit, schedule, and publish content through the user's ContentHero account: generate images, video, voiceovers, and lip-sync, upscale or animate media, plan and publish posts to their connected social accounts, and ground every draft in their brand kit, knowledge base, and best-performing content. Use when the user asks to make an image, video, or voiceover, animate or upscale something, write anything in their brand voice (a caption, hook, title, outline, script, or ad copy), schedule or publish content, check their brand kit, find what performs best for them, or anything touching their ContentHero account.
+allowed-tools: Bash, WebFetch, Read, Write, mcp__contenthero__*, mcp__plugin_contenthero_ContentHero__*
 metadata:
   homepage: https://contenthero.ai
   argument-hint: "[what you want to make, plan, or look up]"
@@ -27,7 +27,7 @@ two tools that look alike.**
 
 ## Transport: detect once, never narrate
 
-Prefer **MCP** (`mcp__*contenthero*__*`). Else the **CLI** (`contenthero <noun> <verb>`). Else
+Prefer **MCP** (any `mcp__*contenthero*__*`, in any casing). Else the **CLI** (`contenthero <noun> <verb>`). Else
 tell the user how to connect. Pick one at the start of the session, never mix, never switch,
 never announce which you picked. Concepts are identical across transports: MCP `generate_image`
 is CLI `contenthero generate image`.

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "contenthero",
+  "version": "0.2.1",
+  "description": "Create, edit, schedule, and publish content from your AI assistant. Generate images, video, and voiceovers, plan your content calendar, and draft on-brand copy, from hooks and scripts to captions and ads, grounded in what already performs for you.",
+  "author": {
+    "name": "ContentHero",
+    "url": "https://contenthero.ai"
+  },
+  "homepage": "https://contenthero.ai",
+  "repository": "https://github.com/contenthero-ai/skills",
+  "license": "MIT",
+  "keywords": [
+    "contenthero",
+    "content",
+    "generate",
+    "image",
+    "video",
+    "audio",
+    "lip-sync",
+    "reference-board",
+    "pipeline",
+    "publish",
+    "schedule",
+    "brand-kit",
+    "brand-voice",
+    "inspiration",
+    "outliers",
+    "social-media"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "ContentHero",
+        "shortDescription": "Generate media, plan and publish content, and read brand and research context",
+        "longDescription": "One skill covers the whole ContentHero surface: generating image, video, audio, reference-board and lip-sync media with cost preflight and output-id chaining; running the planner (spaces, stages, cards, and publishing to connected accounts); reading and growing brand context including the searchable knowledge base; researching what performs by outlier score; managing the media library; and driving the editor. ContentHero never writes copy server-side: it supplies the grounding and the method, your LLM writes the words, and you approve before anything goes live.",
+        "developerName": "ContentHero",
+        "category": "Design",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://contenthero.ai",
+        "defaultPrompt": [
+          "Generate a 9:16 product image, then animate it into a 5-second clip",
+          "Find my best outliers, ground a Reel caption in my brand voice, and draft it for approval",
+          "Read my brand kit and summarize my tone of voice",
+          "Turn this idea into an on-brand card and schedule it to my accounts"
+        ],
+        "brandColor": "#121212"
+      }
+    }
+  }
+}

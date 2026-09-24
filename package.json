@@ -7,7 +7,7 @@
   "scripts": {
     "check:tools": "node scripts/check-tools.mjs",
     "check:skill": "node scripts/build-skill.mjs --check",
-    "check:spec": "uvx --from skills-ref agentskills validate contenthero",
+    "check:spec": "uvx --from skills-ref agentskills validate skills/contenthero",
     "check": "npm run check:tools && npm run check:skill",
     "check:spelling": "check-american-spelling",
     "build:skill": "node scripts/build-skill.mjs",

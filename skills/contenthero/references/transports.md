@@ -7,8 +7,9 @@ which one you picked.
 
 1. **MCP (preferred).** If ContentHero tools are visible in the toolset, use them. Match loosely
    across namespaces: `mcp__contenthero__*` (the hosted OAuth server at
-   `https://mcp.contenthero.ai`), `mcp__contenthero-local__*` (a local stdio build), or any
-   `mcp__*contenthero*__*` a host assigns. OAuth or a configured key handles auth; nothing to do
+   `https://mcp.contenthero.ai`), `mcp__plugin_contenthero_ContentHero__*` (the same server,
+   installed with the ContentHero plugin), `mcp__contenthero-local__*` (a local stdio build), or
+   any `mcp__*contenthero*__*` a host assigns, in any casing. OAuth or a configured key handles auth; nothing to do
    in chat.
 2. **CLI.** No MCP visible, but `contenthero auth status` exits 0 or `CONTENTHERO_API_KEY` is
    set. Pattern is `contenthero <noun> <verb>`, JSON on stdout by default.

@@ -1,13 +1,21 @@
 # CLAUDE.md: maintaining the ContentHero skill
 
 Instructions for editing **this repository**. The skill's own instructions live in
-`contenthero/SKILL.md` and are not repeated here, because two copies of one rule drift.
+`skills/contenthero/SKILL.md` and are not repeated here, because two copies of one rule drift.
 
 ## What this is
 
-**One skill: `contenthero`.** A router `SKILL.md` plus workflow references under
-`contenthero/references/`, published to Claude Code, Claude Desktop, claude.ai, Cursor and Codex
-through the plugin manifests in the dot-directories.
+**One plugin, one skill: `contenthero`.** A router `SKILL.md` plus workflow references under
+`skills/contenthero/references/`, packaged as an **Agent Plugins 1.0** plugin (agent-plugins.org)
+that also declares the ContentHero MCP connector. Chat apps that take a bare skill (claude.ai
+Skills, ChatGPT, Gemini) get `dist/contenthero.zip`; plugin hosts (claude.ai Plugins, Claude Code,
+Codex, Cursor, VS Code, Devin, OpenClaw, Hermes) get the skill and the connector in one install.
+
+**Two files are hand-edited: `plugin.json` and `mcp.json`.** Every vendor spelling
+(`.claude-plugin/`, `.mcp.json`, `skills/contenthero/agents/openai.yaml`) is generated from them by
+`npm run build:skill`, and `npm run check` fails when a generated file is stale. Never edit a
+generated file: the per-vendor manifests this replaced each pointed their host at a different,
+wrong skill path, and Claude's validator rejected ours outright (measured 2026-09-24).
 
 It was three skills (`contenthero-generate`, `contenthero-pipeline`, `contenthero-brand`) until
 2026-09-17. They were consolidated because the split cost more than it saved: `pipeline`
@@ -105,12 +113,15 @@ contenthero-skills/
 ├── CLAUDE.md               This file. Maintainer rules.
 ├── README.md  INSTALL.md  INSTALL_FOR_AGENTS.md  COOKBOOK.md
 ├── CHANGELOG.md  VERSION  LICENSE
-├── package.json            Exists only to run the guard.
-├── scripts/check-tools.mjs The guard.
-├── .github/workflows/      CI.
-├── mcp.json  .mcp.json     Hosted MCP config, used by the manifests.
-├── .claude-plugin/  .codex-plugin/  .cursor-plugin/
-└── contenthero/
+├── package.json            Exists only to run the guards.
+├── scripts/check-tools.mjs The tool-coverage guard.
+├── scripts/build-skill.mjs Generates the vendor files and zips, and guards them.
+├── .github/workflows/      CI, and the release that attaches both zips.
+├── plugin.json  mcp.json   HAND-EDITED. The Agent Plugins manifest and the connector.
+├── .claude-plugin/  .mcp.json   GENERATED for Claude.
+└── skills/contenthero/
     ├── SKILL.md            The router.
-    └── references/         The workflows.
+    ├── references/         The workflows.
+    ├── agents/openai.yaml  GENERATED for ChatGPT and Codex.
+    └── assets/icon.svg
 ```

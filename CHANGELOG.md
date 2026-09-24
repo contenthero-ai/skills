@@ -5,16 +5,33 @@ All notable changes to the ContentHero Skills are documented here. This repo is 
 ## [0.2.1] - 2026-09-24
 
 The skill becomes installable by upload, on every chat app, and passes the open Agent Skills spec.
+The repo becomes one Agent Plugins 1.0 plugin that brings the ContentHero connector with the skill.
+
+### Changed
+- **One plugin layout for every host.** The skill moved from `contenthero/` to
+  `skills/contenthero/`, the fixed location in the Agent Plugins 1.0 standard (agent-plugins.org)
+  that Cursor, VS Code, Codex, Devin, OpenClaw, Hermes and Claude all scan. Root `plugin.json` and
+  `mcp.json` are the only hand-edited manifests; `.claude-plugin/`, `.mcp.json` and
+  `agents/openai.yaml` are generated from them. `.codex-plugin/` and `.cursor-plugin/` are removed:
+  both hosts load the portable layout directly.
 
 ### Fixed
+- **The plugin loaded no skill on any plugin host.** Each vendor manifest pointed at the skill a
+  different, wrong way: Claude's `marketplace.json` listed skills as objects where its schema takes
+  paths (`claude plugin validate` failed: `plugins.0.skills: Invalid input`), Codex's `"skills":
+  "./"` found no `skills/` folder, and Cursor's pointed at the skill instead of its parent. Now a
+  Claude Code install reports 1 skill and 1 MCP server (measured 2026-09-24).
 - **The skill failed the open spec it claims.** The `description` was 1,166 characters against a
   1,024 limit, and the frontmatter carried `argument-hint` and `homepage`, keys the spec does not
   allow. Both now live under `metadata`, and the description is rewritten to what the skill does
   and when to use it. Found by a real claude.ai upload, not by any check here.
 
 ### Added
-- **An uploadable package.** `npm run build:zip` writes `dist/contenthero.zip` with the skill
-  folder at its root, and the release workflow attaches it to every `v*` tag, so
+- **The ContentHero connector ships with the skill.** A bare skill cannot declare a connector, so
+  claude.ai listed none. As a plugin, `mcp.json` declares `https://mcp.contenthero.ai`.
+- **Uploadable packages.** `npm run build:zip` writes `dist/contenthero.zip` (the skill folder at
+  its root, for skill uploads) and `dist/contenthero-plugin.zip` (the plugin, for plugin uploads),
+  and the release workflow attaches both to every `v*` tag, so
   `releases/latest/download/contenthero.zip` is a stable link. Verified by upload on claude.ai
   and ChatGPT (the zip) and Gemini (the same folder, unzipped), with a canary proving Gemini keeps
   `references/`.

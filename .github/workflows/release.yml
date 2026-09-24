@@ -3,11 +3,14 @@ name: release
 # Publishes the uploadable skill package as a GitHub Release asset on every version tag.
 #
 # Chat apps (claude.ai, ChatGPT, Gemini) install a skill by uploading it, so members need a file,
-# not a repository. The stable link every install surface points at is:
+# not a repository. The stable links every install surface points at are:
 #   https://github.com/contenthero-ai/skills/releases/latest/download/contenthero.zip
-# The zip is built here from the tagged commit, never by hand, so it cannot drift from the skill.
+#   https://github.com/contenthero-ai/skills/releases/latest/download/contenthero-plugin.zip
+# The first is the bare skill (skill uploads), the second the plugin with its connector (plugin
+# uploads). Both are built here from the tagged commit, never by hand, so they cannot drift.
 #
-# To release: bump VERSION (and the manifests; `npm run check:skill` refuses a mismatch), commit,
+# To release: bump VERSION, package.json and plugin.json (`npm run check:skill` refuses a mismatch),
+# run `npm run build:skill`, commit,
 # then push a tag `v<VERSION>`.
 
 on:
@@ -35,5 +38,7 @@ jobs:
       - run: npm run build:zip
       - uses: softprops/action-gh-release@v2
         with:
-          files: dist/contenthero.zip
+          files: |
+            dist/contenthero.zip
+            dist/contenthero-plugin.zip
           generate_release_notes: true

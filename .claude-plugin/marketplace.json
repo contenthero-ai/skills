@@ -1,5 +1,6 @@
 {
   "name": "contenthero",
+  "description": "Create, edit, schedule, and publish content from your AI assistant. Generate images, video, and voiceovers, plan your content calendar, and draft on-brand copy, from hooks and scripts to captions and ads, grounded in what already performs for you.",
   "owner": {
     "name": "ContentHero",
     "url": "https://contenthero.ai"
@@ -7,16 +8,10 @@
   "plugins": [
     {
       "name": "contenthero",
+      "displayName": "ContentHero",
       "source": "./",
-      "description": "The ContentHero skill: one skill covering the whole product. Generate media (image, video, audio, boards, lip-sync, upscale), run the planner and publish to connected accounts, read and grow brand context, research what performs by outlier score, manage the media library, and drive the editor. Invoke as /contenthero.",
-      "version": "0.2.1",
-      "skills": [
-        {
-          "name": "contenthero",
-          "path": "contenthero",
-          "invoke": "/contenthero"
-        }
-      ]
+      "description": "Create, edit, schedule, and publish content from your AI assistant. Generate images, video, and voiceovers, plan your content calendar, and draft on-brand copy, from hooks and scripts to captions and ads, grounded in what already performs for you.",
+      "version": "0.2.1"
     }
   ]
 }

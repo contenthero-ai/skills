@@ -23,7 +23,12 @@ jobs:
           node-version: '22'
       # `npm ci` and not `npm install`: the point is to check the skill against the EXACT
       # published @contenthero/mcp the lockfile pins, not whatever floats in today.
+      # `.npmrc` reads the private @contenthero-ai scope (the spelling gate) with NPM_TOKEN. Without it every
+      # run failed at `npm ci` with E401 from 2026-09-19 on, so no check ran and no release could build.
+      # PACKAGES_READ_TOKEN is the org-level read:packages secret the other repos' CI already uses.
       - run: npm ci
+        env:
+          NPM_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
       - run: npm run check
       # The open Agent Skills spec, checked by its own reference validator. Every upload host enforces
       # it, and nothing else here would notice a description over 1,024 characters or a frontmatter

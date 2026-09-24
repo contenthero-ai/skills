@@ -9,7 +9,7 @@
       "name": "contenthero",
       "source": "./",
       "description": "The ContentHero skill: one skill covering the whole product. Generate media (image, video, audio, boards, lip-sync, upscale), run the planner and publish to connected accounts, read and grow brand context, research what performs by outlier score, manage the media library, and drive the editor. Invoke as /contenthero.",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "skills": [
         {
           "name": "contenthero",

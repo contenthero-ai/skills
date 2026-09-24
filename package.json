@@ -1,13 +1,17 @@
 {
   "name": "contenthero-skills",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Tooling for the ContentHero agent skill. The skill itself is plain Markdown; this exists only to run the guards.",
   "type": "module",
   "scripts": {
     "check:tools": "node scripts/check-tools.mjs",
-    "check": "npm run check:tools",
-    "check:spelling": "check-american-spelling"
+    "check:skill": "node scripts/build-skill.mjs --check",
+    "check:spec": "uvx --from skills-ref agentskills validate contenthero",
+    "check": "npm run check:tools && npm run check:skill",
+    "check:spelling": "check-american-spelling",
+    "build:skill": "node scripts/build-skill.mjs",
+    "build:zip": "node scripts/build-skill.mjs --zip"
   },
   "devDependencies": {
     "@contenthero-ai/american-spelling": "0.1.1",

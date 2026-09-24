@@ -1,7 +1,7 @@
 {
   "name": "contenthero",
-  "version": "0.2.0",
-  "description": "One skill covering the whole ContentHero surface: generate media, run the planner and publish, read and grow brand context, research what performs, manage media, drive the editor. ContentHero is the context and execution layer; your own LLM stays the brain and writes every word.",
+  "version": "0.2.1",
+  "description": "One skill covering the whole ContentHero surface: generate media, run the planner and publish, read and grow brand context, research what performs, manage media, drive the editor.",
   "author": {
     "name": "ContentHero",
     "url": "https://contenthero.ai"
@@ -30,8 +30,8 @@
   "skills": "./",
   "interface": {
     "displayName": "ContentHero",
-    "shortDescription": "Generate media, run the content pipeline, and read brand and research context",
-    "longDescription": "The ContentHero skill makes your agent the brain and ContentHero the context-plus-execution layer. One skill covers the whole surface: generating image, video, audio, reference-board and lip-sync media with cost preflight and output-id chaining; running the planner (spaces, stages, cards, and publishing to connected accounts); reading and growing brand context including the searchable knowledge base; researching what performs by outlier score; managing the media library; and driving the editor. ContentHero never writes copy server-side: it supplies the grounding and the method, your LLM writes the words, and you approve before anything goes live.",
+    "shortDescription": "Generate media, plan and publish content, and read brand and research context",
+    "longDescription": "One skill covers the whole ContentHero surface: generating image, video, audio, reference-board and lip-sync media with cost preflight and output-id chaining; running the planner (spaces, stages, cards, and publishing to connected accounts); reading and growing brand context including the searchable knowledge base; researching what performs by outlier score; managing the media library; and driving the editor. ContentHero never writes copy server-side: it supplies the grounding and the method, your LLM writes the words, and you approve before anything goes live.",
     "developerName": "ContentHero",
     "category": "Design",
     "capabilities": [

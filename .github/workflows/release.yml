@@ -1,0 +1,39 @@
+name: release
+
+# Publishes the uploadable skill package as a GitHub Release asset on every version tag.
+#
+# Chat apps (claude.ai, ChatGPT, Gemini) install a skill by uploading it, so members need a file,
+# not a repository. The stable link every install surface points at is:
+#   https://github.com/contenthero-ai/skills/releases/latest/download/contenthero.zip
+# The zip is built here from the tagged commit, never by hand, so it cannot drift from the skill.
+#
+# To release: bump VERSION (and the manifests; `npm run check:skill` refuses a mismatch), commit,
+# then push a tag `v<VERSION>`.
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: astral-sh/setup-uv@v5
+      - run: npm ci
+      - run: npm run check
+      - run: npm run check:spec
+      # A tag that disagrees with VERSION would publish a zip labeled one version containing another.
+      - name: Tag matches VERSION
+        run: test "${GITHUB_REF_NAME}" = "v$(cat VERSION)" || { echo "tag ${GITHUB_REF_NAME} != v$(cat VERSION)"; exit 1; }
+      - run: npm run build:zip
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/contenthero.zip
+          generate_release_notes: true

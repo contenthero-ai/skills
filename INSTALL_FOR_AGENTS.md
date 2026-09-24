@@ -6,7 +6,7 @@ This file is the agent-facing companion to [`INSTALL.md`](./INSTALL.md) (human-f
 
 ## Step 0: If you are not Claude Code
 
-Read [`CLAUDE.md`](./CLAUDE.md) at the repo root first. It is the runtime contract for these skills: the thesis (ContentHero is the context-plus-execution layer, the host LLM is the brain), the auth ladder, the shared-state cache, and the hard rules. Claude Code reads it automatically. Other agents should fetch it explicitly.
+Read [`CLAUDE.md`](./CLAUDE.md) at the repo root first. It is the runtime contract for these skills: the thesis (the host LLM writes every word, grounded in the user's real context; ContentHero never writes copy), the auth ladder, the shared-state cache, and the hard rules. Claude Code reads it automatically. Other agents should fetch it explicitly.
 
 If you fetched this file by URL without cloning yet, the companion files live at:
 

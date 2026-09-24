@@ -25,3 +25,8 @@ jobs:
       # published @contenthero/mcp the lockfile pins, not whatever floats in today.
       - run: npm ci
       - run: npm run check
+      # The open Agent Skills spec, checked by its own reference validator. Every upload host enforces
+      # it, and nothing else here would notice a description over 1,024 characters or a frontmatter
+      # key the spec does not allow: both shipped for a week before a real upload caught them.
+      - uses: astral-sh/setup-uv@v5
+      - run: npm run check:spec

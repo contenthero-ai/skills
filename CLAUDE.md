@@ -89,7 +89,7 @@ trusted.
 
 ## The thesis, which the skill must keep carrying
 
-ContentHero is the **context and execution layer**. The user's own LLM is the **brain**.
+The user's own AI assistant **writes every word**, grounded in the user's real context. ContentHero **never writes copy**; it supplies that context and executes.
 
 - **The anti-pattern:** copy with no grounding in the user's real context, generic words that
   could belong to any brand, presented as if they were on-brand.

@@ -1,7 +1,7 @@
 {
   "name": "contenthero",
-  "version": "0.2.0",
-  "description": "One skill covering the whole ContentHero surface: generate media, run the planner and publish, read and grow brand context, research what performs, manage media, drive the editor. ContentHero is the context and execution layer; your own LLM stays the brain and writes every word.",
+  "version": "0.2.1",
+  "description": "One skill covering the whole ContentHero surface: generate media, run the planner and publish, read and grow brand context, research what performs, manage media, drive the editor.",
   "author": {
     "name": "ContentHero",
     "url": "https://contenthero.ai"

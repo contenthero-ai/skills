@@ -2,8 +2,8 @@
   "$schema": "https://cursor.com/schemas/cursor-plugin/plugin.json",
   "name": "contenthero",
   "displayName": "ContentHero",
-  "version": "0.2.0",
-  "description": "Generate media, run the content pipeline, and read your brand and research context with ContentHero. The skills feed your agent grounding (brand kit, inspiration outliers, your own past posts) and execute (generate, publish, schedule). Your own LLM stays the brain: ContentHero is the context and execution layer.",
+  "version": "0.2.1",
+  "description": "One skill covering the whole ContentHero surface: generate media, run the planner and publish, read and grow brand context, research what performs, manage media, drive the editor.",
   "author": {
     "name": "ContentHero"
   },

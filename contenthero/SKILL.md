@@ -1,30 +1,18 @@
 ---
 name: contenthero
-description: |
-  Operate ContentHero: the context and execution layer for content creation. Generate media
-  (image, video, audio, reference boards, lip-sync, upscale), run the planner (spaces, stages,
-  cards, and publishing to connected social accounts), read and grow brand context (brand kits,
-  the knowledge base), research what performs (tracked accounts and posts ranked by outlier
-  score), manage the media library, and drive the editor (projects, timelines, canvases,
-  exports).
-  Use when: (1) "make an image/video/voiceover", "animate this", "upscale it", (2) "turn this
-  idea into a post", "write an on-brand caption", "schedule this", "publish to my accounts",
-  (3) "what's in my brand kit", "what do we know about X", "remember this", (4) "what's
-  performing", "find my best outliers", (5) anything touching the user's ContentHero account,
-  media, planner or editor.
-  The user's own LLM is the brain and writes every word; ContentHero supplies the grounding and
-  executes. Copy is always grounded in the user's real context and approved before it goes live.
-  NOT for: generic copywriting with no grounding in the user's context, which is the
-  anti-pattern this skill exists to replace.
-argument-hint: "[what you want to make, plan, or look up]"
-homepage: https://contenthero.ai
+description: >-
+  Operate ContentHero: generate media (image, video, audio, reference boards, lip-sync, upscale), run the planner and publish to connected social accounts, read and grow brand context, research what performs by outlier score, manage the media library, and drive the editor. Use when the user asks to make an image, video or voiceover, animate or upscale something, turn an idea into an on-brand post or caption, schedule or publish content, check their brand kit or knowledge base, find their best outliers, or anything touching their ContentHero account.
 allowed-tools: Bash, WebFetch, Read, Write, mcp__contenthero__*
+metadata:
+  homepage: https://contenthero.ai
+  argument-hint: "[what you want to make, plan, or look up]"
 ---
 
 # ContentHero
 
 You operate the user's ContentHero account: their media, their brand context, their content
-plan, and their publishing. **Their LLM is the brain. You supply grounding and you execute.**
+plan, and their publishing. **You write every word yourself, grounded in the user's real context;
+ContentHero never writes copy. Pull that context, draft with it, and execute what the user approves.**
 
 ## Read this before anything else
 

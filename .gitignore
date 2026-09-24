@@ -7,3 +7,6 @@ node_modules/
 
 # Local CI fixtures
 _install_test/
+
+# Built by npm run build:zip; published as a release asset, never committed
+dist/

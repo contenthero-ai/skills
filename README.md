@@ -1,6 +1,6 @@
 # ContentHero Skills
 
-AI agent skills for creating and publishing on-brand content. ContentHero is the context-plus-execution layer. Your own LLM is the brain.
+An agent skill that lets your own AI assistant generate media, plan and publish content, and ground every draft in your brand, all through your ContentHero account.
 
 Works with Claude Code, Cursor, Codex, OpenClaw, and other AI coding agents.
 

@@ -2,6 +2,34 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.1] - 2026-09-24
+
+The skill becomes installable by upload, on every chat app, and passes the open Agent Skills spec.
+
+### Fixed
+- **The skill failed the open spec it claims.** The `description` was 1,166 characters against a
+  1,024 limit, and the frontmatter carried `argument-hint` and `homepage`, keys the spec does not
+  allow. Both now live under `metadata`, and the description is rewritten to what the skill does
+  and when to use it. Found by a real claude.ai upload, not by any check here.
+
+### Added
+- **An uploadable package.** `npm run build:zip` writes `dist/contenthero.zip` with the skill
+  folder at its root, and the release workflow attaches it to every `v*` tag, so
+  `releases/latest/download/contenthero.zip` is a stable link. Verified by upload on claude.ai
+  and ChatGPT (the zip) and Gemini (the same folder, unzipped), with a canary proving Gemini keeps
+  `references/`.
+- **ChatGPT branding.** `contenthero/agents/openai.yaml` (generated from `.codex-plugin/plugin.json`
+  and `.mcp.json`, never hand-edited) gives ChatGPT our name, laurel icon, and the MCP server the
+  skill depends on. Without it ChatGPT invented a placeholder icon.
+- **Two guards.** `check:skill` fails when the generated file is stale or any of the six version
+  spellings disagree; `check:spec` runs the spec's own reference validator in CI.
+
+### Changed
+- Dropped the "context and execution layer" positioning everywhere it appeared. Every connector
+  supplies context and executes, so it said nothing specific; the description and manifests now
+  lead with what the user can do. The behavioral rule it stood for stays in the skill body: the
+  user's assistant writes every word, ContentHero never writes copy.
+
 ## [0.2.0] - 2026-09-17
 
 Three skills become one, the whole 88-tool surface becomes reachable, and the repo gets its first

@@ -35,8 +35,9 @@
 
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js'
-import { buildServer } from '@contenthero/mcp/dist/server.js'
-import { TOOL_GROUPS } from '@contenthero/mcp/dist/groups.js'
+// ⚠️ THE PACKAGE ENTRYPOINT, NEVER `dist/<file>.js`. Those deep paths existed through 0.4.8 and are
+// gone from later builds, which bundle to one file, so the guard could not load any current mcp.
+import { buildServer, TOOL_GROUPS } from '@contenthero/mcp'
 import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, dirname, relative } from 'node:path'
 

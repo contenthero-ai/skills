@@ -9,6 +9,7 @@ into a generation or attached to a card without re-uploading it.
 - `list_media` to browse.
 - `search_media` when the user describes what they want rather than naming it.
 - `get_media` for one item's full detail once you have its id.
+- `show_media` to put a set in front of the user (search results, a folder, a shortlist). It renders a browsable grid and costs you almost no context. Use `get_media` instead only when you need to see the pixels yourself, and never re-show media that a create or import tool already displayed.
 
 Prefer searching over listing-and-scanning when the user's phrasing is descriptive ("that beach
 shot from last week"). Prefer `get_media` over re-listing when you already hold an id.

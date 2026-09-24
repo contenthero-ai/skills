@@ -32,6 +32,9 @@ The repo becomes one Agent Plugins 1.0 plugin that brings the ContentHero connec
   agents only and installs the plugin, or copies `skills/contenthero/` (never the whole repo, which
   nested the skill too deep to be found). `.cursor-plugin/marketplace.json` is generated, because
   Cursor's GitHub import refuses a repo without one.
+- **The skill covers `show_media`**, and the coverage guard runs against a current mcp: it imported
+  `dist/server.js` and `dist/groups.js`, deep paths that later builds no longer ship, so it was stuck
+  on mcp 0.4.8. It now imports the package entrypoint.
 - **The ContentHero connector ships with the skill.** A bare skill cannot declare a connector, so
   claude.ai listed none. As a plugin, `mcp.json` declares `https://mcp.contenthero.ai`.
 - **Uploadable packages.** `npm run build:zip` writes `dist/contenthero.zip` (the skill folder at

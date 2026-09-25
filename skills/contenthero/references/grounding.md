@@ -17,10 +17,12 @@ Most work is for one brand. Settle which one before anything else.
 `create_brand_kit` builds one from any of three sources, and the fastest is rarely the obvious
 one:
 
-- **From a website:** pass `websiteUrl` with `extract: true` and ContentHero scrapes the site and
-  fills in the kit's empty sections, colors, typography, logos and assets by itself. ⚠️ **It
-  returns IMMEDIATELY, before the kit has any content.** The empty kit is the handle and the
-  sections fill in over the next minute or two, so poll `extractionStatus` with `get_brand_kit`
+- **Imported:** pass `websiteUrls` (primary first) and/or the brand's own YouTube or Instagram in
+  `brandAccounts`, with `extract: true`. ContentHero takes the colors, typography, logos and assets
+  from the first website and analyzes every website and those accounts' posts to write the kit's
+  empty sections. ⚠️ **It returns IMMEDIATELY, before the kit has any content.** The empty kit is
+  the handle and the sections fill in over the next few minutes (longer while a newly linked
+  account's posts arrive), so poll `analysisStatus` and `extractionStatus` with `get_brand_kit`
   rather than concluding it failed.
 - **From a social profile:** pass its url and no name at all. The kit is named after the handle
   and starts ingesting that account's posts.

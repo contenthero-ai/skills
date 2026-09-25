@@ -8,7 +8,7 @@ The rule: **grounded voice-synthesis is the feature; generic ungrounded copy is 
 
 Pull all three before drafting. Each answers a different question.
 
-1. **Brand voice: how this user sounds.** `get_brand_kit` returns `voiceProfile`, `audience`, `positioning`, `contentStrategy`, `designPrinciples`, and `sections` (each section has `fields` of `{ key, label, value }`). Read these for tone, vocabulary, the audience being addressed, and any explicit do-nots. Banned words or tone guardrails usually live in `voiceProfile` or a voice section field, not a dedicated column, so read the voice profile and sections rather than assuming a field name.
+1. **Brand voice: how this user sounds.** The brand kit's sections, read by role (`get_brand_kit` with `roles`, after a `detail: 'summary'` read if you do not know what the kit holds). `voice_and_tone` is the personality and principles; `writing_style` covers written pieces and `speaking_style` covers anything spoken; `audience` is who you are addressing and `offer` is what the content serves. Each is Markdown in the user's own structure, so read the whole section rather than looking for a particular heading. Anything the brand avoids is written into these sections as principles.
 
 2. **What performs in the niche: proven patterns.** `list_content` returns the posts the user tracks, ranked by OUTLIER SCORE, which measures a post against its own creator's baseline rather than the platform average. That is why a small account's breakout outranks a big account's routine post: it is a repeatable pattern rather than a big number. The list is shallow (title plus metrics), so mining one is a two-step read. Filters and the full surface are in `research.md`.
 
@@ -39,12 +39,12 @@ You are extracting the *pattern*, not copying the post. Two or three high perfor
 
 From the brand kit and the user's own top posts, hold these while drafting:
 
-- Tone and register (from `voiceProfile` and the user's actual past captions).
-- Vocabulary the user uses, and any words or claims to avoid.
-- The audience being spoken to (`audience`).
-- The positioning and offer the content should serve (`positioning`, `primaryOffer`, `contentStrategy`).
+- Tone and register (from Voice & Tone, the style section for this format, and the user's actual past captions).
+- The principles the user writes by, and anything they avoid.
+- The audience being spoken to (Audience).
+- What the content should serve (Offer and Content Strategy).
 
-When the brand voice profile and the user's own top-performing captions disagree, the user's actual high-performing posts win: they are evidence, the profile is intent.
+When the brand kit and the user's own top-performing captions disagree, the user's actual high-performing posts win: they are evidence, the kit is intent.
 
 ## The draft
 

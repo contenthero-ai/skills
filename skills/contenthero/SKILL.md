@@ -120,7 +120,7 @@ when the user needs it to do something.
 | File | What it carries |
 |---|---|
 | `references/transports.md` | Auth ladder, scopes, exit codes, the shared context file |
-| `references/grounding.md` | Brand kits, the five tabs, the knowledge base, confirmed writes |
+| `references/grounding.md` | Brand kits, their sections, the knowledge base, confirmed writes |
 | `references/research.md` | Tracked accounts, outlier score, mining what performs |
 | `references/voice-synthesis.md` | Grounding to draft: the method, and why it is the moat |
 | `references/generating.md` | Model choice, cost preflight, async, the generation loop |

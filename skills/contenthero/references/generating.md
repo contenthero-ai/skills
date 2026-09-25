@@ -44,7 +44,7 @@ in credits before committing.
 A weak prompt is a wasted spend, not just a worse result. `prompt-craft.md` is the durable craft;
 read it once you know which model you are using, because the right prompt shape depends on it.
 
-Ground the visual in the brand kit's visual style (`grounding.md`) when the output is for the
+Ground the visual in the brand kit's Design Guidelines section (`grounding.md`) when the output is for the
 user's brand.
 
 ### 5. Run it, then poll

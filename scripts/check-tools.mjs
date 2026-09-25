@@ -55,6 +55,12 @@ const NOT_A_TOOL = new Set([
   'default_look_id',
   'connected_account_ids',
   'recent_card_ids',
+  // Brand kit section ROLES: values passed to get_brand_kit's `roles` filter, not operations. Only the ones the
+  // skill names; the server refuses an unknown role with the valid list, so a renamed role fails loudly there.
+  'voice_and_tone',
+  'writing_style',
+  'speaking_style',
+  'design_guidelines',
 ])
 
 /** Files whose entries are historical records, exempt as FILES rather than by name. */

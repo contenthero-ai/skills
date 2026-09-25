@@ -18,9 +18,9 @@ Most work is for one brand. Settle which one before anything else.
 one:
 
 - **From a website:** pass `websiteUrl` with `extract: true` and ContentHero scrapes the site and
-  fills in business name, positioning, voice, colors, typography, logos and assets by itself. ⚠️
-  **It returns IMMEDIATELY, before the kit has any content.** The empty kit is the handle and the
-  fields arrive over the next minute or two, so poll `extractionStatus` with `get_brand_kit`
+  fills in the kit's empty sections, colors, typography, logos and assets by itself. ⚠️ **It
+  returns IMMEDIATELY, before the kit has any content.** The empty kit is the handle and the
+  sections fill in over the next minute or two, so poll `extractionStatus` with `get_brand_kit`
   rather than concluding it failed.
 - **From a social profile:** pass its url and no name at all. The kit is named after the handle
   and starts ingesting that account's posts.
@@ -28,23 +28,43 @@ one:
 
 Kits are capped by plan, and a duplicate counts against the cap like any other.
 
-## The five tabs
+## Sections: what a kit holds
 
-One document, five areas. Read the one the question is about. `get_brand_kit` returns all of it
-in a single read, so **summarize what was asked for and do not dump the whole document back**.
+A brand kit is a set of named **sections**, each one Markdown document the user writes freely.
+Every kit starts with the same eight, and the user can rename them and add their own:
 
-| Tab | Holds | Grounds |
+| Tab | Section (role) | Grounds |
 |---|---|---|
-| Overview | Business, offer, niche, positioning, audience, content strategy | What the brand is for |
-| Voice | `voiceProfile`, tone, vocabulary, the do-not list | Every word you draft |
-| Visual identity | Logos, colors, typography, visual style, design principles | Every image and video |
-| Social | The brand's own profiles and the accounts it watches | Research (`references/research.md`) |
-| Knowledge | Everything uploaded about the brand | The deepest grounding |
+| Overview | About, Audience, Offer, Content Strategy | What the brand is for, who it serves, what it sells, what it publishes |
+| Voice | Voice & Tone, Writing Style, Speaking Style | Every word you draft, written and spoken |
+| Visual | Design Guidelines | Every image, video and layout |
+
+The kit also holds its visual identity as data (logos, colors, typography) and the Social and
+Knowledge tabs: the brand's own profiles and the accounts it watches (`references/research.md`),
+and everything uploaded about the brand.
+
+**Address a section by its `key`, and find what a section means by its `role`.** The key never
+changes; the name is the user's to rename. A starter section's role is the same in every kit
+whatever it is called, so `voice_and_tone` finds the voice even in a kit that renamed it. A
+section the user added has no role: read the summary to see what it covers.
+
+### Read the summary first, then only what the task needs
+
+`get_brand_kit` reads three ways, and the cheapest one is the right first read:
+
+1. **`detail: 'summary'`**: every section's key, role, version, length and outline (its own
+   headings), with no bodies. Decide from this what the task needs.
+2. **A filter** (`keys`, `roles`, or `tabs`): just those sections, with their Markdown bodies. A
+   caption needs `voice_and_tone` and `writing_style`; a video script needs `speaking_style`
+   instead; an image needs `design_guidelines`.
+3. **No filter**: the whole kit, including media and linked accounts. Rarely what a task needs.
+
+**Summarize what was asked for; do not dump a section back at the user.**
 
 ## The knowledge base is the highest-leverage read
 
 This is where the user has put their notes, docs, articles and transcripts. It is richer than the
-kit's structured fields and it is semantically searchable.
+kit's sections and it is semantically searchable.
 
 - **`search_brand_knowledge`** when you need what the brand has said about a topic. This is
   retrieval over embedded content, and it is the read to reach for **before drafting or deciding
@@ -60,22 +80,28 @@ that dies with the session.
 
 ## Editing the brand
 
-`update_brand_kit` changes identity fields, brand media, which kit is DEFAULT, and **which
-tracked accounts the kit is LINKED to**. Only the fields you pass are touched.
+`update_brand_kit` changes section content, brand media, which kit is DEFAULT, and **which
+tracked accounts the kit is LINKED to**. Only what you pass is touched.
 
-⚠️ **The account lists are declarative: they REPLACE, and `[]` clears.** Same trap as
+**Sections are written by key, naming only the sections you change.** A `body` replaces the whole
+section, so read it, change what needs changing, and send the whole new body back. Pass the
+`version` you read as `expectedVersion`: if the section changed since (the user, or another agent,
+edited it), nothing is written and the error returns its current version and body. Re-read,
+reapply your change on top, and retry; never overwrite what somebody else just wrote. `revertTo`
+restores an earlier version as a new one, so any write can be undone. A section without a key is a
+new section of the user's own; a section is archived with the `archive` tool using
+`assetType: brand_kit_section`.
+
+⚠️ **The account and media lists are declarative: they REPLACE, and `[]` clears.** Same trap as
 `update_card`'s posts. Read before you write.
 
-Brand kit sections used to have their own create, update and archive tools. They no longer do:
-**sections are edited through `update_brand_kit`, and a section is archived with the `archive`
-tool** using `assetType: brand_kit_section`.
-
 ⛔ **Confirm a material change before writing it.** This is the user's real brand document. A read
-or a summary needs no confirmation; a rewrite of their voice profile does. Show the field, show
+or a summary needs no confirmation; a rewrite of their Voice & Tone does. Show the section, show
 old and new, get a yes.
 
-Free-form objects (positioning, audience, `voiceProfile`, content strategy) are structured. Edit
-them precisely. Do not flatten a nested object into a paragraph because it was easier to write.
+Keep the user's structure. A section's headings are theirs: edit within them rather than
+reorganizing the document because it was easier to write. And write principles, never sample
+phrases: an AI that reads the kit later will reuse any example line word for word.
 
 ## Where this meets the rest
 

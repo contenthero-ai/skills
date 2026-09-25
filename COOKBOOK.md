@@ -11,7 +11,7 @@ any words**, grounded and never generic, and **the user approves before anything
 The setup every other recipe assumes.
 
 1. `list_brand_kits`, resolve the active kit (the only one, the default, or ask).
-2. `get_brand_kit`, summarize the voice and the offer back in one line.
+2. `get_brand_kit` with `detail: 'summary'`, then the voice and offer sections; summarize them back in one line.
 3. Write `active_brand_kit_id` to `.contenthero/context.md`.
 
 Later work picks the brand up without re-asking. Revalidate before spending on it.
@@ -21,7 +21,7 @@ Later work picks the brand up without re-asking. Revalidate before spending on i
 The everyday request.
 
 1. **Ground.** `list_content` scoped to the brand kit for what performs, `get_content` on the top
-   two or three (transcript on, since you are mining the script). `get_brand_kit` for voice.
+   two or three (transcript on, since you are mining the script). `get_brand_kit` with `roles` for the voice and style sections.
    `search_brand_knowledge` for the brand's stance on the topic.
 2. **Draft.** Host LLM writes the hook and caption, emulating the user's proven patterns in their
    voice. Present it, say which grounding it stands on, get approval.
@@ -36,12 +36,12 @@ The everyday request.
 Research to published.
 
 1. **Ground.** `list_spaces` to know which board you are working on. Then `list_content` for the
-   patterns, `get_content` for the depth, `get_brand_kit` for voice and visual style,
+   patterns, `get_content` for the depth, `get_brand_kit` for the voice and Design Guidelines sections,
    `search_brand_knowledge` for the brand's position.
 2. **Draft.** Concept, hook, caption. Approve before spending a credit on it.
 3. **Produce.** `list_models` then `get_model` for the shape. `generate_image` for the key frame,
    with `getCost` first. Chain its output id into `generate_video` as the start frame. Ground the
-   visual in the brand's visual style.
+   visual in the brand's Design Guidelines.
 4. **Assemble.** `create_card` **with the `spaceId`** so it lands on the right board, then
    `update_card` for the video asset and the platform post. `get_platform` for that platform's
    real field shape rather than guessing it.

@@ -1,6 +1,6 @@
 {
   "name": "contenthero-skills",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "description": "Tooling for the ContentHero agent skill. The skill itself is plain Markdown; this exists only to run the guards.",
   "type": "module",

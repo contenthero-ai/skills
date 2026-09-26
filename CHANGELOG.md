@@ -2,6 +2,18 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.2] - 2026-09-26
+
+Brand kits in the skill match the live API: a kit is a set of Markdown sections.
+
+### Changed
+- **Brand kits are Markdown sections.** The brand guidance reads a kit's section outline first, fetches only the
+  sections a task needs, and writes sections by key; the field model the skill used to describe no longer exists
+  in the API.
+- **Importing a kit from its sources.** A kit's websites are one list, primary first, and an import analyzes every
+  website plus the kit's own YouTube and Instagram accounts, writing only empty sections.
+- Pinned to `@contenthero/mcp` 0.4.19 and `@contenthero-ai/american-spelling` 0.1.2.
+
 ## [0.2.1] - 2026-09-24
 
 The skill becomes installable by upload, on every chat app, and passes the open Agent Skills spec.

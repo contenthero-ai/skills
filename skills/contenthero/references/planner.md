@@ -61,8 +61,41 @@ platform on that card is deleted. Send one asset and the rest of the carousel go
 
 **`get_card` first, then send the complete set you want to end up with.** Posts key on platform.
 Assets key on id, and **the array order is the carousel order**, so reordering is just sending
-the same ids in a different sequence. Keep an existing asset by id; add a new one by `assetUrl`
-or `outputId`.
+the same ids in a different sequence. Keep an existing asset by id; add a new one as below.
+
+### What a card can hold, and how to attach each
+
+A card's `assets` hold four kinds of thing. **Add each by exactly one reference**; an entry that
+names two, or none, is refused.
+
+| To attach | Send | Where the id comes from |
+|---|---|---|
+| **Media**: a generation, a file uploaded from the user's device, or a file imported from the web | `{ "outputId": "<id>" }` (`"<id>-2"` for variation 2) | the generate call; `create_media_upload` then `complete_media_upload` for a local file; `import_media` for a file at a url |
+| A **link** | `{ "assetUrl": "https://..." }` | any web address; nothing is copied |
+| An **inspiration post**, shown on the card's Inspiration tab | `{ "contentId": "<id>" }` | `list_content` or `get_content`, or a card's existing inspiration asset (`get_card` returns it as `assetId`) |
+| An **editor or canvas project** | `{ "projectId": "<id>" }` | `list_projects` for one that exists; for a new one, pass `cardId` to `create_project` or `import_project` and it is linked in the same call |
+
+A file the user has on their machine or somewhere on the web is **media**: upload or import it
+first, then attach its `outputId`. Sending a file's url as `assetUrl` only links to it, so the
+card breaks when that address does.
+
+⛔ **An inspiration post is attached by `contentId`, never by its url.** A post's permalink sent
+as `assetUrl` becomes a plain link, not inspiration, and `assetType: "inspiration"` with a url is
+refused. The same goes for a project: `projectId`, never the editor's url.
+
+To add one thing to a card that already has assets, read it, append, and send the whole list:
+
+```json
+{ "cardId": "<card>", "assets": [
+  { "id": "<existing asset>" },
+  { "contentId": "<the outlier this script came from>" },
+  { "projectId": "<the edit it became>" }
+] }
+```
+
+Attach the posts a piece drew from when you create it. The Inspiration tab is where the user
+checks what an idea was built on, and `get_card` reads each one back with its creator, outlier
+score and a content id for `get_content`.
 
 ### Shaping a post for its platform
 

@@ -13,6 +13,11 @@ anywhere, which is why this file exists.
 starts a new one; `delete_project` removes it. `import_project` and `export_project` move a
 project's definition in and out as a document, which is how you duplicate or back one up.
 
+When a new project is for a planned piece, **pass the card's id as `cardId` to `create_project` or
+`import_project`**: the project is linked to that card in the same call, so the card opens the edit
+in progress from the moment it exists. For a project that already exists, add
+`{ "projectId": "<id>" }` to the card's assets instead.
+
 Read `get_project` before an edit you did not just make yourself. You need its current shape, and
 you need its revision.
 
@@ -82,5 +87,7 @@ captions, subtitles, or feeding a script back into a card.
 
 - Media to put in a project comes from `references/media-library.md` or fresh from
   `references/generating.md`.
-- A finished export usually becomes an asset on a card: `references/planner.md`.
+- **Link the project to its card when the project is made**, not when the edit is done: `cardId` on
+  `create_project` or `import_project`. A finished export can then be attached as media too:
+  `references/planner.md`, "What a card can hold".
 - Failures, scopes and polling: `references/troubleshooting.md`.

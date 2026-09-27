@@ -59,6 +59,8 @@ The pattern, every time:
 3. `get_content` with the transcript on the two or three that are genuinely close to what the
    user is making.
 4. Extract the pattern, not the content: hook archetype, structure, pacing, CTA style.
+5. When the work lands on a card, attach the posts it drew from as inspiration, by `contentId`
+   (`references/planner.md`, "What a card can hold").
 
 ⛔ **Mine the pattern, never the words.** Copying a competitor's phrasing is plagiarism with
 extra steps, and it will not sound like the user. The method for turning patterns into their

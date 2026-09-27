@@ -115,6 +115,10 @@ Report the outcome, not the plumbing. The image, the cost, the link to the card.
 not raw payloads, not which transport you chose, not which tool you called. Surface an id only
 when the user needs it to do something.
 
+When you name an item, make its name a clickable link to the item's `appUrl`, the address that opens
+it in the app, rather than printing the bare address. Use the value as given; never compose a URL
+from an id.
+
 ## References
 
 | File | What it carries |

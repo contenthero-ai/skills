@@ -2,6 +2,13 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.5] - 2026-09-28
+
+### Changed
+- Link what you name: when an answer names an item, its name links to the item's `appUrl` (`SKILL.md`).
+- Pinned to `@contenthero/mcp` 0.4.23: every item carries an 8-character `shortId` and an `appUrl` built from
+  it, every tool accepts a short id wherever it takes an id, and the generation widget works on phones.
+
 ## [0.2.4] - 2026-09-27
 
 ### Changed

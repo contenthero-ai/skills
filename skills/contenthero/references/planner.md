@@ -72,7 +72,7 @@ names two, or none, is refused.
 |---|---|---|
 | **Media**: a generation, a file uploaded from the user's device, or a file imported from the web | `{ "outputId": "<id>" }` (`"<id>-2"` for variation 2) | the generate call; `create_media_upload` then `complete_media_upload` for a local file; `import_media` for a file at a url |
 | A **link** | `{ "assetUrl": "https://..." }` | any web address; nothing is copied |
-| An **inspiration post**, shown on the card's Inspiration tab | `{ "contentId": "<id>" }` | `list_content` or `get_content`, or a card's existing inspiration asset (`get_card` returns it as `assetId`) |
+| An **inspiration post**, shown on the card's Inspiration tab | `{ "contentId": "<id>" }` | `list_content` or `get_content`, or a card's existing inspiration asset (`get_card` returns it as `contentId`) |
 | An **editor or canvas project** | `{ "projectId": "<id>" }` | `list_projects` for one that exists; for a new one, pass `cardId` to `create_project` or `import_project` and it is linked in the same call |
 
 A file the user has on their machine or somewhere on the web is **media**: upload or import it

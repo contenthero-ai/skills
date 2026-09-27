@@ -2,6 +2,13 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.4] - 2026-09-27
+
+### Changed
+- `get_card` returns an inspiration post as `contentId` (`planner.md`), the same field that attaches it.
+- Pinned to `@contenthero/mcp` 0.4.21: a project's `type`, `contentId`/`projectId` on card assets, and a
+  single outlier score definition shared by every tool.
+
 ## [0.2.3] - 2026-09-27
 
 How to attach each kind of thing to a card, and linking a project to its card when it is made.

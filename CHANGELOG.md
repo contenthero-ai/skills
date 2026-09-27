@@ -2,6 +2,22 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.3] - 2026-09-27
+
+How to attach each kind of thing to a card, and linking a project to its card when it is made.
+
+### Added
+- **What a card can hold** (`planner.md`): media by `outputId` (generated, uploaded from a device, or
+  imported from the web), a link by `assetUrl`, an inspiration post by `contentId`, and an editor or
+  canvas project by `projectId`, with where each id comes from. An inspiration post is attached by
+  `contentId`, never its url.
+- **Link a new project to its card in the same call** (`editor.md`): `cardId` on `create_project` and
+  `import_project`.
+- `research.md` ends its pattern by attaching the posts a piece drew from.
+
+### Changed
+- Pinned to `@contenthero/mcp` 0.4.20.
+
 ## [0.2.2] - 2026-09-26
 
 Brand kits in the skill match the live API: a kit is a set of Markdown sections.

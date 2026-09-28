@@ -36,7 +36,7 @@ name plus its fields, and each successful edit returns a NEW revision for chaini
 
 You do not need to fetch the project just to get a revision; every edit hands the next one back.
 
-⚠️ Do not guess op names or layer kinds. `get_timeline_types` and `get_layer_types` return what
+⚠️ Do not guess op names or layer kinds. `get_schema` with kind `timeline` or `layer` returns what
 the surface actually accepts. An op the schema does not know is a 400, and a batch that fails
 part-way is worth avoiding by checking first.
 
@@ -77,7 +77,7 @@ A still cannot show pacing. Reach for a preview only when the question is about 
 
 ## Exporting the finished piece
 
-`get_export_formats` first: it tells you what this project can actually be exported as. Then
+`get_schema` with kind `export` first: it tells you what this project can actually be exported as. Then
 `export_project` to start the render, and `get_export` to poll it and collect the result.
 
 `get_transcript` pulls the spoken text out of a project's media, which is what you want for

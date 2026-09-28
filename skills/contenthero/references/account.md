@@ -13,11 +13,11 @@ asks what their plan includes, read it, or send them to the app.
 
 ## Where can they publish
 
-`list_platforms` is the discovery catalog: every platform the account can publish to, each
-platform's formats, and whether a connected account exists for it. `get_platform` returns one
-platform's full publishing shape, the fields, options and character limits per format.
+`get_schema` with kind `platform` is the discovery catalog: every platform the account can publish to, each
+platform's formats, and whether a connected account exists for it. The same call with a `platform`
+returns that platform's full publishing shape, the fields, options and character limits per format.
 
-**Ground a post's `platformSettings` against `get_platform` instead of guessing the fields.**
+**Ground a post's `platformSettings` against `get_schema` (kind `platform`, with the platform) instead of guessing the fields.**
 Platforms change their requirements and the catalog is live; your memory of Instagram's caption
 limit is not.
 

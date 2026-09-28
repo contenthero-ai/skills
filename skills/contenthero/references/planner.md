@@ -99,8 +99,8 @@ score and a content id for `get_content`.
 
 ### Shaping a post for its platform
 
-Do not guess a platform's fields. `list_platforms` shows what the account can publish to and
-whether a connected account exists for each. `get_platform` returns the real shape: the fields,
+Do not guess a platform's fields. `get_schema` with kind `platform` shows what the account can publish to and
+whether a connected account exists for each. Adding a `platform` returns the real shape: the fields,
 the enums, and the character limits per format (post, reel, short, story, thread). Ground
 `platformSettings` against that.
 

@@ -115,9 +115,10 @@ Report the outcome, not the plumbing. The image, the cost, the link to the card.
 not raw payloads, not which transport you chose, not which tool you called. Surface an id only
 when the user needs it to do something.
 
-When you name an item, make its name a clickable link to the item's `appUrl`, the address that opens
-it in the app, rather than printing the bare address. Use the value as given; never compose a URL
-from an id.
+When you name an item, make its name a clickable link to where it opens in the app. An item's
+`appUrl` is that link, ready to use. To link anything else (a tab of an item, a filtered or sorted
+view, an item you hold only an id for), build the address from the link contract: call `get_schema`
+with kind `link` once, then follow its grammar using only the nouns, tabs and parameters it lists.
 
 ## References
 

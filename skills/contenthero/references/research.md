@@ -52,9 +52,13 @@ for a hook and a structure come from `get_content` on the few that matter.
 info for one post. **The transcript is opt-in**, because a long video is a large document. Ask
 for it when you are going to mine the script, not by default.
 
-`analyze_content` runs Break It Down on a post: a structured read of why it works, from the hook
-and structure to the call to action and the steps to recreate it. `get_content` reports whether a
-post already has one, and reading it is free; creating one spends credits.
+`analyze_content` makes one of two reads of a post. `breakdown` (the default) runs Break It Down:
+why it works, from the hook and structure to the call to action and the steps to recreate it.
+`scenes` prepares the post to be seen: each scene's time range, what happens and what is said in
+it, and a frame of each. Ask for scenes when the task depends on what the video shows, not only
+what it says. `get_content` reports whether either exists, and reading them is free (`analysis`
+for the breakdown, `scenes` for the scenes); creating one spends credits, and scenes are priced
+per minute of video.
 
 The pattern, every time:
 

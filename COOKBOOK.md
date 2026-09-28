@@ -43,7 +43,7 @@ Research to published.
    with `getCost` first. Chain its output id into `generate_video` as the start frame. Ground the
    visual in the brand's Design Guidelines.
 4. **Assemble.** `create_card` **with the `spaceId`** so it lands on the right board, then
-   `update_card` for the video asset and the platform post. `get_platform` for that platform's
+   `update_card` for the video asset and the platform post. `get_schema` kind `platform` for that platform's
    real field shape rather than guessing it.
 5. **Ship.** Schedule it, after confirming.
 
@@ -84,7 +84,7 @@ not something to improvise.
    else might be editing, so a concurrent change fails loudly instead of being overwritten.
 4. `get_context` to see a frame. Its `mode: 'video'` then `get_preview` only when the question is
    about motion or pacing, since that one renders and has to be polled.
-5. `get_export_formats`, then `export_project`, then poll `get_export`.
+5. `get_schema` kind `export`, then `export_project`, then poll `get_export`.
 
 ## Capture a lesson so the brand gets smarter
 

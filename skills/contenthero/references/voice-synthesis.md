@@ -50,7 +50,7 @@ When the brand kit and the user's own top-performing captions disagree, the user
 
 Synthesize: take the proven pattern primitives, apply them to this post's topic, and write in the user's voice for the user's audience.
 
-- Produce the pieces the platform needs: hook, caption or script, hashtags, CTA. Match the target platform's norms (a Reel caption is not a YouTube description), and read them from `get_platform` rather than memory.
+- Produce the pieces the platform needs: hook, caption or script, hashtags, CTA. Match the target platform's norms (a Reel caption is not a YouTube description), and read them from `get_schema` kind `platform` rather than memory.
 - Keep it the user's, not yours. If you would not believe the user wrote it, rewrite it.
 - **Present the draft to the user and get approval.** Offer the reasoning briefly ("modeled the hook on your top Reel's question opener, kept it to your usual short punchy caption") so they can steer.
 - Iterate on feedback. Never proceed to produce or publish on an unapproved draft.

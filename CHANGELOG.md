@@ -2,6 +2,16 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.6] - 2026-09-28
+
+### Changed
+- One reference tool: the references name `get_schema` by kind (platform, timeline, layer, export, link), and
+  linking uses the link contract (`get_schema` kind `link`) for anything without an `appUrl`.
+- `analyze_content` makes one of two reads of a post: `breakdown` (Break It Down) or `scenes` (each scene's time
+  range, what happens and what is said, and a frame of each), read with `get_content` (`references/research.md`).
+- Pinned to `@contenthero/mcp` 0.4.24: `analyze_content` kinds, `get_content` scenes, `import_media` as a background
+  job, and `get_schema`.
+
 ## [0.2.5] - 2026-09-28
 
 ### Changed

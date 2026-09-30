@@ -1,6 +1,6 @@
 {
   "name": "contenthero-skills",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": true,
   "description": "Tooling for the ContentHero agent skill. The skill itself is plain Markdown; this exists only to run the guards.",
   "type": "module",
@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@contenthero-ai/american-spelling": "0.1.2",
-    "@contenthero/mcp": "0.4.25",
+    "@contenthero/mcp": "0.4.26",
     "@modelcontextprotocol/sdk": "^1.12.0"
   }
 }

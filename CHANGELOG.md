@@ -2,6 +2,13 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.8] - 2026-10-01
+
+### Changed
+- Pinned to `@contenthero/mcp` 0.4.26: `get_model` shows a model's prompt guide, and the speech tools (`generate_audio`
+  text, `generate_lip_sync` script) point at the speech model's guide before directions are written into the words;
+  audio results name the model that spoke; a paid result carries its charge in its structured data.
+
 ## [0.2.7] - 2026-09-30
 
 ### Changed

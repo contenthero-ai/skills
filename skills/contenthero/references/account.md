@@ -8,6 +8,8 @@ Small surface, three genuinely different questions.
 batch so you can tell the user whether it will actually complete, rather than discovering it
 half way through.
 
+`update_account` changes the account's settings; today that is the monthly spend cap. Change it only when the user asks: it is their guard on spending. When a spend is refused because the cap is reached, tell the user and when it resets, and leave raising it to them.
+
 ⛔ **Never quote a plan's limits from memory.** Tier limits change without a deploy. If the user
 asks what their plan includes, read it, or send them to the app.
 

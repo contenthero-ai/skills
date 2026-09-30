@@ -2,6 +2,17 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.7] - 2026-09-30
+
+### Changed
+- Your account and tracked accounts are named apart: `get_balance` is `get_account` (your own ContentHero account),
+  the old `get_account` and `list_accounts` are `get_tracked_account` and `list_tracked_accounts`, and the CLI's
+  `account balance` is `account get`.
+- `update_account` changes the monthly spend cap, only when the user asks; a spend refused at the cap is reported
+  with its reset date and left to the user to raise (`references/account.md`).
+- Pinned to `@contenthero/mcp` 0.4.25: spend receipts (`charge`), the monthly spend cap, typed limit refusals, and
+  word-timed scenes.
+
 ## [0.2.6] - 2026-09-28
 
 ### Changed

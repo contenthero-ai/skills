@@ -80,7 +80,7 @@ contenthero auth status
 
 ContentHero generation and publishing spend credits and require scoped keys. Before the first real spend:
 
-- Check the balance: MCP `get_balance`, CLI `contenthero account balance`.
+- Check the balance: MCP `get_account`, CLI `contenthero account get`.
 - API keys are scope-gated. Generation needs generate scopes, publishing needs `publish:write`, the pipeline needs `pipeline:write`. A `contenthero login` key is provisioned with the standard scopes. If a call fails on a missing scope, tell the user which scope to grant in API Keys settings. Do not work around it.
 
 If the balance is low, point the user at their billing settings rather than proceeding into a failed spend.

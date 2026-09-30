@@ -10,7 +10,7 @@ tools.
 
 ## Two kinds of account, one list
 
-`list_accounts` returns the social accounts this ContentHero account **tracks**, and it holds two
+`list_tracked_accounts` returns the social accounts this ContentHero account **tracks**, and it holds two
 kinds distinguished by `accountType`:
 
 - `inspiration`: creators and competitors the user watches, for research.
@@ -21,11 +21,11 @@ publishing connections. Three different things:
 
 | You want | Use |
 |---|---|
-| Who the user watches, and their own profiles as data | `list_accounts` (this file) |
+| Who the user watches, and their own profiles as data | `list_tracked_accounts` (this file) |
 | Where the user can publish | `list_connected_accounts` (`references/planner.md`) |
-| The user's balance and plan | `get_balance` (`references/account.md`) |
+| The user's balance and plan | `get_account` (`references/account.md`) |
 
-`get_account` gives one tracked account with how its content actually performs: post counts,
+`get_tracked_account` gives one tracked account with how its content actually performs: post counts,
 total and average views, likes, comments, average engagement and outlier score, plus its top
 posts and its most recent ones. **It works for both kinds**, so it is how you answer "how is my
 account doing" and "how is this competitor doing" with the same call.

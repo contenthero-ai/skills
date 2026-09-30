@@ -12,13 +12,13 @@ Pull all three before drafting. Each answers a different question.
 
 2. **What performs in the niche: proven patterns.** `list_content` returns the posts the user tracks, ranked by OUTLIER SCORE, which measures a post against its own creator's baseline rather than the platform average. That is why a small account's breakout outranks a big account's routine post: it is a repeatable pattern rather than a big number. The list is shallow (title plus metrics), so mining one is a two-step read. Filters and the full surface are in `research.md`.
 
-3. **What performs for this user: their own track record.** `get_account` on one of the user's own tracked profiles (`accountType: 'brand'`) returns their top and most recent posts with totals and averages. `list_cards` and `get_card` surface the captions, scripts and notes they have written before. **This is the most important voice signal**: the user's own best posts are the truest model of their voice, ahead of any stated profile.
+3. **What performs for this user: their own track record.** `get_tracked_account` on one of the user's own tracked profiles (`accountType: 'brand'`) returns their top and most recent posts with totals and averages. `list_cards` and `get_card` surface the captions, scripts and notes they have written before. **This is the most important voice signal**: the user's own best posts are the truest model of their voice, ahead of any stated profile.
 
 ## The list-then-get mining pattern
 
 Ranked content comes back shallow: title and metrics, no transcript. The deep fields you draft from need a second call.
 
-1. `list_content`, filtered to the brand and a recent window, to rank and choose the few most relevant, highest-performing items. `get_account` on one of the user's own tracked profiles gives the same ranking for their own back catalog.
+1. `list_content`, filtered to the brand and a recent window, to rank and choose the few most relevant, highest-performing items. `get_tracked_account` on one of the user's own tracked profiles gives the same ranking for their own back catalog.
 2. `get_content` on each chosen item for `description`, `hashtags`, `keywords` and audio info. ⚠️ **The transcript is OPT-IN**: ask for it only on the two or three you will actually mine, because a long video is a large document.
 
 Do not try to mine a hook or structure from the list view. Pick from the list, then get the detail.

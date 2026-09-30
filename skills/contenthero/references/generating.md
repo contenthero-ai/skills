@@ -37,7 +37,7 @@ Use it before anything batched, long, high-resolution, or larger than the user i
 expecting. For a routine single small image, skip it. **For video, always.** Surface the number
 in credits before committing.
 
-`get_balance` (`account.md`) tells you whether the spend will even complete.
+`get_account` (`account.md`) tells you whether the spend will even complete.
 
 ### 4. Write the prompt properly
 

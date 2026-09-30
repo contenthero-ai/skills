@@ -4,7 +4,7 @@ Small surface, three genuinely different questions.
 
 ## What can they spend
 
-`get_balance` returns the credit balance, the tier, and top-up state. Read it before a large
+`get_account` returns the credit balance, the tier, and top-up state. Read it before a large
 batch so you can tell the user whether it will actually complete, rather than discovering it
 half way through.
 

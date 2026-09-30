@@ -36,7 +36,7 @@ retry the identical request hoping for a different answer.**
 
 ## Insufficient credits
 
-Not a bug. Check `get_balance`, tell the user plainly, and point them at billing. Then preview
+Not a bug. Check `get_account`, tell the user plainly, and point them at billing. Then preview
 with `getCost` before the next attempt so the number is known in advance rather than discovered.
 
 ## Output is off-model or the wrong subject

@@ -40,6 +40,17 @@ You do not need to fetch the project just to get a revision; every edit hands th
 the surface actually accepts. An op the schema does not know is a 400, and a batch that fails
 part-way is worth avoiding by checking first.
 
+## Graphics: code the editor draws
+
+A graphic clip or layer is a React component the editor draws on every frame. **Read `get_schema` with kind
+`graphic` before writing or changing one.** It is the sandbox's own guide, generated from what the sandbox has: what
+the code can import and what it cannot use, the box a graphic draws in, the brand prop names, the size limit, and
+examples. Do not write a graphic from memory of Remotion: the sandbox is a subset, and code it lacks is refused.
+
+The write says what is wrong. Code that does not compile is refused, and the result's `diagnostics` name each finding
+with its line and column; warnings apply and say what may go wrong. Fix every error and write it again. Then look at
+it: `get_context` renders the frame, so check the graphic at its start, middle and end before you call it done.
+
 ## Background removal is metered, and only for video
 
 Both editors expose `remove_background`. **Image removal is free. Video removal is a premium,

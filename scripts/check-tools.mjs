@@ -158,10 +158,43 @@ for (const tool of liveTools) {
   }
 }
 
+/**
+ * EVERY `get_schema` KIND IS NAMED TOO, read from the live tool's own input schema.
+ *
+ * A kind is a vocabulary the agent is meant to read before it writes: kind `graphic` is the sandbox's guide to a
+ * graphic's code, kind `timeline` the clip types. A kind the skill never names is one no workflow sends an agent to,
+ * and the agent writes from memory instead (measured 2026-10-04: graphics were written against a Remotion the sandbox
+ * does not have). The skill names a kind as "kind `x`", or a list, "kind `timeline` or `layer`".
+ */
+const schemaTool = tools.find((t) => t.name === 'get_schema')
+const liveKinds = schemaTool?.inputSchema?.properties?.kind?.enum ?? []
+const KIND_MENTION = /\bkinds?\s+`[a-z]+`(?:\s*(?:,|or|and)\s*`[a-z]+`)*/g
+const namedKinds = new Set()
+for (const [rel, text] of corpus) {
+  if (HISTORICAL.includes(rel)) continue
+  for (const mention of text.matchAll(KIND_MENTION)) {
+    for (const kind of mention[0].matchAll(/`([a-z]+)`/g)) namedKinds.add(kind[1])
+  }
+}
+
 /* --------------------------------------------------------------- the verdict */
 
 const uncovered = [...liveTools].filter((n) => !named.has(n))
+const unnamedKinds = liveKinds.filter((k) => !namedKinds.has(k))
 let failed = false
+
+// Guard the guard: a surface with no readable kinds means the check above checked nothing.
+if (!liveKinds.length) {
+  failed = true
+  console.error('\nCould not read get_schema\'s kinds from the live surface, so they went unchecked.')
+}
+
+if (unnamedKinds.length) {
+  failed = true
+  console.error(`\n${unnamedKinds.length} get_schema kind(s) are never named, so no workflow sends an agent to them:\n`)
+  console.error('  ' + unnamedKinds.join(', '))
+  console.error('\nName each as kind `x` in the workflow where an agent should read it before it writes.')
+}
 
 if (dead.length) {
   failed = true
@@ -193,6 +226,6 @@ if (uncovered.length) {
 if (failed) process.exit(1)
 
 console.log(
-  `Every one of the ${liveTools.size} live tools is reachable through a documented workflow, ` +
-    `and the skill names nothing that does not exist.`,
+  `Every one of the ${liveTools.size} live tools is reachable through a documented workflow, every one of the ` +
+    `${liveKinds.length} get_schema kinds is named, and the skill names nothing that does not exist.`,
 )

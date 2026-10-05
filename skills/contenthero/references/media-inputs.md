@@ -63,9 +63,9 @@ way a technically valid generation comes back wrong.
 
 Pass references in the same order you address them, whatever the scheme.
 
-### Named elements (Kling 3.0)
+### Kling elements (Kling 3.0)
 
-A model whose `promptReferences` declares a named-element scheme and whose `inputTypes` include `elements` accepts named reference elements: groups of images that all depict one entity (a character, prop, location), addressable as `@name`. Pass them on the video reference set as `elements: [{ name, description, images: [urlsOrIds] }]` (CLI: see `contenthero generate video --help`), alongside a `startFrame` (required). Up to `maxElements` per request. Reference each in the prompt by its `@name`. Element images may be URLs or output-ids, so you can generate the angle shots first and assemble an element from them.
+A model whose `promptReferences` declares a named-element scheme and whose `inputTypes` include `elements` accepts Kling elements: groups of images that all depict one entity (a character, prop, location), addressable as `@name`. Pass them on the video reference set as `klingElements: [{ klingElementId }]` (CLI: see `contenthero generate video --help`), alongside a `startFrame` (required). Up to `maxElements` per request. Reference each in the prompt by its `@name`. Kling element images may be URLs or output-ids, so you can generate the angle shots first and assemble a Kling element from them.
 
 ## Rules
 

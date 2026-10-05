@@ -132,9 +132,9 @@ with kind `link` once, then follow its grammar using only the nouns, tabs and pa
 | `references/prompt-craft.md` | Writing image and video prompts that do not waste a spend |
 | `references/media-inputs.md` | References by URL or output-id, field by field |
 | `references/chaining.md` | Feeding one generation into the next |
-| `references/identity.md` | Avatars, looks, voices, reference boards |
+| `references/identity.md` | Avatars, looks, voices, reference boards, Kling elements |
 | `references/planner.md` | Spaces, stages, cards, posts, scheduling, publishing |
 | `references/media-library.md` | Upload, import, search, folders, tags, archive |
-| `references/editor.md` | Projects, timelines, canvases, elements, previews, exports |
+| `references/editor.md` | Projects, timelines, canvases, templates, previews, exports |
 | `references/account.md` | Balance, platforms, and what the user is looking at |
 | `references/troubleshooting.md` | Error to action, scopes, idempotency |

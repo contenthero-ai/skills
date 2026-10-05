@@ -51,6 +51,31 @@ The write says what is wrong. Code that does not compile is refused, and the res
 with its line and column; warnings apply and say what may go wrong. Fix every error and write it again. Then look at
 it: `get_context` renders the frame, so check the graphic at its start, middle and end before you call it done.
 
+## Templates: the editor's Elements
+
+A **template** is a reusable graphic, shape or animated emoji: ContentHero's own, and the user's saved ones, the same
+set the editor's Elements panel shows. `list_templates` to browse (by kind, category or search), `get_template` for one,
+with its code and controls.
+
+**Place one with an `insert_template` op** in `update_timeline` or `update_canvas`, not by copying its code into a new
+clip. It places the clip the Elements panel would: branded with the project's brand kit, at the template's own size on
+this canvas, and over the main video rather than splitting it. Set its props in the same op, choose where it lands
+with `placement`, or pass `brand: false` to keep the template's own colors and fonts.
+
+Save a template only when the user asks for one: `create_template` from a graphic or shape on a project (`fromItem`),
+as a copy of another (`fromTemplateId`), or from its fields. A placed copy is a snapshot: changing a template changes
+no clip already placed from it.
+
+## Overlays that stay on their moment
+
+An overlay that belongs to a moment (a lower third on a speaker's name, a callout on a word) should carry an `anchor`:
+`{ clipId, t }`, the clip on another track and the second of its footage where the overlay starts. `get_transcript`
+gives the second: a word starts at its `startMs / 1000`. Set it with `update_clip`, or on the clip you create.
+
+An anchored overlay follows its moment through every later edit (a ripple, a trim, a split, a silence cut) and is
+removed, undoably, when the moment itself is cut. An unanchored one stays at its frame on the timeline while the
+footage under it moves.
+
 ## Background removal is metered, and only for video
 
 Both editors expose `remove_background`. **Image removal is free. Video removal is a premium,
@@ -60,15 +85,6 @@ balance cannot cover it. It runs as an ASYNC job: the result carries an id to po
 original is kept.
 
 Tell the user before removing a video background. It is the one op in this surface that spends.
-
-## Saved elements: the reusable pieces
-
-An **element** is a saved reference piece (a character, a location, a prop) that you reuse across
-projects. `list_elements` to browse, `get_element` for one, `create_element` to save a new one,
-`update_element` to rename or recategorize it, `delete_element` to drop it.
-
-Category `auto` lets the server classify an element from its image rather than making you choose.
-The description is what makes an element findable later, so write a real one.
 
 ## Seeing the work before you commit to it
 

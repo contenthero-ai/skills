@@ -1,4 +1,4 @@
-# Identity: avatars, looks, voices, boards
+# Identity: avatars, looks, voices, boards, Kling elements
 
 The reusable library that keeps a person, character or product **on-model across many
 outputs**. Reach for it whenever the user wants the same subject twice.
@@ -50,6 +50,20 @@ stored as ordinary media, so `list_media` finds them again later.
 Reuse a board by passing it into a later generation's reference inputs, exactly like any other
 image. The recipe is in `chaining.md`.
 
+## Kling elements
+
+A Kling element is Kling 3.0's saved reference for one character, location or prop: 2-4 images (or one video) of it
+under a name, so the subject stays consistent across Kling video generations. `list_kling_elements` to browse,
+`get_kling_element` for one, `create_kling_element` to save a new one, `update_kling_element` to rename or recategorize
+it, `delete_kling_element` to drop it.
+
+Its images may be output-ids, so generate the angle shots first and assemble the Kling element from them. Category
+`auto` lets the server classify it from its images rather than making you choose. The description is what makes it
+findable later, so write a real one.
+
+Use it through `generate_video`'s `klingElements` by `klingElementId`, and name it in the prompt as `@name`, with a
+`startFrame` alongside. The recipe is in `media-inputs.md`.
+
 ## Choosing between them
 
 | The user wants | Reach for |
@@ -57,11 +71,11 @@ image. The recipe is in `chaining.md`.
 | The same person across many posts | An avatar, and its look as a reference |
 | A subject held consistent from several angles | A board |
 | A saved face to speak | An avatar's look plus its `defaultVoiceId`, into lip-sync |
-| A saved prop, location or character for the editor | An element (`editor.md`) |
+| A character, location or prop kept consistent across Kling videos | A Kling element |
 | One-off with no consistency requirement | Nothing here. Just generate. |
 
-Elements (`editor.md`) and avatars overlap in spirit and differ in use: an element is a saved
-reference piece for editor projects, an avatar is a subject you generate and animate.
+Kling elements and avatars overlap in spirit and differ in use: a Kling element is a saved reference that Kling 3.0
+video generation reads, an avatar is a subject you generate and animate.
 
 ## Cache, then revalidate
 

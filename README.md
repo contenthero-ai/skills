@@ -44,7 +44,7 @@ workflow rather than making you pick a skill first.
 | **Ground and draft** | Your brand kit and its searchable knowledge base. Your LLM writes in your voice; you approve before anything goes live. |
 | **Research** | The accounts you track and their posts ranked by outlier score, which measures a post against its own creator's baseline rather than the platform's. |
 | **Media library** | Upload, import, search, folders, and archiving that is always reversible. |
-| **Editor** | Projects, timelines, canvases, saved elements, previews, and exports. |
+| **Editor** | Projects, timelines, canvases, previews, and exports. |
 
 It remembers your context in a small workspace file, `.contenthero/context.md`, caching your
 active brand kit and identity ids so they are not re-discovered every run.

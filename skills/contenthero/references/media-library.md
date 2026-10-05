@@ -22,11 +22,13 @@ Two paths, and the right one depends on where the bytes are.
 the `outputId` plus a public URL. One call. This is also the path for a hosted client that
 cannot read local files.
 
-**A local file: two phases, and both are required.**
+**Local files: two phases, both required, and done as one batch.**
 
-1. `create_media_upload` returns a signed `uploadUrl` and **the exact headers to send**.
-2. PUT the bytes to that URL **with those headers unchanged**.
-3. `complete_media_upload` with the returned `outputId`.
+1. `create_media_upload` with every file at once (up to 25) returns, for each, a signed `uploadUrl`
+   and **the exact headers to send**.
+2. PUT each file's bytes to its URL **with its headers unchanged**.
+3. `complete_media_upload` once, with every returned `outputId`. The person sees the batch as one
+   card; finalizing files one call at a time puts a card in their chat for each.
 
 ⚠️ **Skipping step 3 leaves the upload unfinished.** The bytes may be in storage but the media
 record is not real until you complete it. And do not edit the headers: they are part of what the

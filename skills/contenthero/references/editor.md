@@ -51,6 +51,13 @@ The write says what is wrong. Code that does not compile is refused, and the res
 with its line and column; warnings apply and say what may go wrong. Fix every error and write it again. Then look at
 it: `get_context` renders the frame, so check the graphic at its start, middle and end before you call it done.
 
+## Effects
+
+Effects change or generate pixels: in a graphic, on what it draws on a canvas; on a video or image clip, in its
+`effects`, drawn after its color. **Read `get_schema` with kind `effect`** for the effects by group and where each can
+go, and again with an effect's name for its parameters, ranges and defaults before you set them. An effect whose job a
+color control already does is not offered on clips; use that control instead.
+
 ## Templates: the editor's Elements
 
 A **template** is a reusable graphic, shape or animated emoji: ContentHero's own, and the user's saved ones, the same

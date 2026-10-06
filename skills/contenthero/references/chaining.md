@@ -4,6 +4,8 @@ Chaining means feeding one generation's output straight into the next as an inpu
 
 The pattern is always: run step 1, capture its `outputId`, pass that id into step 2.
 
+Every `<...ModelId>` below is a model id (ids from `list_models`).
+
 ## Image to video (animate a still)
 
 Generate the image, then use its id as the video's first frame.
@@ -11,9 +13,9 @@ Generate the image, then use its id as the video's first frame.
 - MCP: `generate_image` -> capture `outputId` -> `generate_video({ modelId, prompt, startFrame: "<imageId>" })`
 - CLI:
   ```bash
-  IMG=$(contenthero generate image "a red ceramic cube on white" --model nano-banana-2 --no-wait | jq -r .outputId)
+  IMG=$(contenthero generate image "a red ceramic cube on white" --model <imageModelId> --no-wait | jq -r .outputId)
   contenthero generation wait "$IMG"            # let it finish
-  contenthero generate video "slow push in" --model veo-3.1-fast --start-frame "$IMG"
+  contenthero generate video "slow push in" --model <videoModelId> --start-frame "$IMG"
   ```
 
 ## Board to image (keep a subject on-model)
@@ -26,19 +28,19 @@ Build a reference board, then generate images that reference it so the subject s
 
 Generate or pick a portrait, then animate it speaking.
 
-- `generate_image(...)` -> `generate_lip_sync({ modelId: "infinitalk", imageUrl: "<portraitId>", script: "<words the user supplied>", voiceId: "<voiceId>" })`
+- `generate_image(...)` -> `generate_lip_sync({ modelId: "<lipSyncModelId>", imageUrl: "<portraitId>", script: "<words the user supplied>", voiceId: "<voiceId>" })`
 - Or with existing speech: pass `audioUrl: "<audioId or URL>"` instead of `script` + `voiceId`.
 
 ## Audio to lip-sync (your own TTS clip)
 
 Synthesize speech, then drive a portrait with it.
 
-- `generate_audio({ modelId: "elevenlabs-tts", text: "<the user's script>", voiceId })` -> capture audio `outputId` -> `generate_lip_sync({ modelId, imageUrl: "<portraitId or URL>", audioUrl: "<audioId>" })`
+- `generate_audio({ modelId: "<audioModelId>", text: "<the user's script>", voiceId })` -> capture audio `outputId` -> `generate_lip_sync({ modelId, imageUrl: "<portraitId or URL>", audioUrl: "<audioId>" })`
 
 ## Generate then upscale
 
-- `generate_image(...)` -> `upscale({ modelId: "topaz-image-upscale", sourceUrl: "<imageId>", factor: "2x" })`
-- Video: `upscale({ modelId: "topaz-video-upscale", sourceUrl: "<videoId>", factor: "2x", durationSeconds: <len> })`
+- `generate_image(...)` -> `upscale({ modelId: "<upscaleModelId>", sourceUrl: "<imageId>", factor: "2x" })`
+- Video: `upscale({ modelId: "<upscaleModelId>", sourceUrl: "<videoId>", factor: "2x", durationSeconds: <len> })`
 
 ## Multi-variation chaining
 

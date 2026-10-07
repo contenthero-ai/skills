@@ -161,8 +161,8 @@ for (const tool of liveTools) {
 /**
  * EVERY `get_schema` KIND IS NAMED TOO, read from the live tool's own input schema.
  *
- * A kind is a vocabulary the agent is meant to read before it writes: kind `graphic` is the sandbox's guide to a
- * graphic's code, kind `timeline` the clip types. A kind the skill never names is one no workflow sends an agent to,
+ * A kind is a vocabulary the agent is meant to read before it writes: kind `code` is the sandbox's guide to a
+ * clip's code, kind `timeline` the clip types. A kind the skill never names is one no workflow sends an agent to,
  * and the agent writes from memory instead (measured 2026-10-04: graphics were written against a Remotion the sandbox
  * does not have). The skill names a kind as "kind `x`", or a list, "kind `timeline` or `layer`".
  */

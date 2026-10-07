@@ -40,27 +40,27 @@ You do not need to fetch the project just to get a revision; every edit hands th
 the surface actually accepts. An op the schema does not know is a 400, and a batch that fails
 part-way is worth avoiding by checking first.
 
-## Graphics: code the editor draws
+## Code clips: code the editor draws
 
-A graphic clip or layer is a React component the editor draws on every frame. **Read `get_schema` with kind
-`graphic` before writing or changing one.** It is the sandbox's own guide, generated from what the sandbox has: what
-the code can import and what it cannot use, the box a graphic draws in, the brand prop names, the size limit, and
-examples. Do not write a graphic from memory of Remotion: the sandbox is a subset, and code it lacks is refused.
+A code clip or layer is a video, audio or image whose content is a React component the editor draws on every frame.
+**Read `get_schema` with kind `code` before writing or changing one.** It is the sandbox's own guide, generated from what the sandbox has: what
+the code can import and what it cannot use, the box the code draws in, the brand prop names, the size limit, and
+examples. Do not write code from memory of Remotion: the sandbox is a subset, and code it lacks is refused.
 
 The write says what is wrong. Code that does not compile is refused, and the result's `diagnostics` name each finding
 with its line and column; warnings apply and say what may go wrong. Fix every error and write it again. Then look at
-it: `get_context` renders the frame, so check the graphic at its start, middle and end before you call it done.
+it: `get_context` renders the frame, so check the clip at its start, middle and end before you call it done.
 
 ## Effects
 
-Effects change or generate pixels: in a graphic, on what it draws on a canvas; on a video or image clip, in its
+Effects change or generate pixels: in code, on what it draws on a canvas; on a video or image clip, in its
 `effects`, drawn after its color. **Read `get_schema` with kind `effect`** for the effects by group and where each can
 go, and again with an effect's name for its parameters, ranges and defaults before you set them. An effect whose job a
 color control already does is not offered on clips; use that control instead.
 
 ## Templates: the editor's Elements
 
-A **template** is a reusable graphic, shape or animated emoji: ContentHero's own, and the user's saved ones, the same
+A **template** is reusable code, a shape or an animated emoji: ContentHero's own, and the user's saved ones, the same
 set the editor's Elements panel shows. `list_templates` to browse (by kind, category or search), `get_template` for one,
 with its code and controls.
 
@@ -69,7 +69,7 @@ clip. It places the clip the Elements panel would: branded with the project's br
 this canvas, and over the main video rather than splitting it. Set its props in the same op, choose where it lands
 with `placement`, or pass `brand: false` to keep the template's own colors and fonts.
 
-Save a template only when the user asks for one: `create_template` from a graphic or shape on a project (`fromItem`),
+Save a template only when the user asks for one: `create_template` from a code clip, code layer or shape on a project (`fromItem`),
 as a copy of another (`fromTemplateId`), or from its fields. A placed copy is a snapshot: changing a template changes
 no clip already placed from it.
 

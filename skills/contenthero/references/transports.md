@@ -67,7 +67,7 @@ API keys are scope-gated, and a missing scope is a deliberate boundary, not an o
 | `publish:write` | Publishing to live accounts |
 | `brandkit:read` / `brandkit:write` | Reading and editing brand context |
 | `editor:write` | Timeline and canvas edits |
-| `context:read` | Reading the open app's state, and previews |
+| `context:read` | Reading the open app's state, and renders of your work |
 
 ⛔ **When a call fails on scope, name the scope the user needs to grant and stop.** Do not route
 around it through another transport or another tool. Holding `publish:write` in particular is the

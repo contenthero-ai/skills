@@ -135,6 +135,6 @@ with kind `link` once, then follow its grammar using only the nouns, tabs and pa
 | `references/identity.md` | Avatars, looks, voices, reference boards, Kling elements |
 | `references/planner.md` | Spaces, stages, cards, posts, scheduling, publishing |
 | `references/media-library.md` | Upload, import, search, folders, tags, archive |
-| `references/editor.md` | Projects, timelines, canvases, templates, previews, exports |
+| `references/editor.md` | Projects, timelines, canvases, templates, renders of your work, exports |
 | `references/account.md` | Balance, platforms, and what the user is looking at |
 | `references/troubleshooting.md` | Error to action, scopes, idempotency |

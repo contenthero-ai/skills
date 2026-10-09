@@ -37,4 +37,4 @@ is also how you land a new card in the space they are actually looking at instea
 board.
 
 It can render a frame or a few frames of what is on screen, which is the cheap instant answer for
-"how does it look" (`references/editor.md` covers when to reach for a full preview instead).
+"how does it look" (`references/editor.md` covers judging motion with frames across a range).

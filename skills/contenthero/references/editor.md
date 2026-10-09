@@ -95,19 +95,15 @@ Tell the user before removing a video background. It is the one op in this surfa
 
 ## Seeing the work before you commit to it
 
-Two different answers, and picking the wrong one wastes time or money:
+One tool answers it: `get_context` with a render. It returns composed images inline, and they are
+**ephemeral and never stored**, so none of them is a deliverable.
 
-One tool answers all of it: `get_context` with a render. `mode` picks how much motion you need.
+- **A frame:** just `render`, for how a moment looks.
+- **Motion, cuts, transitions, pacing:** frames across the range in question, with `count` and
+  `fromFrame`/`toFrame`. Frames close together show how something moves; frames spread across a
+  longer range show its pacing. Ask for the frames the question needs.
 
-- **A frame:** just `render`. Cheapest and instant; `mode` defaults to `'image'`.
-- **A few frames across a range:** `count` with `fromFrame`/`toFrame`. Still instant, still inline images.
-- **Motion, cuts, transitions, pacing:** `mode: 'video'` renders a short low-res composed clip of
-  a timeline range. This one is a JOB: it returns a renderId, you poll `get_preview` until it is
-  done, then fetch the url. Capped at 20 seconds, because judging motion needs seconds not minutes.
-
-All three are **ephemeral and never stored**, so none of them is a deliverable.
-
-A still cannot show pacing. Reach for a preview only when the question is about motion.
+One frame cannot show pacing; frames across a range can.
 
 ## Exporting the finished piece
 

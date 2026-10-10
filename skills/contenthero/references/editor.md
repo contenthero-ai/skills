@@ -11,7 +11,7 @@ anywhere, which is why this file exists.
 
 `list_projects` to see what exists, `get_project` for one project's full state. `create_project`
 starts a new one; `delete_project` removes it. `import_project` and `export_project` move a
-project's definition in and out as a document, which is how you duplicate or back one up.
+project's definition in and out as a document. To copy a project, use `duplicate_project`.
 
 When a new project is for a planned piece, **pass the card's id as `cardId` to `create_project` or
 `import_project`**: the project is linked to that card in the same call, so the card opens the edit
@@ -36,6 +36,22 @@ name plus its fields, and each successful edit returns a NEW revision for chaini
 
 You do not need to fetch the project just to get a revision; every edit hands the next one back.
 
+## Versions, copies and undo
+
+`undo_project_edit` and `redo_project_edit` step through the project's edit history, as the editor's Undo and
+Redo do, whoever made the edit.
+
+A **version** is a saved state you can come back to: `save_project_version` before a risky change,
+`list_project_versions` to find one, `update_project_version` to name it, `delete_project_version` to remove it.
+Two tools bring a version back, and they do different things:
+
+- `restore_project_version` puts the version back into this project. The current state is saved as a version
+  first, so the restore can itself be reversed.
+- `duplicate_project` with `versionId` makes a NEW project from the version and leaves this one as it is.
+  Without `versionId` it copies the project as it is now.
+
+Restore when the user wants this project back where it was; duplicate when they want to keep both.
+
 ⚠️ Do not guess op names or layer kinds. `get_schema` with kind `timeline` or `layer` returns what
 the surface actually accepts. An op the schema does not know is a 400, and a batch that fails
 part-way is worth avoiding by checking first.
@@ -49,7 +65,7 @@ examples. Do not write code from memory of Remotion: the sandbox is a subset, an
 
 The write says what is wrong. Code that does not compile is refused, and the result's `diagnostics` name each finding
 with its line and column; warnings apply and say what may go wrong. Fix every error and write it again. Then look at
-it: `get_context` renders the frame, so check the clip at its start, middle and end before you call it done.
+it: `view` renders the frame, so check the clip at its start, middle and end before you call it done.
 
 ## Effects
 
@@ -93,22 +109,30 @@ original is kept.
 
 Tell the user before removing a video background. It is the one op in this surface that spends.
 
-## Seeing the work before you commit to it
+## Seeing and hearing the work before you commit to it
 
-One tool answers it: `get_context` with a render. It returns composed images inline, and they are
-**ephemeral and never stored**, so none of them is a deliverable.
+One tool answers it: `view` with a render. What it returns is **ephemeral and never stored**, so none
+of it is a deliverable.
 
 - **A frame:** just `render`, for how a moment looks.
-- **Motion, cuts, transitions, pacing:** frames across the range in question, with `count` and
-  `fromFrame`/`toFrame`. Frames close together show how something moves; frames spread across a
-  longer range show its pacing. Ask for the frames the question needs.
+- **Motion, cuts, transitions, pacing:** frames across the range in question, with `count`, `perSecond`
+  or `frames` and `fromFrame`/`toFrame`. Frames close together show how something moves; frames spread
+  across a longer range show its pacing. Ask for the frames the question needs.
+- **Sound:** `sound` renders the range's mix as an export mixes it, and measures it.
+- **The range as it plays:** `video` watches it with its sound. Where video cannot be received, it comes
+  back as frames across the range plus the sound measured.
+- **A raw source clip, not your edit:** name it with `assetId` or `mediaUrl` and window it with
+  `fromSec`/`toSec`, to judge footage before you cut it in.
 
+A render is a job: what is not ready within the call comes back with a `renderId` to read later.
 One frame cannot show pacing; frames across a range can.
 
 ## Exporting the finished piece
 
 `get_schema` with kind `export` first: it tells you what this project can actually be exported as. Then
 `export_project` to start the render, and `get_export` to poll it and collect the result.
+`list_project_exports` lists the project's earlier exports, finished and running: check it before
+exporting again, because a second export of the same edit is a second file the user keeps.
 
 `get_transcript` pulls the spoken text out of a project's media, which is what you want for
 captions, subtitles, or feeding a script back into a card.

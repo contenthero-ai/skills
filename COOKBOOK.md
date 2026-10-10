@@ -82,8 +82,8 @@ not something to improvise.
 2. `get_project` for its current state and revision.
 3. `update_timeline` or `update_canvas` with a batch of ops. Pass `expectedRevision` when anyone
    else might be editing, so a concurrent change fails loudly instead of being overwritten.
-4. `get_context` with a render to see a frame, or frames across a range when the question is about
-   motion or pacing.
+4. `view` with a render to see a frame, frames across a range when the question is about motion or
+   pacing, or `video` to watch the range with its sound.
 5. `get_schema` kind `export`, then `export_project`, then poll `get_export`.
 
 ## Capture a lesson so the brand gets smarter

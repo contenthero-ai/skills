@@ -24,7 +24,7 @@ which one you picked.
   `contenthero login` (browser-assisted), the `CONTENTHERO_API_KEY` environment variable, or MCP
   OAuth. Never log or echo a key.
 - **MCP mode: only MCP tools.** Do not shell out to the CLI for the same operation.
-- **CLI mode: only `contenthero ...`.** Discover arguments with `contenthero schema` or
+- **CLI mode: only `contenthero ...`.** Discover arguments with `contenthero schema get commands` or
   `contenthero <command> --help`. Do not hand-write raw HTTP.
 - ⛔ **Never cross over.** If an operation is missing from your detected transport, tell the user.
   Do not switch transports to reach it.
@@ -34,13 +34,13 @@ Concepts are identical across transports. MCP `generate_image` is CLI
 
 ## Discovering the CLI surface
 
-`contenthero schema` dumps the input schema of every command in one JSON document, which is how
+`contenthero schema get commands` dumps the input schema of every command in one JSON document, which is how
 an agent learns the surface without reading documentation. `contenthero --help` gives the tree;
 `contenthero <command> --help` gives one command's flags.
 
-⚠️ **Requires cli 0.3.5 or newer.** Earlier versions truncated `schema` at 64KB when its output
-went through a pipe (65,536 bytes of 93,998), because the process exited before stdout drained.
-On an older CLI the JSON will not parse. Redirect to a file if you are stuck on one.
+⚠️ **`schema get` needs the current CLI.** An older one names the command differently, and older
+still truncated its output when it went through a pipe, so the JSON would not parse. Update the
+CLI rather than working around either.
 
 ## Exit codes (CLI)
 

@@ -28,7 +28,7 @@ the product supports, connected accounts are what this user has actually hooked 
 
 ## What are they looking at right now
 
-`get_context` reads the live state of the open app: the active surface, the focused element, the
+`view` reads the live state of the open app: the active surface, the focused element, the
 playhead position, and the current selection.
 
 This is the tool that turns "make this one brighter" from a guess into an action. **When a user
@@ -36,5 +36,6 @@ says "this", "here", or "the selected one", read the context rather than asking 
 is also how you land a new card in the space they are actually looking at instead of the default
 board.
 
-It can render a frame or a few frames of what is on screen, which is the cheap instant answer for
-"how does it look" (`references/editor.md` covers judging motion with frames across a range).
+The same tool renders your work (a frame, frames across a range, its sound, or the range as it
+plays), which is the cheap instant answer for "how does it look" or "how does it sound"
+(`references/editor.md` covers which to ask for).

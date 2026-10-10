@@ -2,6 +2,15 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.9] - 2026-10-10
+
+### Changed
+- One `view` tool replaces `get_context`: what the user is looking at, and your own work seen or heard (a frame,
+  frames across a range, its sound, the range as it plays, or a raw source clip) (`references/editor.md`).
+- Versions: `restore_project_version` only restores; `duplicate_project` with `versionId` makes a new project from
+  a version. The editor reference now names versions, undo and redo, and earlier exports.
+- CLI names follow the renamed commands: `generation-status get` and `schema get commands`.
+
 ## [0.2.8] - 2026-10-01
 
 ### Changed

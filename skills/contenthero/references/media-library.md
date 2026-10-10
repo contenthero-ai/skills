@@ -40,6 +40,9 @@ Folders are the structure: `list_folders`, `get_folder`, `create_folder`, `updat
 `delete_folder`. `favorite` marks something worth finding again, and takes `favorited: false` to
 clear it.
 
+`share_media` makes a public link to finished generations, or stops sharing one. It is outward-facing, so share only
+when the user asks.
+
 ## Nothing is ever hard-deleted
 
 `archive` hides an asset and takes `archived: false` to restore it. It works across the product,

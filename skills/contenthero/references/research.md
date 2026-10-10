@@ -28,7 +28,8 @@ publishing connections. Three different things:
 `get_tracked_account` gives one tracked account with how its content actually performs: post counts,
 total and average views, likes, comments, average engagement and outlier score, plus its top
 posts and its most recent ones. **It works for both kinds**, so it is how you answer "how is my
-account doing" and "how is this competitor doing" with the same call.
+account doing" and "how is this competitor doing" with the same call. `update_tracked_account` moves a tracked
+account within its list.
 
 ## Outlier score is the whole idea
 

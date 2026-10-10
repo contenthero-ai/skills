@@ -21,6 +21,13 @@ in progress from the moment it exists. For a project that already exists, add
 Read `get_project` before an edit you did not just make yourself. You need its current shape, and
 you need its revision.
 
+## Project settings belong to the project
+
+`get_project` reads a project's settings with its state; `update_project` changes them, along with its title, brand
+kit and cover. A setting is shared by everyone who edits the project, and changing one is an edit that undo reverses.
+Change settings with `update_project`, never inside an `update_timeline` or `update_canvas` batch: those carry
+content only, and a setting sent there is refused.
+
 ## Edits are batches of operations, and revision is how you avoid clobbering
 
 `update_timeline` and `update_canvas` each take a batch of ops. A timeline op acts on clips and
@@ -53,8 +60,8 @@ Two tools bring a version back, and they do different things:
 Restore when the user wants this project back where it was; duplicate when they want to keep both.
 
 ⚠️ Do not guess op names or layer kinds. `get_schema` with kind `timeline` or `layer` returns what
-the surface actually accepts. An op the schema does not know is a 400, and a batch that fails
-part-way is worth avoiding by checking first.
+the surface actually accepts. An op the schema does not know is a 400, and a batch with one refused op
+applies nothing, so check first.
 
 ## Code clips: code the editor draws
 
@@ -88,6 +95,9 @@ with `placement`, or pass `brand: false` to keep the template's own colors and f
 Save a template only when the user asks for one: `create_template` from a code clip, code layer or shape on a project (`fromItem`),
 as a copy of another (`fromTemplateId`), or from its fields. A placed copy is a snapshot: changing a template changes
 no clip already placed from it.
+
+`update_template` changes one of the user's own templates and `delete_template` removes one; ContentHero's templates
+are read-only, so copy one to change it.
 
 ## Overlays that stay on their moment
 
@@ -136,6 +146,9 @@ exporting again, because a second export of the same edit is a second file the u
 
 `get_transcript` pulls the spoken text out of a project's media, which is what you want for
 captions, subtitles, or feeding a script back into a card.
+
+`share_project` makes a public live link to a project, and revokes it. It is outward-facing, so share only when the
+user asks.
 
 ## Where this meets the rest
 

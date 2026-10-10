@@ -5,6 +5,9 @@ All notable changes to the ContentHero Skills are documented here. This repo is 
 ## [0.2.9] - 2026-10-10
 
 ### Changed
+- Project settings are read by `get_project` and changed by `update_project`; the six tools that had no workflow
+  (`update_project`, `share_project`, `share_media`, `update_template`, `delete_template`, `update_tracked_account`)
+  now have one, and the batch rule reads as it works: one refused op and nothing applies.
 - One `view` tool replaces `get_context`: what the user is looking at, and your own work seen or heard (a frame,
   frames across a range, its sound, the range as it plays, or a raw source clip) (`references/editor.md`).
 - Versions: `restore_project_version` only restores; `duplicate_project` with `versionId` makes a new project from

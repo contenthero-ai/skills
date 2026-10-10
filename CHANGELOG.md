@@ -2,6 +2,15 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [0.2.10] - 2026-10-10
+
+### Changed
+- Every wait names `get_status`; `get_export` only reads a finished export (`references/generating.md`, `chaining.md`,
+  `editor.md`, `COOKBOOK.md`).
+- `share_media` and `share_project` are one `share` tool; `save_project_version` is `create_project_version`;
+  `list_project_exports` is `list_exports` (`references/editor.md`, `references/media-library.md`). Checks against
+  mcp 0.4.34.
+
 ## [0.2.9] - 2026-10-10
 
 ### Changed

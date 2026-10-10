@@ -48,7 +48,7 @@ You do not need to fetch the project just to get a revision; every edit hands th
 `undo_project_edit` and `redo_project_edit` step through the project's edit history, as the editor's Undo and
 Redo do, whoever made the edit.
 
-A **version** is a saved state you can come back to: `save_project_version` before a risky change,
+A **version** is a saved state you can come back to: `create_project_version` before a risky change,
 `list_project_versions` to find one, `update_project_version` to name it, `delete_project_version` to remove it.
 Two tools bring a version back, and they do different things:
 
@@ -141,14 +141,14 @@ One frame cannot show pacing; frames across a range can.
 
 `get_schema` with kind `export` first: it tells you what this project can actually be exported as.
 Then `export_project` to start the render, `get_status` to wait for it, and `get_export` to collect
-the result. `list_project_exports` lists the project's earlier exports, finished and running: check
+the result. `list_exports` lists a project's earlier exports, finished and running: check
 it before exporting again, because a second export of the same edit is a second file the user keeps.
 
 `get_transcript` pulls the spoken text out of a project's media, which is what you want for
 captions, subtitles, or feeding a script back into a card.
 
-`share_project` makes a public live link to a project, and revokes it. It is outward-facing, so share only when the
-user asks.
+`share` with `assetType` `project` makes a public live link to a project, and revokes it. It is outward-facing, so
+share only when the user asks.
 
 ## Where this meets the rest
 

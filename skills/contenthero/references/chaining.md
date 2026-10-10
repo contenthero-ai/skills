@@ -14,7 +14,7 @@ Generate the image, then use its id as the video's first frame.
 - CLI:
   ```bash
   IMG=$(contenthero generate image "a red ceramic cube on white" --model <imageModelId> --no-wait | jq -r .outputId)
-  contenthero generation-status get "$IMG"     # let it finish
+  contenthero status "$IMG"     # let it finish
   contenthero generate video "slow push in" --model <videoModelId> --start-frame "$IMG"
   ```
 
@@ -48,4 +48,4 @@ If step 1 produced several variations, choose one with the `-N` suffix: `startFr
 
 ## Sequencing rule
 
-A chained input must be finished before the next step resolves it. With the CLI, the generate commands wait by default, so a piped id is ready; if you used `--no-wait`, call `contenthero generation-status get <id>` before chaining. With MCP, the smart-wait usually returns a completed result; if it returned a pending `outputId`, poll `get_generation_status` until complete before feeding it forward.
+A chained input must be finished before the next step resolves it. With the CLI, the generate commands wait by default, so a piped id is ready; if you used `--no-wait`, call `contenthero status <id>` before chaining. With MCP, the smart-wait usually returns a completed result; if it returned a pending `outputId`, poll `get_status` until complete before feeding it forward.

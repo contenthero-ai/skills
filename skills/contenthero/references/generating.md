@@ -52,9 +52,9 @@ user's brand.
 Image, video, board, lip-sync and `upscale` are async with a smart-wait of roughly fifty seconds,
 then hand back an id if the render is still going. Audio returns directly.
 
-⛔ **Poll `get_generation_status` with the id. Never re-submit because it is slow.** A pending
+⛔ **Poll `get_status` with the id. Never re-submit because it is slow.** A pending
 status means it is still rendering. Re-submitting spends the credits again for the same output.
-`get_generation_status` blocks by default and takes several ids at once, so a batch is one call.
+`get_status` blocks by default and takes several ids at once, so a batch is one call.
 
 ### 6. Deliver the outcome
 

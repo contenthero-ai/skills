@@ -84,7 +84,7 @@ not something to improvise.
    else might be editing, so a concurrent change fails loudly instead of being overwritten.
 4. `view` with a render to see a frame, frames across a range when the question is about motion or
    pacing, or `video` to watch the range with its sound.
-5. `get_schema` kind `export`, then `export_project`, then poll `get_export`.
+5. `get_schema` kind `export`, then `export_project`, then wait with `get_status` and collect the file with `get_export`.
 
 ## Capture a lesson so the brand gets smarter
 

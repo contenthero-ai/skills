@@ -114,7 +114,7 @@ footage under it moves.
 Both editors expose `remove_background`. **Image removal is free. Video removal is a premium,
 metered feature**, charged per second with a duration cap, and it errors out if the plan or the
 balance cannot cover it. It runs as an ASYNC job: the result carries an id to poll with
-`get_generation_status`, the layer's media swaps to the transparent cutout when it lands, and the
+`get_status`, the layer's media swaps to the transparent cutout when it lands, and the
 original is kept.
 
 Tell the user before removing a video background. It is the one op in this surface that spends.
@@ -139,10 +139,10 @@ One frame cannot show pacing; frames across a range can.
 
 ## Exporting the finished piece
 
-`get_schema` with kind `export` first: it tells you what this project can actually be exported as. Then
-`export_project` to start the render, and `get_export` to poll it and collect the result.
-`list_project_exports` lists the project's earlier exports, finished and running: check it before
-exporting again, because a second export of the same edit is a second file the user keeps.
+`get_schema` with kind `export` first: it tells you what this project can actually be exported as.
+Then `export_project` to start the render, `get_status` to wait for it, and `get_export` to collect
+the result. `list_project_exports` lists the project's earlier exports, finished and running: check
+it before exporting again, because a second export of the same edit is a second file the user keeps.
 
 `get_transcript` pulls the spoken text out of a project's media, which is what you want for
 captions, subtitles, or feeding a script back into a card.

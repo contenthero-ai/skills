@@ -53,19 +53,21 @@ for a hook and a structure come from `get_content` on the few that matter.
 info for one post. **The transcript is opt-in**, because a long video is a large document. Ask
 for it when you are going to mine the script, not by default.
 
-`analyze_content` makes one of two reads of a post. `breakdown` (the default) runs Break It Down:
+`analyze_content` works on a post for analysis, as one of three kinds. `breakdown` (the default) runs Break It Down:
 why it works, from the hook and structure to the call to action and the steps to recreate it.
 `scenes` prepares the post to be seen: each scene's time range, what happens and what is said in
 it, and a frame of each. Ask for scenes when the task depends on what the video shows, not only
 what it says. `get_content` reports whether either exists, and reading them is free (`analysis`
 for the breakdown, `scenes` for the scenes); creating one spends credits, and scenes are priced
-per minute of video.
+per minute of video. The third kind, `video`, is below.
 
-`import` with a post's `contentId` downloads its video into the post's shared analysis copy, which
-the reading tools use. Nothing lands in the user's library; for the footage itself, `import` the
-post's page address as `url` instead. It spends unless the copy already exists or is being made, which is free, so price it
-with `getCost` first. A copy still downloading answers pending: call `import` again with the same
-`contentId` to follow it, at no charge. It needs the `studio:generate` scope.
+`analyze_content` with `kind: "video"` downloads a post's video into its shared analysis copy,
+which the reading tools use, and answers with its cut list (where the video changes scene) once
+stored, free. Nothing lands in the user's library or counts against their storage; for the footage
+itself, `import` the post's page address as `url` instead. It is charged for what the download
+moved, and is free when the copy already exists or is being made, so price it with `getCost` first.
+A copy still downloading answers pending: call `analyze_content` again with the same `contentId` and
+kind to follow it, at no charge. It needs the `studio:generate` scope.
 
 The pattern, every time:
 

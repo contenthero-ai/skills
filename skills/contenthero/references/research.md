@@ -61,13 +61,15 @@ what it says. `get_content` reports whether either exists, and reading them is f
 for the breakdown, `scenes` for the scenes); creating one spends credits, and scenes are priced
 per minute of video. The third kind, `video`, is below.
 
-`analyze_content` with `kind: "video"` downloads a post's video into its shared analysis copy,
-which the reading tools use, and answers with its cut list (where the video changes scene) once
-stored, free. Nothing lands in the user's library or counts against their storage; for the footage
-itself, `import` the post's page address as `url` instead. It is charged for what the download
-moved, and is free when the copy already exists or is being made, so price it with `getCost` first.
-A copy still downloading answers pending: call `analyze_content` again with the same `contentId` and
-kind to follow it, at no charge. It needs the `studio:generate` scope.
+`analyze_content` with `kind: "video"` downloads every video a post holds, its one video or each
+video slide of a carousel, into shared analysis copies, which the reading tools use. Once stored,
+each video answers with its cut list (where it changes scene), free, reported by slide for a
+carousel. A post with no video says so: its images are already stored and readable. Nothing lands in
+the user's library or counts against their storage; for the footage itself, `import` the post's page
+address as `url` instead. It is charged for what the downloads moved, and is free when the copies
+already exist or are being made, so price it with `getCost` first. A copy still downloading answers
+pending: call `analyze_content` again with the same `contentId` and kind to follow it, at no charge.
+It needs the `studio:generate` scope.
 
 The pattern, every time:
 

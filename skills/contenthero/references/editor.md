@@ -12,7 +12,7 @@ anywhere, which is why this file exists.
 `list_projects` to see what exists, `get_project` for one project's full state. `create_project`
 starts a new one; `delete_project` removes it. `import` with `pptxUrl` (a PowerPoint or Google
 Slides file) or `canvaDesignId` (a Canva design, through the account's Canva connection) starts a
-new canvas project from a deck, free, with `title` to name it; `export_project` renders a project
+new canvas project from a deck, free, with `title` to name it; `export` renders a project
 out. To copy a project, use `duplicate_project`.
 
 When a new project is for a planned piece, **pass the card's id as `cardId` to `create_project`, or
@@ -146,7 +146,7 @@ One frame cannot show pacing; frames across a range can.
 ## Exporting the finished piece
 
 `get_schema` with kind `export` first: it tells you what this project can actually be exported as.
-Then `export_project` to start the render, `get_status` to wait for it, and `get_export` to collect
+Then `export` to start the render, `get_status` to wait for it, and `get_export` to collect
 the result. `list_exports` lists a project's earlier exports, finished and running: check
 it before exporting again, because a second export of the same edit is a second file the user keeps.
 

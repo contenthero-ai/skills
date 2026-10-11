@@ -11,6 +11,7 @@ All notable changes to the ContentHero Skills are documented here. This repo is 
 - `download` hands back any file or export as save links (`references/media-library.md`).
 
 ### Changed
+- Breaking: `export_project` is `export`, with no alias (`COOKBOOK.md`, `references/editor.md`).
 - `transcribe` takes a tracked post's downloaded video, priced first with `getCost`; only an audio file cannot be
   priced in advance (`SKILL.md`, `references/research.md`, `references/media-library.md`).
 - `view` sees and hears a tracked post's video by `contentId` (and `slide`), frames at named seconds (`atSec`) or

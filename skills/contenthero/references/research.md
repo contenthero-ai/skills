@@ -69,7 +69,15 @@ the user's library or counts against their storage; for the footage itself, `imp
 address as `url` instead. It is charged for what the downloads moved, and is free when the copies
 already exist or are being made, so price it with `getCost` first. A copy still downloading answers
 pending: call `analyze_content` again with the same `contentId` and kind to follow it, at no charge.
-It needs the `studio:generate` scope.
+It needs the `studio:generate` scope. `get_content` reports each video's state every time (`absent`
+until it is downloaded), and `cuts` adds each downloaded video's cut list, free, narrowed by
+`startMs`/`endMs`.
+
+To see and hear a downloaded video, not only read its cuts, `view` it as a source with its
+`contentId` (and `slide`, the 0-based slide a carousel video is reported by): frames at its cut
+list's seconds with `atSec`, or across a window with `count` or `perSecond`, and `sound` for the
+window's loudness, where its sounds start and a picture of its waveform and spectrogram. That is how
+to study a post's pacing and its sound, beat by beat (`references/editor.md`).
 
 The pattern, every time:
 

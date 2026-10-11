@@ -133,8 +133,12 @@ of it is a deliverable.
 - **Sound:** `sound` renders the range's mix as an export mixes it, and measures it.
 - **The range as it plays:** `video` watches it with its sound. Where video cannot be received, it comes
   back as frames across the range plus the sound measured.
-- **A raw source clip, not your edit:** name it with `assetId` or `mediaUrl` and window it with
-  `fromSec`/`toSec`, to judge footage before you cut it in.
+- **A source, not your edit:** a clip of the user's by `assetId` or `mediaUrl`, or a tracked post's
+  video by `contentId` (and `slide` for a carousel) once `analyze_content` kind `video` has downloaded
+  it, windowed with `fromSec`/`toSec`, to judge footage before you cut it in or to study how a post is
+  cut. Its frames come spread across the window (`count`), at the seconds `atSec` names (a cut list's
+  times, say), or `perSecond` across it; `sound` measures the window as it is, beside any frames, with
+  where its sounds start in the source's own seconds; `video` watches it play.
 
 A render is a job: what is not ready within the call comes back with a `renderId` to read later.
 One frame cannot show pacing; frames across a range can.

@@ -2,6 +2,14 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [Unreleased]
+
+### Changed
+- `view` sees and hears a tracked post's video by `contentId` (and `slide`), frames at named seconds (`atSec`) or
+  per second across a source's window, and `sound` on any source (`references/editor.md`, `references/research.md`).
+- `get_content` reports each of a post's videos with its state, and `cuts` adds their cut lists
+  (`references/research.md`).
+
 ## [0.2.10] - 2026-10-10
 
 ### Changed

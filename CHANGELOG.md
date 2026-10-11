@@ -11,6 +11,9 @@ All notable changes to the ContentHero Skills are documented here. This repo is 
 - `download` hands back any file or export as save links (`references/media-library.md`).
 
 ### Changed
+- Breaking: a post's scenes are descriptions only (`references/research.md`). `analyze_content` kind `scenes` maps
+  each scene's range, what happens and what is said; `get_content` reads them with `scenes: "map"`, and `'frames'`
+  is gone. A scene's frames come from `view`, by `contentId` and an `atSec` in its range.
 - Breaking: `export_project` is `export`, with no alias (`COOKBOOK.md`, `references/editor.md`).
 - `transcribe` takes a tracked post's downloaded video, priced first with `getCost`; only an audio file cannot be
   priced in advance (`SKILL.md`, `references/research.md`, `references/media-library.md`).

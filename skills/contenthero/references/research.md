@@ -55,11 +55,12 @@ for it when you are going to mine the script, not by default.
 
 `analyze_content` works on a post for analysis, as one of three kinds. `breakdown` (the default) runs Break It Down:
 why it works, from the hook and structure to the call to action and the steps to recreate it.
-`scenes` prepares the post to be seen: each scene's time range, what happens and what is said in
-it, and a frame of each. Ask for scenes when the task depends on what the video shows, not only
-what it says. `get_content` reports whether either exists, and reading them is free (`analysis`
-for the breakdown, `scenes` for the scenes); creating one spends credits, and scenes are priced
-per minute of video. The third kind, `video`, is below.
+`scenes` maps the post's scenes: each one's time range, what happens and what is said in it. Ask
+for scenes when the task depends on what the video shows, not only what it says. `get_content`
+reports whether either exists, and reading them is free (`analysis` for the breakdown,
+`scenes: "map"` for the scenes); creating one spends credits, and scenes are priced per minute of
+video. Scenes are descriptions only: to see a scene, `view` the post by its `contentId` with an
+`atSec` at the scene's start or anywhere in its range. The third kind, `video`, is below.
 
 `analyze_content` with `kind: "video"` downloads every video a post holds, its one video or each
 video slide of a carousel, into shared analysis copies, which the reading tools use. Once stored,

@@ -43,6 +43,7 @@ codes: `references/transports.md`.
 | An idea turned into a planned or published post | **Plan and publish** → `references/planner.md` |
 | Copy written in their voice | **Ground, then draft** → `references/grounding.md`, then `references/voice-synthesis.md` |
 | To know what performs, theirs or a competitor's | **Research** → `references/research.md` |
+| How one post's video looks, moves and sounds | **Style study** → `references/style-study.md` |
 | Brand facts read, searched, or remembered | **Brand context** → `references/grounding.md` |
 | A reusable character or a consistent subject | **Identity** → `references/identity.md` |
 | Files found, uploaded, organized, or cleaned up | **Media library** → `references/media-library.md` |
@@ -78,8 +79,9 @@ Generation costs the user real credits. Every metered tool takes a `getCost` pre
 nothing and charges nothing. Use it before anything batched, long, or larger than the user is
 likely expecting, and tell them the number.
 
-⚠️ **`transcribe` is the one exception: it spends and cannot be priced in advance.** Its cost is
-only knowable afterwards. Say so before transcribing something long.
+⚠️ **`transcribe` on an audio file is the one exception: it spends and cannot be priced in
+advance.** Its cost is only knowable afterwards. Say so before transcribing something long. A
+tracked post's video is priced with `getCost` like any other spend.
 
 ### 4. Poll, never re-submit
 
@@ -127,6 +129,7 @@ with kind `link` once, then follow its grammar using only the nouns, tabs and pa
 | `references/transports.md` | Auth ladder, scopes, exit codes, the shared context file |
 | `references/grounding.md` | Brand kits, their sections, the knowledge base, confirmed writes |
 | `references/research.md` | Tracked accounts, outlier score, mining what performs |
+| `references/style-study.md` | One post's video studied for its look, motion, pacing and sound |
 | `references/voice-synthesis.md` | Grounding to draft: the method, and why it is the moat |
 | `references/generating.md` | Model choice, cost preflight, async, the generation loop |
 | `references/prompt-craft.md` | Writing image and video prompts that do not waste a spend |

@@ -4,7 +4,15 @@ All notable changes to the ContentHero Skills are documented here. This repo is 
 
 ## [Unreleased]
 
+### Added
+- Draft, pending approval: the style study workflow (`references/style-study.md`), routed from `SKILL.md`. It
+  downloads a post's video, reads its cut list, sees it at the cuts and hears it in windows with `view`, transcribes
+  it, then writes up its visuals, motion, type, color, pacing, sound effects, music and the mix against the voice.
+- `download` hands back any file or export as save links (`references/media-library.md`).
+
 ### Changed
+- `transcribe` takes a tracked post's downloaded video, priced first with `getCost`; only an audio file cannot be
+  priced in advance (`SKILL.md`, `references/research.md`, `references/media-library.md`).
 - `view` sees and hears a tracked post's video by `contentId` (and `slide`), frames at named seconds (`atSec`) or
   per second across a source's window, and `sound` on any source (`references/editor.md`, `references/research.md`).
 - `get_content` reports each of a post's videos with its state, and `cuts` adds their cut lists

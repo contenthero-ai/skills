@@ -42,6 +42,13 @@ An import still running when the call returns comes back pending: wait for it wi
 record is not real until you complete it. And do not edit the headers: they are part of what the
 signature covers.
 
+## Getting a file out
+
+`download` hands back any file the account owns, or a project's finished export, as save links
+that name the file, need no sign-in and do not expire. Reach for it when the user wants to keep a
+file outside ContentHero, or when you need the bytes on disk. It never spends. An export still
+rendering is not ready: wait for it with `get_status`, then download it.
+
 ## Organizing
 
 Folders are the structure: `list_folders`, `get_folder`, `create_folder`, `update_folder`,
@@ -72,9 +79,10 @@ whether they mean hide or destroy, and default to archive.
 background noise, or enhancing a rough recording. It **spends credits**, so preview with
 `getCost` first. It takes a standalone file by url, or audio already in the library.
 
-`transcribe` turns audio into text. It **spends credits and cannot be priced in advance**,
-because pricing it would mean reading the file's duration first. It is metered per minute, so
-warn the user before transcribing anything long. The transcript comes back inline, no polling.
+`transcribe` turns an audio file into text. It **spends credits and cannot be priced in advance**,
+because pricing it would mean reading the file's duration first. It is metered by the length heard,
+so warn the user before transcribing anything long. The transcript comes back inline, no polling.
+A tracked post's video is transcribed the same way and can be priced first: `references/research.md`.
 
 ## Where this meets the rest
 

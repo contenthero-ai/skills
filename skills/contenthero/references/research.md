@@ -77,7 +77,15 @@ To see and hear a downloaded video, not only read its cuts, `view` it as a sourc
 `contentId` (and `slide`, the 0-based slide a carousel video is reported by): frames at its cut
 list's seconds with `atSec`, or across a window with `count` or `perSecond`, and `sound` for the
 window's loudness, where its sounds start and a picture of its waveform and spectrogram. That is how
-to study a post's pacing and its sound, beat by beat (`references/editor.md`).
+to study a post's pacing and its sound, beat by beat (`references/editor.md`); the whole study, in
+order, is `references/style-study.md`.
+
+To read a downloaded video's words, `transcribe` it by its `contentId` (and `slide`). It spends
+credits, so price it with `getCost` first; it is charged once, to whoever asks first, and is free
+once the words exist or are being made. The post's one video becomes its transcript, which
+`get_content` then returns word-timed, so transcribe a post whose transcript is `absent` or lacks
+timing rather than working around it. A long video answers running: call again with the same post
+to follow it, at no charge.
 
 The pattern, every time:
 

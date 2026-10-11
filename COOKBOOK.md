@@ -69,8 +69,8 @@ not something to improvise.
 
 ## Turn a rough recording into a finished post
 
-1. `import_media` if it is on a URL, or `create_media_upload` then PUT then
-   `complete_media_upload` for a local file.
+1. `import` with `url` if it is on a URL (a video page spends, so `getCost` first), or
+   `create_media_upload` then PUT then `complete_media_upload` for a local file.
 2. `edit_audio` to isolate the voice or enhance the recording. `getCost` first.
 3. `transcribe` for the text. ⚠️ **It spends and cannot be priced in advance**, so say so before
    doing it to something long.

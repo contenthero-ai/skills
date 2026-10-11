@@ -61,6 +61,12 @@ what it says. `get_content` reports whether either exists, and reading them is f
 for the breakdown, `scenes` for the scenes); creating one spends credits, and scenes are priced
 per minute of video.
 
+`import` with a post's `contentId` downloads its video into the post's shared analysis copy, which
+the reading tools use. Nothing lands in the user's library; for the footage itself, `import` the
+post's page address as `url` instead. It spends unless the copy already exists or is being made, which is free, so price it
+with `getCost` first. A copy still downloading answers pending: call `import` again with the same
+`contentId` to follow it, at no charge. It needs the `studio:generate` scope.
+
 The pattern, every time:
 
 1. `list_content`, ranked, filtered to the brand and a recent window.

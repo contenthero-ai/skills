@@ -18,9 +18,17 @@ shot from last week"). Prefer `get_media` over re-listing when you already hold 
 
 Two paths, and the right one depends on where the bytes are.
 
-**Already on a public URL:** `import_media`. The server fetches it and re-hosts it, and returns
-the `outputId` plus a public URL. One call. This is also the path for a hosted client that
-cannot read local files.
+**Already on a public URL:** `import` with `url`. The server fetches it and re-hosts it, and
+returns the `outputId` plus a public URL. One call. This is also the path for a hosted client
+that cannot read local files. What the address points at decides the price:
+
+- **A file address** (an image, video or audio file) is free.
+- **A video page on a supported site** downloads that page's video into the library, and it
+  spends: the most the download may cost is held, and it is charged for what arrived. Run it with
+  `getCost` first and tell the user the price.
+
+An import still running when the call returns comes back pending: wait for it with `get_status`.
+`import` takes exactly one source per call, so bring in several files with one call each.
 
 **Local files: two phases, both required, and done as one batch.**
 

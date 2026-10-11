@@ -10,11 +10,13 @@ anywhere, which is why this file exists.
 ## Find the project before you edit it
 
 `list_projects` to see what exists, `get_project` for one project's full state. `create_project`
-starts a new one; `delete_project` removes it. `import_project` and `export_project` move a
-project's definition in and out as a document. To copy a project, use `duplicate_project`.
+starts a new one; `delete_project` removes it. `import` with `pptxUrl` (a PowerPoint or Google
+Slides file) or `canvaDesignId` (a Canva design, through the account's Canva connection) starts a
+new canvas project from a deck, free, with `title` to name it; `export_project` renders a project
+out. To copy a project, use `duplicate_project`.
 
-When a new project is for a planned piece, **pass the card's id as `cardId` to `create_project` or
-`import_project`**: the project is linked to that card in the same call, so the card opens the edit
+When a new project is for a planned piece, **pass the card's id as `cardId` to `create_project`, or
+to `import` beside `pptxUrl` or `canvaDesignId`**: the project is linked to that card in the same call, so the card opens the edit
 in progress from the moment it exists. For a project that already exists, add
 `{ "projectId": "<id>" }` to the card's assets instead.
 
@@ -155,6 +157,6 @@ share only when the user asks.
 - Media to put in a project comes from `references/media-library.md` or fresh from
   `references/generating.md`.
 - **Link the project to its card when the project is made**, not when the edit is done: `cardId` on
-  `create_project` or `import_project`. A finished export can then be attached as media too:
+  `create_project`, or on `import` with a deck. A finished export can then be attached as media too:
   `references/planner.md`, "What a card can hold".
 - Failures, scopes and polling: `references/troubleshooting.md`.

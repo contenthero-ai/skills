@@ -33,8 +33,8 @@ content only, and a setting sent there is refused.
 ## Edits are batches of operations, and revision is how you avoid clobbering
 
 `update_timeline` and `update_canvas` each take a batch of ops. A timeline op acts on clips and
-tracks; a canvas op acts on layers and slides (`create_layer`, `update_layer`, `reorder_layer`,
-`group_layers`, `create_slide`, `set_background`, and more). Each op is an object with an `op`
+tracks; a canvas op acts on layers and slides. `get_schema` kind `timeline` or `layer` lists every op with its
+shape, so read it there rather than guessing a name. Each op is an object with an `op`
 name plus its fields, and each successful edit returns a NEW revision for chaining the next one.
 
 **`expectedRevision` is optional and that is a real choice, not a formality.**
@@ -105,7 +105,7 @@ are read-only, so copy one to change it.
 
 An overlay that belongs to a moment (a lower third on a speaker's name, a callout on a word) should carry an `anchor`:
 `{ clipId, t }`, the clip on another track and the second of its footage where the overlay starts. `get_transcript`
-gives the second: a word starts at its `startMs / 1000`. Set it with `update_clip`, or on the clip you create.
+gives the second: a word starts at its `startMs / 1000`. Set it with the clip update op (read it in the `get_schema` timeline index), or on the clip you create.
 
 An anchored overlay follows its moment through every later edit (a ripple, a trim, a split, a silence cut) and is
 removed, undoably, when the moment itself is cut. An unanchored one stays at its frame on the timeline while the
@@ -113,7 +113,7 @@ footage under it moves.
 
 ## Background removal is metered, and only for video
 
-Both editors expose `remove_background`. **Image removal is free. Video removal is a premium,
+Both editors have a background removal op (find it in the `get_schema` index). **Image removal is free. Video removal is a premium,
 metered feature**, charged per second with a duration cap, and it errors out if the plan or the
 balance cannot cover it. It runs as an ASYNC job: the result carries an id to poll with
 `get_status`, the layer's media swaps to the transparent cutout when it lands, and the

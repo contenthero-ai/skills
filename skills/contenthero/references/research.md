@@ -29,7 +29,9 @@ publishing connections. Three different things:
 total and average views, likes, comments, average engagement and outlier score, plus its top
 posts and its most recent ones. **It works for both kinds**, so it is how you answer "how is my
 account doing" and "how is this competitor doing" with the same call. `update_tracked_account` moves a tracked
-account within its list.
+account within its list. `add_tracked_account` starts tracking a handle or profile URL (inspiration accounts count
+toward the plan's limit, so read each outcome, not just that the call succeeded), and `remove_tracked_account` stops
+tracking one while keeping its posts and analyses.
 
 ## Outlier score is the whole idea
 

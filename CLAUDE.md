@@ -69,9 +69,8 @@ Run it before committing. It is also CI.
    documented, purely for having no underscore. Coverage now searches for each live name
    literally; only dead-name detection uses the pattern, because you cannot enumerate what does
    not exist.
-2. **It flagged correct prose.** Canvas ops (`create_layer`, `set_background`) and schema enum
-   values are real, current, snake_case, and not tools. Rather than allowlist them, the guard
-   accepts any token the **live surface itself still mentions**, harvested from every description
+2. **It flagged correct prose.** Schema enum values are real, current, snake_case, and not tools.
+   Rather than allowlist them, the guard accepts any token the **live surface itself still mentions**, harvested from every description
    and enum the server advertises. A retired op vanishes from those descriptions too, so it is
    still caught.
 

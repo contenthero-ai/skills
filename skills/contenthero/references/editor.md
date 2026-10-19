@@ -76,6 +76,14 @@ The write says what is wrong. Code that does not compile is refused, and the res
 with its line and column; warnings apply and say what may go wrong. Fix every error and write it again. Then look at
 it: `view` renders the frame, so check the clip at its start, middle and end before you call it done.
 
+## Style libraries: code shared across projects
+
+Code that one project uses stays a project module. Code a second project will import is published to a style library: `create_style_library` the first time, `update_style_library` for each later version. To publish modules a project already holds, send them with `fromProject` so they are read from its saved state, not retyped.
+
+Publishing never changes a project. A project uses a library only after `set_style_library`, an op in `update_timeline` and `update_canvas`, pins it to a version, and its code then imports a module as `@style/<library>/<module>`. A published version never changes, so a pinned project renders the same until someone moves the pin.
+
+Before moving a pin, read what the newer versions changed: `get_project` lists each pin with the newer versions and their notes, and `get_style_library` with a version returns that version's modules. Find a library by name with `list_style_libraries`. Moving a pin is an ordinary op, so it is undoable. There is no delete: retire a library with `archive`.
+
 ## Effects
 
 Effects change or generate pixels: in code, on what it draws on a canvas; on a video or image clip, in its

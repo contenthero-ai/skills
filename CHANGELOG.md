@@ -2,6 +2,12 @@
 
 All notable changes to the ContentHero Skills are documented here. This repo is git-installed and versioned independently of the `@contenthero/*` npm packages.
 
+## [Unreleased]
+
+### Added
+- Style libraries (`references/editor.md`): when code is shared across projects, how a pin and the `@style/` import
+  work, and what to read before moving a pin.
+
 ## [0.2.11] - 2026-10-17
 
 ### Added

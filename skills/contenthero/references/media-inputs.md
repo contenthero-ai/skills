@@ -19,18 +19,17 @@ You get an `outputId` from any generate result. A multi-variation generation (e.
 | Video | `referenceImages[]` | image URL or output-id | reference / subject images |
 | Video | `referenceVideos[]` | video URL or output-id | e.g. motion-control source, Seedance refs mode |
 | Video | `referenceAudio[]` | audio URL or output-id | audio-driven video (models that accept it) |
-| Board | `referenceImages[]` | image URL or output-id | the source the board is built from |
-| Lip-sync | `imageUrl` | image URL or output-id | the portrait (required) |
-| Lip-sync | `audioUrl` | audio URL or output-id | existing speech (or use `script` + `voiceId`) |
-| Upscale | `sourceUrl` | image or video URL or output-id | matches the upscaler's media kind |
+| Image: board, upscale, background removal, layer separation | `referenceImages[]` | image URL or output-id | the source the model's operation works on |
+| Video: lip sync | `referenceImages[]` | image URL or output-id | the one portrait to animate (or `referenceVideos[]` for a model that takes a video; `get_model` declares which) |
+| Video: lip sync | `referenceAudio[]` | audio URL or output-id | the one existing speech clip (or use `script` + `voiceId`) |
+| Video: upscale, background removal | `referenceVideos[]` | video URL or output-id | the source video |
 
 ## CLI equivalents
 
 - Image refs: repeat `--ref <urlOrId>`.
 - Video: `--start-frame`, `--end-frame`, repeat `--ref` (images), `--ref-video`, `--ref-audio`.
-- Board: repeat `--ref`.
-- Lip-sync: `--image`, `--audio` (or `--script` + `--voice`).
-- Upscale: positional source id or `--ref` style per `contenthero upscale --help`.
+- Board, upscale, background removal, layer separation (`generate image`): repeat `--ref`; `--type` and `--name` for a board, `--upscale-factor` for an upscale.
+- Lip sync, upscale and background removal on video (`generate video`): `--ref` for a portrait, `--ref-video` for a source video, `--ref-audio` or `--script` with `--voice-id`, `--upscale-factor`.
 
 ## Addressing references in the prompt
 

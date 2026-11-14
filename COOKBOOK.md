@@ -51,7 +51,8 @@ Research to published.
 
 1. `generate_audio` with the user's script and a `voiceId` from `list_voices`. Capture the output
    id.
-2. `generate_lip_sync` with a portrait plus that audio output id. An avatar's look is the natural
+2. `generate_video` with a lip-sync model, the portrait in `referenceImages` and that audio output id
+   in `referenceAudio`. An avatar's look is the natural
    portrait, and its `defaultVoiceId` the natural voice.
 3. `create_card`, then `update_card` to attach the video and the post.
 4. Schedule.
@@ -64,13 +65,13 @@ not something to improvise.
 1. `create_avatar` with `getCost` first, since it spends. Supply reference photos for a likeness,
    or omit them to invent one.
 2. ⚠️ **Poll `get_avatar` until status is `completed`.** It returns before the avatar is usable.
-3. `generate_board` from its look for a multi-angle consistency sheet.
+3. `generate_image` with a reference-board model, from its look, for a multi-angle consistency sheet.
 4. Pass the board or the look as a reference into every later generation.
 
 ## Turn a rough recording into a finished post
 
 1. `import` with `url` if it is on a URL (a video page spends, so `getCost` first), or
-   `create_media_upload` then PUT then `complete_media_upload` for a local file.
+   `create_upload`, then the PUT, then `complete_upload` for a local file.
 2. `edit_audio` to isolate the voice or enhance the recording. `getCost` first.
 3. `transcribe` for the text. ⚠️ **It spends and cannot be priced in advance**, so say so before
    doing it to something long.

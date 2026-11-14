@@ -4,9 +4,16 @@ All notable changes to the ContentHero Skills are documented here. This repo is 
 
 ## [Unreleased]
 
+## 0.2.12
+
 ### Added
 - Style libraries (`references/editor.md`): when code is shared across projects, how a pin and the `@style/` import
   work, and what to read before moving a pin.
+
+### Changed
+- Tool names corrected to the live contract: `generate_board`, `generate_lip_sync` and `upscale` are gone, and the
+  references name `generate_image`, `generate_video` and `generate_audio` instead.
+- The plugin now lives in the ContentHero monorepo and this repository is a read-only mirror of it.
 
 ## [0.2.11] - 2026-10-17
 

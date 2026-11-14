@@ -32,11 +32,18 @@ An import still running when the call returns comes back pending: wait for it wi
 
 **Local files: two phases, both required, and done as one batch.**
 
-1. `create_media_upload` with every file at once (up to 25) returns, for each, a signed `uploadUrl`
-   and **the exact headers to send**.
-2. PUT each file's bytes to its URL **with its headers unchanged**.
-3. `complete_media_upload` once, with every returned `outputId`. The person sees the batch as one
-   card; finalizing files one call at a time puts a card in their chat for each.
+1. `create_upload` with every file at once (up to 25), each with its name, type and size. It answers,
+   for each, an upload target: a temporary write permission, not a media address. A single target
+   is one URL and **the exact headers to send**. A multipart target states the size of a part.
+2. PUT the bytes. A single target takes the whole file at its URL **with its headers unchanged**.
+   A multipart target takes parts: ask `sign_upload_parts` for the part numbers still needed (it is
+   safe to ask again, so an interrupted upload asks only for the rest), PUT each part to its URL
+   with its headers, and keep the ETag header of every answer.
+3. `complete_upload` once, with every file's `outputId` (and, for a multipart file, each part's
+   number and ETag exactly as the store answered). The person sees the batch as one card;
+   finalizing files one call at a time puts a card in their chat for each.
+
+A stored file can be renamed or described afterward with `update_media`.
 
 ⚠️ **Skipping step 3 leaves the upload unfinished.** The bytes may be in storage but the media
 record is not real until you complete it. And do not edit the headers: they are part of what the

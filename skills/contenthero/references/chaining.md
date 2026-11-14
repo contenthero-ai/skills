@@ -20,27 +20,30 @@ Generate the image, then use its id as the video's first frame.
 
 ## Board to image (keep a subject on-model)
 
-Build a reference board, then generate images that reference it so the subject stays consistent.
+Build a reference board, then generate images that reference it so the subject stays consistent. A board is made by `generate_image` with a reference-board model (`get_model` names it and its board types).
 
-- `generate_board({ boardType: "character", referenceImages: ["<sourceImageId or URL>"] })` -> capture board `outputId` -> `generate_image({ modelId, prompt, referenceImages: ["<boardId>"] })`
+- `generate_image({ modelId: "<boardModelId>", boardType: "<a type get_model lists>", referenceImages: ["<sourceImageId or URL>"] })` -> capture board `outputId` -> `generate_image({ modelId, prompt, referenceImages: ["<boardId>"] })`
 
 ## Image to lip-sync (talking portrait)
 
-Generate or pick a portrait, then animate it speaking.
+Generate or pick a portrait, then animate it speaking. Lip sync is `generate_video` with a lip-sync model.
 
-- `generate_image(...)` -> `generate_lip_sync({ modelId: "<lipSyncModelId>", imageUrl: "<portraitId>", script: "<words the user supplied>", voiceId: "<voiceId>" })`
-- Or with existing speech: pass `audioUrl: "<audioId or URL>"` instead of `script` + `voiceId`.
+- `generate_image(...)` -> `generate_video({ modelId: "<lipSyncModelId>", referenceImages: ["<portraitId>"], script: "<words the user supplied>", voiceId: "<voiceId>" })`
+- Or with existing speech: pass `referenceAudio: ["<audioId or URL>"]` instead of `script` + `voiceId`.
+- A model that animates a video instead of a portrait takes it in `referenceVideos`; `get_model` declares which.
 
 ## Audio to lip-sync (your own TTS clip)
 
 Synthesize speech, then drive a portrait with it.
 
-- `generate_audio({ modelId: "<audioModelId>", text: "<the user's script>", voiceId })` -> capture audio `outputId` -> `generate_lip_sync({ modelId, imageUrl: "<portraitId or URL>", audioUrl: "<audioId>" })`
+- `generate_audio({ modelId: "<audioModelId>", text: "<the user's script>", voiceId })` -> capture audio `outputId` -> `generate_video({ modelId: "<lipSyncModelId>", referenceImages: ["<portraitId or URL>"], referenceAudio: ["<audioId>"] })`
 
 ## Generate then upscale
 
-- `generate_image(...)` -> `upscale({ modelId: "<upscaleModelId>", sourceUrl: "<imageId>", factor: "2x" })`
-- Video: `upscale({ modelId: "<upscaleModelId>", sourceUrl: "<videoId>", factor: "2x", durationSeconds: <len> })`
+Upscaling is the generate tool of the source's medium with an upscale model.
+
+- `generate_image(...)` -> `generate_image({ modelId: "<upscaleModelId>", referenceImages: ["<imageId>"], upscaleFactor: "<a factor get_model lists>" })`
+- Video: `generate_video({ modelId: "<upscaleModelId>", referenceVideos: ["<videoId>"], upscaleFactor: "<a factor get_model lists>", sourceDurationSeconds: <len> })` (the source's length in seconds, which upscale and background-removal models require for pricing)
 
 ## Multi-variation chaining
 

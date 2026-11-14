@@ -1,6 +1,7 @@
 # Generating: the loop that does not waste a spend
 
-Image, video, audio, boards, lip-sync and upscaling. This is where the user's credits actually
+Image, video and audio, plus what the model's operation makes of them: boards, lip sync, upscaling,
+background removal and layer separation. This is where the user's credits actually
 go, so the order matters more here than anywhere else in the surface.
 
 ## The loop
@@ -49,8 +50,9 @@ user's brand.
 
 ### 5. Run it, then poll
 
-Image, video, board, lip-sync and `upscale` are async with a smart-wait of roughly fifty seconds,
-then hand back an id if the render is still going. Audio returns directly.
+Image and video are async: they hand back an `outputId` and `get_status` waits for the render. A
+reference board waits for its result and hands back an id only when it is still rendering. Audio
+returns directly.
 
 ⛔ **Poll `get_status` with the id. Never re-submit because it is slow.** A pending
 status means it is still rendering. Re-submitting spends the credits again for the same output.
@@ -63,20 +65,26 @@ unless the user is going to chain on them.
 
 ## The operations
 
+There is one generate tool per medium. **The model you pick decides the operation**, and `get_model`
+names it and the inputs it takes. A field the model's operation does not take is refused, never
+ignored.
+
 | Want | Tool | Note |
 |---|---|---|
 | Still image | `generate_image` | Text-to-image, or image-to-image with references |
+| A consistency sheet | `generate_image` | A reference-board model: `boardType` and `boardName`, the source in `referenceImages`; see `identity.md` |
+| More resolution, image | `generate_image` | An upscale model: the source in `referenceImages`, `upscaleFactor` |
+| Background removed, layers separated | `generate_image` | The matching model; the source in `referenceImages` |
 | Motion | `generate_video` | From a prompt, a start or end frame, or references |
+| A face that speaks | `generate_video` | A lip-sync model: a portrait in `referenceImages` (or a video in `referenceVideos`, as `get_model` declares), plus speech from `referenceAudio` or `script` with `voiceId` |
+| More resolution, video | `generate_video` | An upscale model: the source in `referenceVideos`, `upscaleFactor` |
 | Speech, music, sound effects | `generate_audio` | Synchronous, no polling |
-| A consistency sheet | `generate_board` | Multi-panel reference sheet; see `identity.md` |
-| A face that speaks | `generate_lip_sync` | A portrait plus an audio clip or a script |
-| More resolution | `upscale` | Image or video, at a model-supported factor |
 | Cleaner audio | `edit_audio` | Isolate a voice, enhance a recording (`media-library.md`) |
 | Audio into text | `transcribe` | ⚠️ Spends, and **cannot be priced first** |
 
 ## Chaining is the differentiator
 
-Any reference, start frame, image input or upscale source takes **either a raw URL or a
+Any reference, start frame, image input or upscale or lip-sync source takes **either a raw URL or a
 ContentHero output-id token**. The server resolves either, type-checks it, and scopes it to the
 owner.
 

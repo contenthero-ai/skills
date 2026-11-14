@@ -44,8 +44,9 @@ that avatar, and using a different voice for a familiar face is usually a mistak
 A board is a dense multi-panel sheet capturing a subject from many angles and poses. It is the
 strongest tool available for consistency, because one image carries the whole subject.
 
-Produce one with `generate_board` from a source image, a written description, or both. Boards are
-stored as ordinary media, so `list_media` finds them again later.
+Produce one with `generate_image` and a reference-board model (`get_model` names its board types and
+the inputs it takes), from a source image in `referenceImages`, a written description, or both.
+Boards are stored as ordinary media, so `list_media` finds them again later.
 
 Reuse a board by passing it into a later generation's reference inputs, exactly like any other
 image. The recipe is in `chaining.md`.

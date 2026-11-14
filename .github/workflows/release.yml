@@ -1,17 +1,17 @@
 name: release
 
-# Publishes the uploadable skill package as a GitHub Release asset on every version tag.
+# Publishes the uploadable skill packages as GitHub Release assets on every version tag.
 #
-# Chat apps (claude.ai, ChatGPT, Gemini) install a skill by uploading it, so members need a file,
-# not a repository. The stable links every install surface points at are:
+# This repository is a read-only mirror of the ContentHero plugin, written by ContentHero's release process, which also
+# pushes the tag that starts this workflow. Nothing here installs dependencies or runs project code: the plugin is
+# content, so the release only checks the tag and zips the tagged commit.
+#
+# Chat apps (claude.ai, ChatGPT, Gemini) install a skill by uploading it, so members need a file, not a repository.
+# The stable links every install surface points at are:
 #   https://github.com/contenthero-ai/skills/releases/latest/download/contenthero.zip
 #   https://github.com/contenthero-ai/skills/releases/latest/download/contenthero-plugin.zip
-# The first is the bare skill (skill uploads), the second the plugin with its connector (plugin
-# uploads). Both are built here from the tagged commit, never by hand, so they cannot drift.
-#
-# To release: bump VERSION, package.json and plugin.json (`npm run check:skill` refuses a mismatch),
-# run `npm run build:skill`, commit,
-# then push a tag `v<VERSION>`.
+# The first is the bare skill (skill uploads), the second the plugin with its connector (plugin uploads). Both are built
+# here from the tagged commit, never by hand, so they cannot drift.
 
 on:
   push:
@@ -19,32 +19,24 @@ on:
 
 permissions:
   contents: write
-  packages: read
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - uses: astral-sh/setup-uv@v5
-      # `.npmrc` reads the private @contenthero-ai scope (the spelling gate) with NPM_TOKEN. Without it every
-      # run failed at `npm ci` with E401 from 2026-09-19 on, so no check ran and no release could build.
-      # GITHUB_TOKEN reads the package once the package grants this repository Actions access (package
-      # settings, Manage Actions access). PACKAGES_READ_TOKEN, if set as a secret here, is the fallback: the
-      # same read:packages credential the private repos' CI uses.
-      - run: npm ci
-        env:
-          NPM_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN || secrets.GITHUB_TOKEN }}
-      - run: npm run check
-      - run: npm run check:spec
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       # A tag that disagrees with VERSION would publish a zip labeled one version containing another.
       - name: Tag matches VERSION
         run: test "${GITHUB_REF_NAME}" = "v$(cat VERSION)" || { echo "tag ${GITHUB_REF_NAME} != v$(cat VERSION)"; exit 1; }
-      - run: npm run build:zip
-      - uses: softprops/action-gh-release@v2
+      - name: Build both zips
+        run: |
+          mkdir dist
+          # The skill folder, not its contents, is this zip's root: claude.ai and ChatGPT require it.
+          (cd skills && zip -r -X -q ../dist/contenthero.zip contenthero -x '*.DS_Store')
+          # The plugin root is this zip's root, exactly as the repository is laid out.
+          zip -r -X -q dist/contenthero-plugin.zip plugin.json mcp.json .mcp.json .claude-plugin .cursor-plugin skills README.md LICENSE -x '*.DS_Store'
+          ls -l dist
+      - uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
         with:
           files: |
             dist/contenthero.zip

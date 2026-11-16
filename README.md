@@ -63,6 +63,29 @@ Two transports, detected in priority order:
 
 Never paste an API key into an agent chat. Use `contenthero login` (browser-assisted), the `CONTENTHERO_API_KEY` environment variable, or MCP OAuth. See [INSTALL.md](./INSTALL.md) for details.
 
+## What this plugin runs and sends
+
+The plugin is content, not code. It contains the `contenthero` skill (Markdown instructions), the connector declaration
+(`mcp.json` and the `.mcp.json` generated from it), and the manifests. It has no hooks, no scripts, no binaries, no
+slash commands, and no package launcher, and installing it runs nothing.
+
+- **Connector.** One remote MCP server, `https://mcp.contenthero.ai`. It is the only address the plugin declares. The
+  plugin does not fetch, download, or execute anything from any other address.
+- **What is sent.** Only when you ask for something that needs a tool, the assistant calls the connector with the
+  request and the data that tool takes: your prompt text, ids, and media or brand data you ask it to use, such as an
+  uploaded file or a reference image. The tools read and change your own ContentHero account: media library, brand
+  kits, planner, editor projects, and connected social accounts.
+- **Third-party models.** When you ask for an image, video, or audio, ContentHero's hosted service forwards the
+  generation request to its AI model providers and returns the result. Generation spends your ContentHero credits.
+  The skill tells the assistant to price a spend first and to get your approval before anything is published.
+- **Sign-in.** OAuth in your browser. No API key is typed into the chat, and the token stays in your AI host. You can
+  revoke access by disconnecting the server in your host or by revoking the session in the ContentHero app.
+- **Local files and tools.** The skill's instructions have the assistant read and write one small workspace file,
+  `.contenthero/context.md`, which caches ids and is safe to delete. The skill lists `Bash` and `WebFetch` among its
+  allowed tools, but its instructions use `Bash` only for the optional CLI described above, installed separately
+  and not part of this plugin, and give no instruction to fetch web pages. Files you ask to keep come back from the
+  connector as save links, and you decide whether to save them.
+
 ## Things to try
 
 | Prompt | What happens |

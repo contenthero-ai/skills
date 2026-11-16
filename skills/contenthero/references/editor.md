@@ -70,7 +70,7 @@ applies nothing, so check first.
 A code clip or layer is a video, audio or image whose content is a React component the editor draws on every frame.
 **Read `get_schema` with kind `code` before writing or changing one.** It is the sandbox's own guide, generated from what the sandbox has: what
 the code can import and what it cannot use, the box the code draws in, the brand prop names, the size limit, and
-examples. Do not write code from memory of Remotion: the sandbox is a subset, and code it lacks is refused.
+examples. Do not write code from memory of other video code libraries: the sandbox is a subset, and code it lacks is refused.
 
 The write says what is wrong. Code that does not compile is refused, and the result's `diagnostics` name each finding
 with its line and column; warnings apply and say what may go wrong. Fix every error and write it again. Then look at

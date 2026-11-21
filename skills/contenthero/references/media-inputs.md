@@ -19,7 +19,7 @@ You get an `outputId` from any generate result. A multi-variation generation (e.
 | Video | `referenceImages[]` | image URL or output-id | reference / subject images |
 | Video | `referenceVideos[]` | video URL or output-id | e.g. motion-control source, Seedance refs mode |
 | Video | `referenceAudio[]` | audio URL or output-id | audio-driven video (models that accept it) |
-| Image: board, upscale, background removal, layer separation | `referenceImages[]` | image URL or output-id | the source the model's operation works on |
+| Image: reference sheet, upscale, background removal, layer separation | `referenceImages[]` | image URL or output-id | the source the model's operation works on |
 | Video: lip sync | `referenceImages[]` | image URL or output-id | the one portrait to animate (or `referenceVideos[]` for a model that takes a video; `get_model` declares which) |
 | Video: lip sync | `referenceAudio[]` | audio URL or output-id | the one existing speech clip (or use `script` + `voiceId`) |
 | Video: upscale, background removal | `referenceVideos[]` | video URL or output-id | the source video |
@@ -28,7 +28,7 @@ You get an `outputId` from any generate result. A multi-variation generation (e.
 
 - Image refs: repeat `--ref <urlOrId>`.
 - Video: `--start-frame`, `--end-frame`, repeat `--ref` (images), `--ref-video`, `--ref-audio`.
-- Board, upscale, background removal, layer separation (`generate image`): repeat `--ref`; `--type` and `--name` for a board, `--upscale-factor` for an upscale.
+- Reference sheet, upscale, background removal, layer separation (`generate image`): repeat `--ref`; `--type`, `--name`, `--panel-count` and `--aspect` for a reference sheet, `--upscale-factor` for an upscale.
 - Lip sync, upscale and background removal on video (`generate video`): `--ref` for a portrait, `--ref-video` for a source video, `--ref-audio` or `--script` with `--voice-id`, `--upscale-factor`.
 
 ## Addressing references in the prompt

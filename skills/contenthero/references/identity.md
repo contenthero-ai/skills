@@ -1,4 +1,4 @@
-# Identity: avatars, looks, voices, boards, Kling elements
+# Identity: avatars, looks, voices, reference sheets, Kling elements
 
 The reusable library that keeps a person, character or product **on-model across many
 outputs**. Reach for it whenever the user wants the same subject twice.
@@ -39,16 +39,19 @@ Lip-sync and text-to-speech both need a `voiceId`. `list_voices` to browse, `get
 for it, so do not promise one. An avatar's `defaultVoiceId` is the natural choice when animating
 that avatar, and using a different voice for a familiar face is usually a mistake worth flagging.
 
-## Reference boards
+## Reference sheets
 
-A board is a dense multi-panel sheet capturing a subject from many angles and poses. It is the
+A reference sheet is a dense multi-panel image capturing a subject from many angles and poses. It is the
 strongest tool available for consistency, because one image carries the whole subject.
 
-Produce one with `generate_image` and a reference-board model (`get_model` names its board types and
+Produce one with `generate_image` and a reference-sheet model (`get_model` names its sheet types and
 the inputs it takes), from a source image in `referenceImages`, a written description, or both.
-Boards are stored as ordinary media, so `list_media` finds them again later.
+The number of panels (`panelCount`) and the sheet's `aspectRatio` are settable; each has a default per sheet type, so
+leave them out unless the use needs something else, and read the allowed range and ratios from `get_model` rather
+than guessing. A value outside them is refused with the limits named.
+Reference sheets are stored as ordinary media, so `list_media` finds them again later.
 
-Reuse a board by passing it into a later generation's reference inputs, exactly like any other
+Reuse a reference sheet by passing it into a later generation's reference inputs, exactly like any other
 image. The recipe is in `chaining.md`.
 
 ## Kling elements
@@ -70,7 +73,7 @@ Use it through `generate_video`'s `klingElements` by `klingElementId`, and name 
 | The user wants | Reach for |
 |---|---|
 | The same person across many posts | An avatar, and its look as a reference |
-| A subject held consistent from several angles | A board |
+| A subject held consistent from several angles | A reference sheet |
 | A saved face to speak | An avatar's look plus its `defaultVoiceId`, into lip-sync |
 | A character, location or prop kept consistent across Kling videos | A Kling element |
 | One-off with no consistency requirement | Nothing here. Just generate. |

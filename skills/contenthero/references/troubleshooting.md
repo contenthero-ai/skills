@@ -5,9 +5,9 @@ Exit codes and scope names live in `transports.md`. This is what to DO when some
 ## "Still rendering" is not a failure
 
 The single most expensive misreading available. Image and video generation (upscaling,
-background removal and lip sync included) return an id at once, and a reference board waits for its
+background removal and lip sync included) return an id at once, and a reference sheet waits for its
 result and returns an id only when it is still rendering. `get_status` waits, up to about forty seconds
-a call. Video and boards routinely take minutes.
+a call. Video and reference sheets routinely take minutes.
 
 ⛔ **Poll the id. Never re-submit because it is slow.** Re-submitting spends again for the same
 output. CLI exit code 4 means exactly this: accepted, not finished, id still emitted.
@@ -43,7 +43,7 @@ with `getCost` before the next attempt so the number is known in advance rather 
 
 ## Output is off-model or the wrong subject
 
-Do not solve consistency with a longer prompt. Build a reference board or reuse an avatar look and
+Do not solve consistency with a longer prompt. Build a reference sheet or reuse an avatar look and
 pass it as a reference. `identity.md` and `chaining.md`.
 
 ## A read came back empty or short

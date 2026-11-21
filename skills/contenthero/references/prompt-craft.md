@@ -62,7 +62,7 @@ Match the aspect ratio to where the content will be published.
 ## References and consistency
 
 - Most image models accept multiple `referenceImages`; some single-frame video models accept exactly one. The live schema decides; a model that takes one will reject extras.
-- For a subject that must stay consistent across many outputs (a person, mascot, product), do not rely on the prompt alone. Build a reference board and feed it back in, or reuse an avatar look. See `identity.md` and `chaining.md`.
+- For a subject that must stay consistent across many outputs (a person, mascot, product), do not rely on the prompt alone. Build a reference sheet and feed it back in, or reuse an avatar look. See `identity.md` and `chaining.md`.
 
 ## Universal content principles
 

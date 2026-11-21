@@ -18,11 +18,11 @@ Generate the image, then use its id as the video's first frame.
   contenthero generate video "slow push in" --model <videoModelId> --start-frame "$IMG"
   ```
 
-## Board to image (keep a subject on-model)
+## Reference sheet to image (keep a subject on-model)
 
-Build a reference board, then generate images that reference it so the subject stays consistent. A board is made by `generate_image` with a reference-board model (`get_model` names it and its board types).
+Build a reference sheet, then generate images that reference it so the subject stays consistent. A reference sheet is made by `generate_image` with a reference-sheet model (`get_model` names it, its sheet types, the panel count range and the aspect ratios it offers; `panelCount` and `aspectRatio` are optional and default per sheet type).
 
-- `generate_image({ modelId: "<boardModelId>", boardType: "<a type get_model lists>", referenceImages: ["<sourceImageId or URL>"] })` -> capture board `outputId` -> `generate_image({ modelId, prompt, referenceImages: ["<boardId>"] })`
+- `generate_image({ modelId: "<sheetModelId>", sheetType: "<a type get_model lists>", referenceImages: ["<sourceImageId or URL>"] })` -> capture reference sheet `outputId` -> `generate_image({ modelId, prompt, referenceImages: ["<sheetId>"] })`
 
 ## Image to lip-sync (talking portrait)
 

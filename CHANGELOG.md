@@ -4,6 +4,13 @@ All notable changes to the ContentHero Skills are documented here. This repo is 
 
 ## [Unreleased]
 
+## 0.2.13
+
+### Changed
+
+- Reference boards are now reference sheets in every skill and reference file, matching the renamed tools and parameters.
+- Reference sheets: the skill tells an agent the panel count and aspect ratio are settable and to read their limits from `get_model('reference-sheets')`.
+
 ## 0.2.12
 
 ### Added

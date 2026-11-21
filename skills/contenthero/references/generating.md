@@ -1,6 +1,6 @@
 # Generating: the loop that does not waste a spend
 
-Image, video and audio, plus what the model's operation makes of them: boards, lip sync, upscaling,
+Image, video and audio, plus what the model's operation makes of them: reference sheets, lip sync, upscaling,
 background removal and layer separation. This is where the user's credits actually
 go, so the order matters more here than anywhere else in the surface.
 
@@ -51,7 +51,7 @@ user's brand.
 ### 5. Run it, then poll
 
 Image and video are async: they hand back an `outputId` and `get_status` waits for the render. A
-reference board waits for its result and hands back an id only when it is still rendering. Audio
+reference sheet waits for its result and hands back an id only when it is still rendering. Audio
 returns directly.
 
 ⛔ **Poll `get_status` with the id. Never re-submit because it is slow.** A pending
@@ -72,7 +72,7 @@ ignored.
 | Want | Tool | Note |
 |---|---|---|
 | Still image | `generate_image` | Text-to-image, or image-to-image with references |
-| A consistency sheet | `generate_image` | A reference-board model: `boardType` and `boardName`, the source in `referenceImages`; see `identity.md` |
+| A consistency sheet | `generate_image` | A reference-sheet model: `sheetType` and `sheetName`, optionally `panelCount` and `aspectRatio`, the source in `referenceImages`; see `identity.md` |
 | More resolution, image | `generate_image` | An upscale model: the source in `referenceImages`, `upscaleFactor` |
 | Background removed, layers separated | `generate_image` | The matching model; the source in `referenceImages` |
 | Motion | `generate_video` | From a prompt, a start or end frame, or references |

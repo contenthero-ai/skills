@@ -28,7 +28,7 @@ instructions and the download. The short version is in [INSTALL.md](./INSTALL.md
 ContentHero pairs your LLM with your context. Your LLM is already a strong writer. What it lacks is your brand voice, your proven patterns, and a way to publish. ContentHero supplies all three.
 
 - **Context:** your brand kit (voice, audience, offer, design guidelines), your inspiration outliers (the posts that actually perform in your niche), and your own past posts and their performance.
-- **Execution:** generate image, video, audio, reference boards, and lip-sync, then assemble, schedule, and publish to your connected accounts.
+- **Execution:** generate image, video, audio, reference sheets, and lip-sync, then assemble, schedule, and publish to your connected accounts.
 
 When a draft is needed, the skill grounds your LLM in your real context and your proven patterns, your LLM writes it in your voice, and you approve before anything goes live.
 
@@ -39,7 +39,7 @@ workflow rather than making you pick a skill first.
 
 | Workflow | What it covers |
 |----------|----------------|
-| **Generate** | Image, video, audio, reference boards, lip-sync, upscaling. Cost preflight before every spend, output-id chaining so you never re-upload. |
+| **Generate** | Image, video, audio, reference sheets, lip-sync, upscaling. Cost preflight before every spend, output-id chaining so you never re-upload. |
 | **Plan and publish** | Spaces, stages and cards, one post per platform, scheduling, and publishing to your connected accounts. |
 | **Ground and draft** | Your brand kit and its searchable knowledge base. Your LLM writes in your voice; you approve before anything goes live. |
 | **Research** | The accounts you track and their posts ranked by outlier score, which measures a post against its own creator's baseline rather than the platform's. |

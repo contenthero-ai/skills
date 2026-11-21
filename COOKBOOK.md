@@ -65,8 +65,8 @@ not something to improvise.
 1. `create_avatar` with `getCost` first, since it spends. Supply reference photos for a likeness,
    or omit them to invent one.
 2. ⚠️ **Poll `get_avatar` until status is `completed`.** It returns before the avatar is usable.
-3. `generate_image` with a reference-board model, from its look, for a multi-angle consistency sheet.
-4. Pass the board or the look as a reference into every later generation.
+3. `generate_image` with a reference-sheet model, from its look, for a multi-angle consistency sheet.
+4. Pass the reference sheet or the look as a reference into every later generation.
 
 ## Turn a rough recording into a finished post
 

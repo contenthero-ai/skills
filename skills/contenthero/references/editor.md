@@ -4,6 +4,9 @@ The editor is where media becomes a finished piece. A **project** is either a TI
 clips over time) or a CANVAS (slides and layers). Both are edited by sending batches of
 operations, and both are versioned.
 
+This file is the mechanics. The order of work for editing footage into a finished video, and the checks
+each step must pass, are in `video-editing.md`.
+
 ⚠️ **No skill covered this surface before 2026-09-17.** Sixteen tools, none of them mentioned
 anywhere, which is why this file exists.
 

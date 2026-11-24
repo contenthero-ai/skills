@@ -40,6 +40,8 @@ codes: `references/transports.md`.
 | The user wants | Go to |
 |---|---|
 | Media made, changed, or upscaled | **Generate** → `references/generating.md` |
+| A film, skit, ad or story made of several generated shots | **Produce** → `references/pre-production.md` |
+| Footage edited into a finished video | **Edit** → `references/video-editing.md`, then `references/editor.md` |
 | An idea turned into a planned or published post | **Plan and publish** → `references/planner.md` |
 | Copy written in their voice | **Ground, then draft** → `references/grounding.md`, then `references/voice-synthesis.md` |
 | To know what performs, theirs or a competitor's | **Research** → `references/research.md` |
@@ -133,6 +135,11 @@ with kind `link` once, then follow its grammar using only the nouns, tabs and pa
 | `references/voice-synthesis.md` | Grounding to draft: the method, and why it is the moat |
 | `references/generating.md` | Model choice, cost preflight, async, the generation loop |
 | `references/prompt-craft.md` | Writing image and video prompts that do not waste a spend |
+| `references/pre-production.md` | Planning a multi-shot piece: documents, assets, generations, iteration |
+| `references/video-direction.md` | Video prompts: shots, cuts, camera movement, space, objects, light |
+| `references/performance.md` | Directing characters who act or speak |
+| `references/models/` | One file per model family: what it does well, how to write for it, its versions |
+| `references/video-editing.md` | Editing footage into a finished, verified video |
 | `references/media-inputs.md` | References by URL or output-id, field by field |
 | `references/chaining.md` | Feeding one generation into the next |
 | `references/identity.md` | Avatars, looks, voices, reference sheets, Kling elements |

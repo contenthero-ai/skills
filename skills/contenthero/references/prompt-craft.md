@@ -18,7 +18,7 @@ Field names below are the ContentHero surface names (`aspectRatio`, `resolution`
 
 **Realism:** models default to a clean, dataset-average "ideal." To get genuine realism, ask for specific imperfections (skin texture, asymmetry, wear, grain) rather than just saying "realistic."
 
-**Text in images:** when the image should contain readable text, state the exact string, and the placement and style. Some models render text far better than others (see `model-catalog.md`).
+**Text in images:** when the image should contain readable text, state the exact string, and the placement and style. Some models render text far better than others; when text matters, compare candidates from the live roster.
 
 ## Image-to-image (editing)
 
@@ -31,15 +31,15 @@ The model already has the input; redescribing it competes with the edit.
 
 ## Video prompts
 
-**Text-to-video:** the image formula still applies (subject, setting, camera, lighting, style), plus motion.
+Video craft has its own files. `video-direction.md` covers any video prompt: describing the visible, shots and cuts,
+camera movement, space, objects and light. `performance.md` covers characters who act or speak. A piece of several
+shots is planned first in `pre-production.md`. A model family with its own habits has a file under `models/`.
 
-**Image-to-video (a `startFrame`):** the frame anchors the first frame. **The prompt should describe motion, not the static frame.**
+**Image-to-video (a `startFrame`):** the frame anchors the first frame, so the prompt describes motion, not the static
+frame. Do not redescribe what is already in it.
 
-- Camera motion: push in, slow dolly, sweeping pan, tracking shot, whip pan.
-- Subject motion: "the dancer spins," "smoke rises slowly," "leaves drift across frame."
-- Do not redescribe what is already in the frame.
-
-**Duration, aspect ratio, audio, and references are model-gated.** Confirm per model against the live roster (CLI `contenthero model list`; MCP `generate_*` `modelId` enum) rather than assuming. Audio: set `audioEnabled` only on models that support it; a few models take an `referenceAudio` input instead (e.g. Seedance references mode). See `model-catalog.md`.
+**Duration, aspect ratio, audio, and references are model-gated.** Confirm them per model with `get_model` rather than
+assuming. Set `audioEnabled` only on models that support it; some models take `referenceAudio` instead.
 
 ## Negative phrasing
 

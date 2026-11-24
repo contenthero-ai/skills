@@ -4,6 +4,22 @@ All notable changes to the ContentHero Skills are documented here. This repo is 
 
 ## [Unreleased]
 
+## 0.2.14
+
+### Added
+
+- Film production references: `pre-production.md` (planning a multi-shot piece, assets, audio, cheap iteration),
+  `video-direction.md` (video prompts, shots and cuts, camera movement, space, objects, light) and `performance.md`
+  (directing characters who act or speak).
+- Model family files under `references/models/`: `seedance.md` and `seedream.md`, each with what the family does
+  well, how to write for it and how its versions differ.
+- `video-editing.md`: the order of work and the checks for editing footage into a finished, verified video.
+
+### Changed
+
+- `prompt-craft.md` points video work to the new files and no longer links a model catalog that does not exist.
+- The skill routes film production and video editing to the new files.
+
 ## 0.2.13
 
 ### Changed
